@@ -42,13 +42,15 @@ Attached to it is a [Single Ended HD68 TO LD50 SCSI Cable](http://www.itinstock.
 - **Interface**: Fast Wide SCSI
 - **Connector Type**: 68 pin HD D-Sub (HD-68)
 
-But the actual connector that is connected to the cable is much smaller than a HD 68 connector. It actually looks like a VHDCI SCSI connector (see [here](http://www.paralan.com/sediff.html). Looking up the product code on the cable (19P0279) also returns several hits that describe it as a "VHDCI to 68pin cable" ([example](http://www.vibrant.com/IBM-19p0279.html)).
+But the actual connector that is connected to the cable is much smaller than a HD 68 connector. It actually looks more like a VHDCI SCSI connector (see [here](http://www.paralan.com/sediff.html)). Looking up the product code on the cable (19P0279) also returns several hits that describe it as a "VHDCI to 68pin cable" ([example](http://www.vibrant.com/IBM-19p0279.html)).
 
 ## Connecting to modern machines
 
 See:
 
 [Best way to read SCSI tape drive on a modern PC?](http://qanda.digipres.org/1160/best-way-to-read-scsi-tape-drive-on-a-modern-pc)
+
+Also, the situation with difference SCSI types, interfaces and connectors is quite complex, and apparently interface mismatches [can result in damage to the hardware](https://twitter.com/charles_forsyth/status/1004356758893154305). So we have to be careful here, and may need multiple SCSI cards. This needs further investigation.
 
 ## Resources
 
