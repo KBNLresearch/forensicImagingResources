@@ -75,8 +75,8 @@ Some options (non-exhaustive list):
 
 * [Adaptec 2248700-R U320 PCI Express X1 1-Channel SCSI Host Bus Adapter](https://www.amazon.com/Adaptec-2248700-R-Express-1-Channel-Adapter/dp/B000NX3PII)
 * [Adaptec SCSI Card 29320LPE](https://storage.microsemi.com/en-us/support/scsi/u320/asc-29320lpe/)
-* [Adaptec SCSI Card 29160](https://storage.microsemi.com/en-us/support/scsi/u160/asc-29160/) --> [here on Marktplaats](https://link.marktplaats.nl/m1287640942)
-* [Adaptect aha-2940uw](https://storage.microsemi.com/en-us/support/scsi/2940/aha-2940uw/) --> [here on Marktplaats](https://link.marktplaats.nl/m1286986209)
+* [Adaptec SCSI Card 29160](https://storage.microsemi.com/en-us/support/scsi/u160/asc-29160/) --> [here on Marktplaats](https://link.marktplaats.nl/m1287640942); [eBay](https://www.ebay.nl/itm/Adaptec-Controller-Card-SCSI-Card-29160-PCI-SCSI-Adapter/232728027802)
+* [Adaptect aha-2940uw](https://storage.microsemi.com/en-us/support/scsi/2940/aha-2940uw/) --> [here on Marktplaats](https://link.marktplaats.nl/m1286986209); [eBay](https://www.ebay.nl/itm/Adaptec-Controller-Card-AHA-2940-U-PCI-SCSI-Adapter-Karte-NUR/252975323891)
 
 These controllers are often available cheap on sites like eBay and Marktplaats.
 
