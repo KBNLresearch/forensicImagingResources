@@ -69,9 +69,9 @@ Also, the situation with difference SCSI types, interfaces and connectors is qui
 
 > The SPI-5 standard (which describes up to Ultra-640) deprecates single-ended devices, so some devices may not be electrically backward compatible
 
-## Controllers
+### SCSI Controllers
 
-Some options (there may be more):
+Some options (non-exhaustive list):
 
 * [Adaptec 2248700-R U320 PCI Express X1 1-Channel SCSI Host Bus Adapter](https://www.amazon.com/Adaptec-2248700-R-Express-1-Channel-Adapter/dp/B000NX3PII)
 * [Adaptec SCSI Card 29320LPE](https://storage.microsemi.com/en-us/support/scsi/u320/asc-29320lpe/)
