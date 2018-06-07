@@ -26,7 +26,7 @@ This checklist is partially based on [DIY Handboek voor Webarcheologie](https://
 
 We currently have the following tape readers:
 
-### DDS
+### DDS tapes
 
 [HP SureStore DAT8](http://www.hp.com/ecomcat/hpcatalog/specs/S4112B.htm) DDS drive. 
 
@@ -45,7 +45,7 @@ Note that the 50-pin connector is listed as "LD50". A search on "LD50" and "SCSI
 
 This suggests the connector on the device is most likely indeed a centronics-type "SCSI-1" connector.
 
-### DLT-IV
+### DLT-IV tapes
 
 [IBM 7205 440](https://www.cnet.com/products/ibm-7205-440-tape-drive-dlt-scsi/specs/) DLT drive.
 
