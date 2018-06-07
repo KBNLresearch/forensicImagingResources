@@ -14,7 +14,7 @@
 |Old, unimportant DDS-1 and DLT-IV tapes for testing|Yes, several|Needed for testing the tape readers, as we don't want to accidentally destroy any important tapes because the tape readers are not working properly!|
 |SCSI PCI card(s)|-|Needed for connecting SCSI tape drives. A bit tricky because of the plethora of SCSI variants and connectors; see also [here](http://qanda.digipres.org/1160/best-way-to-read-scsi-tape-drive-on-a-modern-pc)|
 |Various SCSI converters||See also the [SCSI Connector Guide](https://www.cablestogo.com/learning/connector-guides/scsi)|
-|Various cables and adapters||Useful resources are [The Cable Bible](https://amiaopensource.github.io/cable-bible/) and the [SCSI Connector Guide](https://www.cablestogo.com/learning/connector-guides/scsi)|
+|Various cables and adapters||Useful resources are [The Cable Bible](https://amiaopensource.github.io/cable-bible/), [SCSI Connector Guide](https://www.cablestogo.com/learning/connector-guides/scsi) and [the SCSI articles on Paralan](http://www.paralan.com/aboutscsi.html)|
 |Power strips; spare power cables|-||
 |Cans of compressed air for blowing away dust|||
 |Utility kit with screwdrivers|||
