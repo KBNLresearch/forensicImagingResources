@@ -73,3 +73,4 @@ Also, the situation with difference SCSI types, interfaces and connectors is qui
 * [SCSI Connector Guide](https://www.cablestogo.com/learning/connector-guides/scsi)
 * [The Cable Bible](https://amiaopensource.github.io/cable-bible/)
 * [DIY Handboek voor Webarcheologie](https://hart.amsterdam/image/2017/11/17/20171116_freeze_diy_handboek.pdf)
+* [Getting to Know FRED: Introducing Workflows for Born-Digital Content](https://practicaltechnologyforarchives.org/issue4_prael_wickner/)
