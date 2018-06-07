@@ -65,8 +65,24 @@ See:
 
 Also, the situation with difference SCSI types, interfaces and connectors is quite complex, and apparently interface mismatches [can result in damage to the hardware](https://twitter.com/charles_forsyth/status/1004356758893154305). So we have to be careful here, and may need multiple SCSI cards. This needs further investigation.
 
-## Resources
+[](https://en.wikipedia.org/wiki/Parallel_SCSI#Compatibility)
 
+> The SPI-5 standard (which describes up to Ultra-640) deprecates single-ended devices, so some devices may not be electrically backward compatible
+
+## Controllers
+
+Some options (there may be more):
+
+* [Adaptec 2248700-R U320 PCI Express X1 1-Channel SCSI Host Bus Adapter](https://www.amazon.com/Adaptec-2248700-R-Express-1-Channel-Adapter/dp/B000NX3PII)
+* [Adaptec SCSI Card 29320LPE](https://storage.microsemi.com/en-us/support/scsi/u320/asc-29320lpe/)
+* [Adaptec SCSI Card 29160](https://storage.microsemi.com/en-us/support/scsi/u160/asc-29160/) --> [hier op Marktplaats](https://link.marktplaats.nl/m1287640942)
+* [Adaptect aha-2940uw](https://storage.microsemi.com/en-us/support/scsi/2940/aha-2940uw/) [hier op Marktplaats](https://link.marktplaats.nl/m1286986209)
+
+These controllers are often available cheap on sites like eBay and Marktplaats.
+
+Unknown to what extent these controllers work on Linux (Ubuntu) without separately installed drivers.
+
+## Resources
 * [What kind of SCSI do I have? Single-ended or differential SCSI interface?](http://www.paralan.com/sediff.html)
 * [LVD, SE, HVD, SCSI Compatibility - Or Not](http://www.paralan.com/scsiexpert.html)
 * [SCSI articles on Paralan](http://www.paralan.com/aboutscsi.html)
