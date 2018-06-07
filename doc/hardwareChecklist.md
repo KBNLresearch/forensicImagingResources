@@ -32,7 +32,18 @@ We currently have the following tape readers:
 
 **Interface**: Single-ended, narrow SCSI-2.
 
-Attached to it is a [Single Ended HD68 TO LD50 SCSI Cable](http://www.itinstock.com/hp-c5665-61001-single-ended-hd68-to-ld50-scsi-cable-1-meter-40938-p.asp). The connector that goes into the PCI card is a 68-pin DB68 (MD68) connector (also known as High-Density or HD 68 and Half-Pitch or HP68).
+**Connector**: drive has a 50-contact female connector which looks an awful lot like a 50-contact, centronics-type connector ("SCSI-1 Connector" AKA "Alternative 2, A-cable connector"). See also the topmost connector [here](http://www.paralan.com/sediff.html). This is somewhat strange, since the specs explicitly state the drive has a SCSI-2 interface. 
+
+Alternatively it *might* be a 50-pin high-density SCSI connector ("SCSI-2 Connector" AKA "Alt 1, A-cable connector"); 3rd from top [here](http://www.paralan.com/sediff.html). But the distance between the two contact rows in the illustration appears to be smaller than on the actual drive. 
+
+**Cable**: attached to the device is a [Single Ended HD68 TO LD50 SCSI Cable](http://www.itinstock.com/hp-c5665-61001-single-ended-hd68-to-ld50-scsi-cable-1-meter-40938-p.asp). The connector that goes into the PCI card is a 68-pin DB68 (MD68) connector (also known as High-Density or HD 68 and Half-Pitch or HP68).
+
+Note that the 50-pin connector is listed as "LD50". A search on "LD50" and "SCSI" turned up [this](http://carlsralp.www3.50megs.com/computer/connectr/scsiconn.html#ld) link, which says:
+
+> LD50 is SCSI-1 standard and is still used for many narrow (formerly called 8bit SCSI) devices.
+> Consider using the HD50 for new designs. HD50 is SCSI-2 standard, fully compatible with LD50, support higher frequency such as UltraSCSI and is smaller. 
+
+This suggests the connector on the device is most likely indeed a centronics-type "SCSI-1" connector.
 
 ### DLT-IV
 
@@ -42,7 +53,9 @@ Attached to it is a [Single Ended HD68 TO LD50 SCSI Cable](http://www.itinstock.
 - **Interface**: Fast Wide SCSI
 - **Connector Type**: 68 pin HD D-Sub (HD-68)
 
-But the actual connector that is connected to the cable is much smaller than a HD 68 connector. It actually looks more like a VHDCI SCSI connector (see [here](http://www.paralan.com/sediff.html)). Looking up the product code on the cable (19P0279) also returns several hits that describe it as a "VHDCI to 68pin cable" ([example](http://www.vibrant.com/IBM-19p0279.html)).
+At the back of the machine is a 68-contact female connector, which visually matches the "68-pin high-density SCSI connector" ("SCSI-3 Connector" AKA "Alt 3, P-cable connector"); 5th from top [here](http://www.paralan.com/sediff.html). This is consistent with the specification.
+
+**Cable**: connector at the outgoing side VHDCI SCSI connector (bottommost [here](http://www.paralan.com/sediff.html)). Looking up the product code on the cable (19P0279) also returns several hits that describe it as a "VHDCI to 68pin cable" ([example](http://www.vibrant.com/IBM-19p0279.html)).
 
 ## Connecting to modern machines
 
