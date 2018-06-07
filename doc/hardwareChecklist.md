@@ -63,9 +63,9 @@ See:
 
 [Best way to read SCSI tape drive on a modern PC?](http://qanda.digipres.org/1160/best-way-to-read-scsi-tape-drive-on-a-modern-pc)
 
-Also, the situation with difference SCSI types, interfaces and connectors is quite complex, and apparently interface mismatches [can result in damage to the hardware](https://twitter.com/charles_forsyth/status/1004356758893154305). So we have to be careful here, and may need multiple SCSI cards. This needs further investigation.
+Also, the situation with different SCSI types, interfaces and connectors is quite complex, and apparently interface mismatches [can result in damage to the hardware](https://twitter.com/charles_forsyth/status/1004356758893154305). So we have to be careful here, and may need multiple SCSI cards. This needs further investigation.
 
-[](https://en.wikipedia.org/wiki/Parallel_SCSI#Compatibility)
+More info on the compatibility between the different SCSI types can be found [here](https://en.wikipedia.org/wiki/Parallel_SCSI#Compatibility). Note:
 
 > The SPI-5 standard (which describes up to Ultra-640) deprecates single-ended devices, so some devices may not be electrically backward compatible
 
