@@ -20,6 +20,7 @@
 |Utility kit with screwdrivers|||
 |Camera (for documentation)|-||
 |Grounded bench|-|Needed to for working with electronic components. Room may need other measures to reduce electrostatic discharge. See e.g. [this blog about Michigan University's Digital Preservation Lab](https://www.lib.umich.edu/blogs/bits-and-pieces/digital-preservation-lab-20)|
+|Anti-static wrist straps|||
 
 This checklist is partially based on [DIY Handboek voor Webarcheologie](https://hart.amsterdam/image/2017/11/17/20171116_freeze_diy_handboek.pdf) by Tjarda de Haan, Robert Jansma and Paul Vogel.
 
