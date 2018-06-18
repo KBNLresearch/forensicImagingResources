@@ -51,9 +51,9 @@ This suggests the connector on the device is most likely indeed a centronics-typ
 
 [IBM 7205 440](https://www.cnet.com/products/ibm-7205-440-tape-drive-dlt-scsi/specs/) DLT drive.
 
-- **SCSI Signaling Type**: Low Voltage Differential (LVD)
-- **Interface**: Fast Wide SCSI
-- **Connector Type**: 68 pin HD D-Sub (HD-68)
+* **SCSI Signaling Type**: Low Voltage Differential (LVD)
+* **Interface**: Fast Wide SCSI
+* **Connector Type**: 68 pin HD D-Sub (HD-68)
 
 At the back of the machine is a 68-contact female connector, which visually matches the "68-pin high-density SCSI connector" ("SCSI-3 Connector" AKA "Alt 3, P-cable connector"); 5th from top [here](http://www.paralan.com/sediff.html). This is consistent with the specification.
 
@@ -99,3 +99,4 @@ Unknown to what extent these controllers work on Linux (Ubuntu) without separate
 * [Accessing Mac Formatted Floppy Disks without a Kryoflux](https://porterolsen.wordpress.com/2016/06/15/accessing-mac-formatted-floppy-disks-without-the-kryoflux/)
 * [NYPL’s New Digital Archives Lab](https://www.nypl.org/blog/2017/01/11/nypls-new-digital-archives-lab)
 * [Michigan University Digital Preservation Lab 2.0](https://www.lib.umich.edu/blogs/bits-and-pieces/digital-preservation-lab-20)
+* [Building Audio, Video, And Data-Rescue Kits](https://radd.dsalo.info/wp-content/uploads/2017/10/BuildDocumentation.pdf)
