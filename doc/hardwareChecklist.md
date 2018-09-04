@@ -95,7 +95,7 @@ Unknown to what extent these controllers work on Linux (Ubuntu) without separate
 * [Digital Forensics and Preservation (DPC Report)](http://dx.doi.org/10.7207/twr12-03)
 * [Rescuing Floppy Disks (ArchiveTeam)](https://www.archiveteam.org/index.php/Rescuing_Floppy_Disks)
 * [Digital Archives Workstation Update: KryoFlux, FRED, and BitCurator Walk into a Bar…](https://blogs.princeton.edu/techsvs/2017/10/03/digital-archives-workstation-update-kryoflux-fred-and-bitcurator-walk-into-a-bar/)
-* [The Archivist’s Guide to KryoFlux](https://docs.google.com/document/d/1LViSnYpvr2jf1TrCh6ELuL-FWo14ICw-WZeb8j5GGpU/edit#heading=h.m99l1q28wvaz)
+* [The Archivist’s Guide to KryoFlux](https://github.com/archivistsguidetokryoflux/archivists-guide-to-kryoflux)
 * [Accessing Mac Formatted Floppy Disks without a Kryoflux](https://porterolsen.wordpress.com/2016/06/15/accessing-mac-formatted-floppy-disks-without-the-kryoflux/)
 * [NYPL’s New Digital Archives Lab](https://www.nypl.org/blog/2017/01/11/nypls-new-digital-archives-lab)
 * [Michigan University Digital Preservation Lab 2.0](https://www.lib.umich.edu/blogs/bits-and-pieces/digital-preservation-lab-20)
