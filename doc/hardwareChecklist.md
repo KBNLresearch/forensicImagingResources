@@ -84,6 +84,10 @@ These controllers are often available cheap on sites like eBay and Marktplaats.
 
 Unknown to what extent these controllers work on Linux (Ubuntu) without separately installed drivers.
 
+### SCSI Cables
+
+* Various types available at Conrad 
+
 ## Resources
 * [What kind of SCSI do I have? Single-ended or differential SCSI interface?](http://www.paralan.com/sediff.html)
 * [LVD, SE, HVD, SCSI Compatibility - Or Not](http://www.paralan.com/scsiexpert.html)
@@ -101,3 +105,4 @@ Unknown to what extent these controllers work on Linux (Ubuntu) without separate
 * [Michigan University Digital Preservation Lab 2.0](https://www.lib.umich.edu/blogs/bits-and-pieces/digital-preservation-lab-20)
 * [Building Audio, Video, And Data-Rescue Kits](https://radd.dsalo.info/wp-content/uploads/2017/10/BuildDocumentation.pdf)
 * [Getting Data Out Of Its Floppy Cage](http://www.wcsarchivesblog.org/getting-data-out-of-its-floppy-cage/) - provides some details on how to get the FC5025 floppy controller working with BitCurator
+* [Bodging a case for a 5.25″ floppy drive](https://radd.dsalo.info/2017/01/bodging-a-case-for-a-5-25-floppy-drive/)
