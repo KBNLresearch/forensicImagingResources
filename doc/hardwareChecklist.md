@@ -55,7 +55,7 @@ This suggests the connector on the device is most likely indeed a centronics-typ
 * **Interface**: Fast Wide SCSI
 * **Connector Type**: 68 pin HD D-Sub (HD-68)
 
-At the back of the machine is a 68-contact female connector, which visually matches the "68-pin high-density SCSI connector" ("SCSI-3 Connector" AKA "Alt 3, P-cable connector"); 5th from top [here](http://www.paralan.com/sediff.html). This is consistent with the specification.
+At the back of the machine is a 68-contact female connector, which visually matches the "68-pin high-density SCSI connector" ("SCSI-3 Connector" AKA "Alt 3, P-cable connector"); 5th from top [here](http://www.paralan.com/sediff.html). This is consistent with the specification. Additionally below the connector is a label with the text "SCSI LVD".
 
 **Cable**: connector at the outgoing side VHDCI SCSI connector (bottommost [here](http://www.paralan.com/sediff.html)). Looking up the product code on the cable (19P0279) also returns several hits that describe it as a "VHDCI to 68pin cable" ([example](http://www.vibrant.com/IBM-19p0279.html)).
 
@@ -73,18 +73,29 @@ More info on the compatibility between the different SCSI types can be found [he
 
 ### SCSI Controllers
 
+<!--
+
 Some options (non-exhaustive list):
 
 * [Adaptec 2248700-R U320 PCI Express X1 1-Channel SCSI Host Bus Adapter](https://www.amazon.com/Adaptec-2248700-R-Express-1-Channel-Adapter/dp/B000NX3PII)
 * [Adaptec SCSI Card 29320LPE](https://storage.microsemi.com/en-us/support/scsi/u320/asc-29320lpe/)
-* [Adaptec SCSI Card 29160](https://storage.microsemi.com/en-us/support/scsi/u160/asc-29160/) --> [here on Marktplaats](https://link.marktplaats.nl/m1287640942); [eBay](https://www.ebay.nl/itm/Adaptec-Controller-Card-SCSI-Card-29160-PCI-SCSI-Adapter/232728027802)
-* [Adaptect aha-2940uw](https://storage.microsemi.com/en-us/support/scsi/2940/aha-2940uw/) --> [here on Marktplaats](https://link.marktplaats.nl/m1286986209); [eBay](https://www.ebay.nl/itm/Adaptec-Controller-Card-AHA-2940-U-PCI-SCSI-Adapter-Karte-NUR/252975323891)
+* [Adaptec SCSI Card 29160](https://storage.microsemi.com/en-us/support/scsi/u160/asc-29160/), [here on Marktplaats](https://link.marktplaats.nl/m1287640942); [eBay](https://www.ebay.nl/itm/Adaptec-Controller-Card-SCSI-Card-29160-PCI-SCSI-Adapter/232728027802)
+* [Adaptect aha-2940uw](https://storage.microsemi.com/en-us/support/scsi/2940/aha-2940uw/), [here on Marktplaats](https://link.marktplaats.nl/m1286986209); [eBay](https://www.ebay.nl/itm/Adaptec-Controller-Card-AHA-2940-U-PCI-SCSI-Adapter-Karte-NUR/252975323891)
 
 These controllers are often available cheap on sites like eBay and Marktplaats.
 
 Unknown to what extent these controllers work on Linux (Ubuntu) without separately installed drivers.
 
+-->
+
+* [Adaptec SCSI Card 29160](https://storage.microsemi.com/en-us/support/scsi/u160/asc-29160/). Back panel shows "LVD/SE", check [here](http://www.paralan.com/scsiexpert.html) for any possible compatibility issues. Connector (outside) is a 68-contact female connector, which visually matches the "68-pin high-density SCSI connector" ("SCSI-3 Connector" AKA "Alt 3, P-cable connector"); 5th from top [here](http://www.paralan.com/sediff.html).
+
 ### SCSI Cables
+
+* DDS machine: default cable appears to be compatible with Adaptec controller.
+* DLT-IV machine: default cable *not* compatible with Adaptec controller; would need 68-pin cable (two-sided), [this one](https://www.conrad.nl/p/advantech-pcl-10168-1e-kabel-1317110) would probably do the trick.
+
+
 
 * Various types available at Conrad 
 
