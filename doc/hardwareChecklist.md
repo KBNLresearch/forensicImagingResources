@@ -96,8 +96,13 @@ Unknown to what extent these controllers work on Linux (Ubuntu) without separate
 * DLT-IV machine: default cable *not* compatible with Adaptec controller; would need 68-pin cable (two-sided), [this one](https://www.conrad.nl/p/advantech-pcl-10168-1e-kabel-1317110) would probably do the trick.
 
 
+## Reading the tapes
 
-* Various types available at Conrad 
+The following resources all use standard unix tools:
+
+* [How to use the DAT-tape with Linux](http://www.cs.inf.ethz.ch/stricker/lab/linux_tape.html) - should work for DDS tapes (and possibly DLT tapes as well)
+* [LTO 1 and 2 (Ultrium 1 and 2) tape archiving](http://www.sb.fsu.edu/~xray/Manuals/LTO-1_LTO-2_DDS_tape_archiving.html)
+
 
 ## Resources
 * [What kind of SCSI do I have? Single-ended or differential SCSI interface?](http://www.paralan.com/sediff.html)
