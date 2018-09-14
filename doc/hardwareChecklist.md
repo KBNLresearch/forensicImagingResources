@@ -102,7 +102,8 @@ The following resources all use standard unix tools:
 
 * [How to use the DAT-tape with Linux](http://www.cs.inf.ethz.ch/stricker/lab/linux_tape.html) - should work for DDS tapes (and possibly DLT tapes as well)
 * [LTO 1 and 2 (Ultrium 1 and 2) tape archiving](http://www.sb.fsu.edu/~xray/Manuals/LTO-1_LTO-2_DDS_tape_archiving.html)
-
+* [15 Useful Linux and Unix Tape Managements Commands For Sysadmins](https://www.cyberciti.biz/hardware/unix-linux-basic-tape-management-commands/)
+* [Duplicating a tape drive using dd ](https://www.linuxquestions.org/questions/linux-newbie-8/duplicating-a-tape-drive-using-dd-4175592839/) - some useful suggestions on how to use dd and how to determine correct block size
 
 ## Resources
 * [What kind of SCSI do I have? Single-ended or differential SCSI interface?](http://www.paralan.com/sediff.html)
