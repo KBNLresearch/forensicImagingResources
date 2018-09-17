@@ -94,6 +94,8 @@ Unknown to what extent these controllers work on Linux (Ubuntu) without separate
     * [Startech PCI Express to PCI Adapter Card](https://www.startech.com/nl/en/Cards-Adapters/Slot-Extension/PCI-Express-to-PCI-Adapter-Card~PEX1PCI1)
     * [Sintech PCI-E Express X1 to Dual PCI Riser Extender Card](https://www.amazon.com/gp/product/B00KZHDSLQ?psc=1&redirect=true&ref_=oh_aui_detailpage_o07_s00)
 
+* [Adaptec SCSI Card 29320LPE](https://storage.microsemi.com/en-us/support/scsi/u320/asc-29320lpe/). Bus System is PCIe x1 (PCI Express), so should work on modern motherboard.
+
 ### SCSI Cables
 
 * DDS machine: default cable appears to be compatible with Adaptec controller.
