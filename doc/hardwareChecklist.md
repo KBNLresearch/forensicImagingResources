@@ -88,7 +88,7 @@ Unknown to what extent these controllers work on Linux (Ubuntu) without separate
 
 -->
 
-* [Adaptec SCSI Card 29160](https://storage.microsemi.com/en-us/support/scsi/u160/asc-29160/). Back panel shows "LVD/SE", check [here](http://www.paralan.com/scsiexpert.html) for any possible compatibility issues. Connector (outside) is a 68-contact female connector, which visually matches the "68-pin high-density SCSI connector" ("SCSI-3 Connector" AKA "Alt 3, P-cable connector"); 5th from top [here](http://www.paralan.com/sediff.html).
+* [Adaptec SCSI Card 29160](https://storage.microsemi.com/en-us/support/scsi/u160/asc-29160/). Back panel shows "LVD/SE", check [here](http://www.paralan.com/scsiexpert.html) for any possible compatibility issues. Connector (outside) is a 68-contact female connector, which visually matches the "68-pin high-density SCSI connector" ("SCSI-3 Connector" AKA "Alt 3, P-cable connector"); 5th from top [here](http://www.paralan.com/sediff.html). NOTE: Bus System Interface Type  is 64-bit PCI!
 
 ### SCSI Cables
 
@@ -124,3 +124,5 @@ The following resources all use standard unix tools:
 * [Building Audio, Video, And Data-Rescue Kits](https://radd.dsalo.info/wp-content/uploads/2017/10/BuildDocumentation.pdf)
 * [Getting Data Out Of Its Floppy Cage](http://www.wcsarchivesblog.org/getting-data-out-of-its-floppy-cage/) - provides some details on how to get the FC5025 floppy controller working with BitCurator
 * [Bodging a case for a 5.25″ floppy drive](https://radd.dsalo.info/2017/01/bodging-a-case-for-a-5-25-floppy-drive/)
+* [PCI card types](https://upload.wikimedia.org/wikipedia/commons/1/15/PCI_Keying.svg)
+* [Adaptec SCSI controller specifications](https://storage.microsemi.com/en-us/support/scsi/)
