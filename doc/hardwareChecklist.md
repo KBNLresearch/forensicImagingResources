@@ -90,11 +90,14 @@ Unknown to what extent these controllers work on Linux (Ubuntu) without separate
 
 * [Adaptec SCSI Card 29160](https://storage.microsemi.com/en-us/support/scsi/u160/asc-29160/). Back panel shows "LVD/SE", check [here](http://www.paralan.com/scsiexpert.html) for any possible compatibility issues. Connector (outside) is a 68-contact female connector, which visually matches the "68-pin high-density SCSI connector" ("SCSI-3 Connector" AKA "Alt 3, P-cable connector"); 5th from top [here](http://www.paralan.com/sediff.html). NOTE: Bus System Interface Type  is 64-bit PCI!
 
+*  [Adaptect aha-2940](https://storage.microsemi.com/en-us/support/scsi/2940/aha-2940/). Bus System Type is PCI; might need a PCI Express to PCI Adapter  to work on modern machine. Options:
+    * [Startech PCI Express to PCI Adapter Card](https://www.startech.com/nl/en/Cards-Adapters/Slot-Extension/PCI-Express-to-PCI-Adapter-Card~PEX1PCI1)
+    * [Sintech PCI-E Express X1 to Dual PCI Riser Extender Card](https://www.amazon.com/gp/product/B00KZHDSLQ?psc=1&redirect=true&ref_=oh_aui_detailpage_o07_s00)
+
 ### SCSI Cables
 
 * DDS machine: default cable appears to be compatible with Adaptec controller.
 * DLT-IV machine: default cable *not* compatible with Adaptec controller; would need 68-pin cable (two-sided), [this one](https://www.conrad.nl/p/advantech-pcl-10168-1e-kabel-1317110) would probably do the trick.
-
 
 ## Reading the tapes
 
@@ -106,6 +109,7 @@ The following resources all use standard unix tools:
 * [Duplicating a tape drive using dd ](https://www.linuxquestions.org/questions/linux-newbie-8/duplicating-a-tape-drive-using-dd-4175592839/) - some useful suggestions on how to use dd and how to determine correct block size
 
 ## Resources
+
 * [What kind of SCSI do I have? Single-ended or differential SCSI interface?](http://www.paralan.com/sediff.html)
 * [LVD, SE, HVD, SCSI Compatibility - Or Not](http://www.paralan.com/scsiexpert.html)
 * [SCSI articles on Paralan](http://www.paralan.com/aboutscsi.html)
@@ -126,3 +130,5 @@ The following resources all use standard unix tools:
 * [Bodging a case for a 5.25″ floppy drive](https://radd.dsalo.info/2017/01/bodging-a-case-for-a-5-25-floppy-drive/)
 * [PCI card types](https://upload.wikimedia.org/wikipedia/commons/1/15/PCI_Keying.svg)
 * [Adaptec SCSI controller specifications](https://storage.microsemi.com/en-us/support/scsi/)
+* [Startech PCI Express to PCI Adapter Card](https://www.startech.com/nl/en/Cards-Adapters/Slot-Extension/PCI-Express-to-PCI-Adapter-Card~PEX1PCI1)
+* [Sintech PCI-E Express X1 to Dual PCI Riser Extender Card](https://www.amazon.com/gp/product/B00KZHDSLQ?psc=1&redirect=true&ref_=oh_aui_detailpage_o07_s00)
