@@ -86,20 +86,22 @@ These controllers are often available cheap on sites like eBay and Marktplaats.
 
 Unknown to what extent these controllers work on Linux (Ubuntu) without separately installed drivers.
 
--->
 
-* [Adaptec SCSI Card 29160](https://storage.microsemi.com/en-us/support/scsi/u160/asc-29160/). Back panel shows "LVD/SE", check [here](http://www.paralan.com/scsiexpert.html) for any possible compatibility issues. Connector (outside) is a 68-contact female connector, which visually matches the "68-pin high-density SCSI connector" ("SCSI-3 Connector" AKA "Alt 3, P-cable connector"); 5th from top [here](http://www.paralan.com/sediff.html). NOTE: Bus System Interface Type  is 64-bit PCI!
+
+* [Adaptec SCSI Card 29160](https://storage.microsemi.com/en-us/support/scsi/u160/asc-29160/). Back panel shows "LVD/SE", check [here](http://www.paralan.com/scsiexpert.html) for any possible compatibility issues. Connector (outside) is a 68-contact female connector, which visually matches the "68-pin high-density SCSI connector" ("SCSI-3 Connector" AKA "Alt 3, P-cable connector"); 5th from top [here](http://www.paralan.com/sediff.html). NOTE: Bus System Interface Type  is 64-bit PCI so won't fit in modern machine!
 
 *  [Adaptect aha-2940](https://storage.microsemi.com/en-us/support/scsi/2940/aha-2940/). Bus System Type is PCI; might need a PCI Express to PCI Adapter  to work on modern machine. Options:
     * [Startech PCI Express to PCI Adapter Card](https://www.startech.com/nl/en/Cards-Adapters/Slot-Extension/PCI-Express-to-PCI-Adapter-Card~PEX1PCI1)
     * [Sintech PCI-E Express X1 to Dual PCI Riser Extender Card](https://www.amazon.com/gp/product/B00KZHDSLQ?psc=1&redirect=true&ref_=oh_aui_detailpage_o07_s00)
 
-* [Adaptec SCSI Card 29320LPE](https://storage.microsemi.com/en-us/support/scsi/u320/asc-29320lpe/). Bus System is PCIe x1 (PCI Express), so should work on modern motherboard.
+-->
+
+[Adaptec SCSI Card 29320LPE](https://storage.microsemi.com/en-us/support/scsi/u320/asc-29320lpe/). Bus System is PCIe x1 (PCI Express), so should work on modern motherboard. External connector is [VHDCI 68-pin](http://www.paralan.com/sediff.html) (female).
 
 ### SCSI Cables
 
-* DDS machine: default cable appears to be compatible with Adaptec controller.
-* DLT-IV machine: default cable *not* compatible with Adaptec controller; would need 68-pin cable (two-sided), [this one](https://www.conrad.nl/p/advantech-pcl-10168-1e-kabel-1317110) would probably do the trick.
+* DLT-IV machine: default cable is compatible with the Adaptec 29320LPE controller.
+* DDS machine: default cable *not* compatible with Adaptec 29320LPE controller; would need 68-pin HD (male) to 68-pin VHDCI 68 (male) cable. [this one](https://www.conrad.nl/p/advantech-pcl-10168-1e-kabel-1317110) would probably do the trick.
 
 ## Reading the tapes
 
