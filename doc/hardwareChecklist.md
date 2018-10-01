@@ -38,7 +38,7 @@ We currently have the following tape readers:
 
 Alternatively it *might* be a 50-pin high-density SCSI connector ("SCSI-2 Connector" AKA "Alt 1, A-cable connector"); 3rd from top [here](http://www.paralan.com/sediff.html). But the distance between the two contact rows in the illustration appears to be smaller than on the actual drive. 
 
-**Cable**: attached to the device is a [Single Ended HD68 TO LD50 SCSI Cable](http://www.itinstock.com/hp-c5665-61001-single-ended-hd68-to-ld50-scsi-cable-1-meter-40938-p.asp). The connector that goes into the PCI card is a 68-pin DB68 (MD68) connector (also known as High-Density or HD 68 and Half-Pitch or HP68).
+**Cable**: attached to the device is a [Single Ended HD68 TO LD50 SCSI Cable](https://web.archive.org/web/20180606100950/http://www.itinstock.com/hp-c5665-61001-single-ended-hd68-to-ld50-scsi-cable-1-meter-40938-p.asp). The connector that goes into the PCI card is a 68-pin DB68 (MD68) connector (also known as High-Density or HD 68 and Half-Pitch or HP68).
 
 Note that the 50-pin connector is listed as "LD50". A search on "LD50" and "SCSI" turned up [this](http://carlsralp.www3.50megs.com/computer/connectr/scsiconn.html#ld) link, which says:
 
