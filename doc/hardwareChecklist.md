@@ -101,8 +101,7 @@ Unknown to what extent these controllers work on Linux (Ubuntu) without separate
 ### SCSI Cables
 
 * DLT-IV machine: default cable is compatible with the Adaptec 29320LPE controller.
-* DDS machine: default cable *not* compatible with Adaptec 29320LPE controller; would need 68-pin HD (male) to 68-pin VHDCI 68 (male) cable. [this one](https://www.conrad.nl/p/advantech-pcl-10168-1e-kabel-1317110) would probably do the trick.
-
+* DDS machine: default cable *not* compatible with Adaptec 29320LPE controller; would need 68-pin HD (male) to 68-pin VHDCI 68 (male) cable.
 ## Reading the tapes
 
 The following resources all use standard unix tools:
