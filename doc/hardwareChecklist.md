@@ -36,7 +36,9 @@ We currently have the following tape readers:
 
 **Connector**: drive has a 50-contact female connector which looks an awful lot like a 50-contact, centronics-type connector ("SCSI-1 Connector" AKA "Alternative 2, A-cable connector"). See also the topmost connector [here](http://www.paralan.com/sediff.html). This is somewhat strange, since the specs explicitly state the drive has a SCSI-2 interface. 
 
-Alternatively it *might* be a 50-pin high-density SCSI connector ("SCSI-2 Connector" AKA "Alt 1, A-cable connector"); 3rd from top [here](http://www.paralan.com/sediff.html). But the distance between the two contact rows in the illustration appears to be smaller than on the actual drive. 
+Alternatively it *might* be a 50-pin high-density SCSI connector ("SCSI-2 Connector" AKA "Alt 1, A-cable connector"); 3rd from top [here](http://www.paralan.com/sediff.html). But the distance between the two contact rows in the illustration appears to be smaller than on the actual drive.
+
+However looking up the product code on the terminator connected to the bottom connector (which is identical to the upper one) returns [this](https://web.archive.org/web/20181002100536/https://www.ebay.com/itm/DM800-09-R-DataMate-SCSI-Terminator-50-Pin-Centronics-/350546682678), which says it is a "50-Pin Centronics" type connector, i.e. a "SCSI-1" connector (which matches the visual identification).
 
 **Cable**: attached to the device is a [Single Ended HD68 TO LD50 SCSI Cable](https://web.archive.org/web/20180606100950/http://www.itinstock.com/hp-c5665-61001-single-ended-hd68-to-ld50-scsi-cable-1-meter-40938-p.asp). The connector that goes into the PCI card is a 68-pin DB68 (MD68) connector (also known as High-Density or HD 68 and Half-Pitch or HP68).
 
