@@ -14,6 +14,6 @@
 |**Interface**|Fast Wide SCSI|
 |**Connector**|68 pin HD D-Sub (HD-68) (see also 5th from top [here](http://www.paralan.com/sediff.html))|
 |**Cable**|At the outgoing side is a male VHDCI SCSI connector (bottommost [here](http://www.paralan.com/sediff.html))|
-|**Workstation connection**|Can connected directly with workstation's SCSI controller (which has a female VHDCI connector)|
+|**Workstation connection**|Can be connected directly with workstation's SCSI controller (which has a female VHDCI connector)|
 
 ## Procedure for reading a tape
