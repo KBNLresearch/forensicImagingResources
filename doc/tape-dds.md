@@ -6,7 +6,7 @@
 
 ## Tape reader
 
-| | |
+|||
 |:--|:--|
 |**Model**|[HP SureStore DAT8](http://www.hp.com/ecomcat/hpcatalog/specs/S4112B.htm)|
 |**Media**|DDS-2 (8 GB), DDS-1 (2.6 GB and 4 GB)|

@@ -6,7 +6,7 @@
 
 ## Tape reader
 
-| | |
+|||
 |:--|:--|
 |**Model**|[IBM 7205 440](https://www.cnet.com/products/ibm-7205-440-tape-drive-dlt-scsi/specs/)|
 |**Media**|DLT IV (and possibly DLT III)|
