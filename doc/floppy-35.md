@@ -19,21 +19,23 @@
 
     ![](./img/floppy-35-guymager1.png)
 
-2. Insert floppy into reader.
+2. Make sure the square write-protection tab is enabled (the hole in the corner of the disk must be uncovered).
 
-3. Press *rescan* button in Guymager (top). Result:
+3. Insert the floppy into the reader.
+
+4. Press the *rescan* button in Guymager (top). Result:
 
     ![](./img/floppy-35-guymager2.png)
 
-4. Click on entry for floppy device in Guymager. Result:
+5. In Guymager, click on the entry for the floppy device. Result:
 
     ![](./img/floppy-35-guymager3.png)
 
-5. Right-click and select *Acquire image*:
+6. Right-click and select *Acquire image*:
 
     ![](./img/floppy-35-guymager4.png)
 
-6. In the *Acquire image* dialog, make the following settings:
+7. In the *Acquire image* dialog, make the following settings:
 
     - Set *File format* to *Linux dd raw*.
     - Uncheck the *Split image files* checkbox.
@@ -43,9 +45,9 @@
 
     ![](./img/floppy-35-guymager5.png)
 
-7. Press the *Start* button and watch the progress indicator.
+8. Press the *Start* button and watch the progress indicator.
 
-8. If all went well, the *State* field will read *Finished - Verified & ok*.
+9. If all went well, the *State* field will read *Finished - Verified & ok*.
 
     ![](./img/floppy-35-guymager6.png)
 
