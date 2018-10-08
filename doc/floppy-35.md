@@ -20,38 +20,37 @@
 
     ![](./img/floppy-35-guymager1.png)
 
-2. Insert floppy into reader
+2. Insert floppy into reader.
 
 3. Press *rescan* button in Guymager (top). Result:
 
-    ![](./img/floppy-35-guymager2.png)
+  ![](./img/floppy-35-guymager2.png)
 
 4. Click on entry for floppy device in Guymager. Result:
 
-    ![](floppy-35-guymager3.png)
+  ![](floppy-35-guymager3.png)
 
 5. Right-click and select *Acquire image*:
 
-    ![](floppy-35-guymager4.png)
+  ![](floppy-35-guymager4.png)
 
 6. In the *Acquire image* dialog, make the following settings:
 
-        - File format: Linux dd raw
-        - Uncheck *Split image files* checkbox
-        - Select the destination directory for the disk image, and enter a file name (without extension)
-        - Check *Calculate SHA-256* (and uncheck the MD5 and SHA-1 options)
-        - Check *Verify image after acquisition*.
+    - File format: Linux dd raw
+    - Uncheck *Split image files* checkbox
+    - Select the destination directory for the disk image, and enter a file name (without extension)
+    - Check *Calculate SHA-256* (and uncheck the MD5 and SHA-1 options)
+    - Check *Verify image after acquisition*.
 
-   ![](floppy-35-guymager5.png)
+    ![](floppy-35-guymager5.png)
 
 7. Press the *Start* button and watch the progress indicator.
 
 8. If all went well, the *State* field will read *Finished - Verified & ok*.
 
-    ![](floppy-35-guymager5.png)
+  ![](floppy-35-guymager5.png)
 
 The above steps result in two files:
 
     - a file with extension *.dd*, which is the actual disk image
     - a file with extension *.info*, which contains information about the imaging process.
-    
