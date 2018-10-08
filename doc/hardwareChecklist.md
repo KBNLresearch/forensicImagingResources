@@ -133,6 +133,7 @@ The following resources all use standard unix tools:
 * [Michigan University Digital Preservation Lab 2.0](https://www.lib.umich.edu/blogs/bits-and-pieces/digital-preservation-lab-20)
 * [Building Audio, Video, And Data-Rescue Kits](https://radd.dsalo.info/wp-content/uploads/2017/10/BuildDocumentation.pdf)
 * [Getting Data Out Of Its Floppy Cage](http://www.wcsarchivesblog.org/getting-data-out-of-its-floppy-cage/) - provides some details on how to get the FC5025 floppy controller working with BitCurator
+* [Use Guide for the FC5025 Floppy Disk Controller](https://web.archive.org/web/20180507194729/https://mith.umd.edu/vintage-computers/fc5025-operation-instructions)
 * [Bodging a case for a 5.25″ floppy drive](https://radd.dsalo.info/2017/01/bodging-a-case-for-a-5-25-floppy-drive/)
 * [PCI card types](https://upload.wikimedia.org/wikipedia/commons/1/15/PCI_Keying.svg)
 * [Adaptec SCSI controller specifications](https://storage.microsemi.com/en-us/support/scsi/)
