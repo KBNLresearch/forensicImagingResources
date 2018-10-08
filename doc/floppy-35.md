@@ -24,15 +24,15 @@
 
 3. Press *rescan* button in Guymager (top). Result:
 
-  ![](./img/floppy-35-guymager2.png)
+    ![](./img/floppy-35-guymager2.png)
 
 4. Click on entry for floppy device in Guymager. Result:
 
-  ![](floppy-35-guymager3.png)
+    ![](./img/floppy-35-guymager3.png)
 
 5. Right-click and select *Acquire image*:
 
-  ![](floppy-35-guymager4.png)
+    ![](./img/floppy-35-guymager4.png)
 
 6. In the *Acquire image* dialog, make the following settings:
 
@@ -42,13 +42,13 @@
     - Check *Calculate SHA-256* (and uncheck the MD5 and SHA-1 options)
     - Check *Verify image after acquisition*.
 
-    ![](floppy-35-guymager5.png)
+    ![](./img/floppy-35-guymager5.png)
 
 7. Press the *Start* button and watch the progress indicator.
 
 8. If all went well, the *State* field will read *Finished - Verified & ok*.
 
-  ![](floppy-35-guymager6.png)
+    ![](./img/floppy-35-guymager6.png)
 
 The above steps result in two files:
 
