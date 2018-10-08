@@ -19,7 +19,7 @@
 
     ![](./img/floppy-35-guymager1.png)
 
-2. Make sure the square write-protection tab is enabled (the hole in the corner of the disk must be uncovered).
+2. Make sure the floppy's square write-protection tab is enabled (the hole in the corner of the disk must be uncovered).
 
 3. Insert the floppy into the reader.
 
