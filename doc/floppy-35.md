@@ -48,9 +48,9 @@
 
 8. If all went well, the *State* field will read *Finished - Verified & ok*.
 
-  ![](floppy-35-guymager5.png)
+  ![](floppy-35-guymager6.png)
 
 The above steps result in two files:
 
-    - a file with extension *.dd*, which is the actual disk image
-    - a file with extension *.info*, which contains information about the imaging process.
+- a file with extension *.dd*, which is the actual disk image
+- a file with extension *.info*, which contains information about the imaging process.
