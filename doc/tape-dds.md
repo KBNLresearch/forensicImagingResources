@@ -6,9 +6,8 @@
 
 ## Tape reader
 
-|||
-|:--|:--|
 |**Model**|[HP SureStore DAT8](http://www.hp.com/ecomcat/hpcatalog/specs/S4112B.htm)|
+|:--|:--|
 |**Media**|DDS-2 (8 GB), DDS-1 (2.6 GB and 4 GB)|
 |**Interface**|Single-ended, narrow SCSI-2|
 |**Connector**|50-contact, centronics-type connector ("SCSI-1 Connector" AKA "Alternative 2, A-cable connector"), female (see also the topmost connector [here](http://www.paralan.com/sediff.html))[^1]|
