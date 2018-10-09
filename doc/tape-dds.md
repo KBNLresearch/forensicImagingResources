@@ -4,7 +4,9 @@
 
 [Digital Data Storage (DDS)](https://en.wikipedia.org/wiki/Digital_Data_Storage) is a family of tape formats that are based on [digital audio tape](https://en.wikipedia.org/wiki/Digital_audio_tape) (DAT).
 
-## Tape reader
+## Hardware
+
+### Tape reader
 
 |**Model**|[HP SureStore DAT8](http://www.hp.com/ecomcat/hpcatalog/specs/S4112B.htm)|
 |:--|:--|
@@ -15,5 +17,14 @@
 |**Workstation connection**|With this [HD68 to VHDCI adapter](https://web.archive.org/web/20181002103944/https://www.ramelectronics.net/sm-044-r.aspx) the reader can be hooked up to the workstation's SCSI controller (which has a female VHDCI connector)|
 
 [^1]: This is somewhat strange, since the specs explicitly state the drive has a SCSI-2 interface
+
+### SCSI controller
+
+|**Model**|[Adaptec SCSI Card 29320LPE](https://storage.microsemi.com/en-us/support/scsi/u320/asc-29320lpe/)|
+|:--|:--|
+|**Bus System Interface Type**|[PCI Express](https://en.wikipedia.org/wiki/PCI_Express) x1|
+|**External Connectors**|[68-pin VHDCI](https://en.wikipedia.org/wiki/Very-high-density_cable_interconnect)|
+|**Data Transfer Rate**|Up to 320 MByte/sec.|
+
 
 ## Procedure for reading a tape
