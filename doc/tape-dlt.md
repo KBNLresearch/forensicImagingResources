@@ -25,4 +25,8 @@
 |**External Connectors**|[68-pin VHDCI](https://en.wikipedia.org/wiki/Very-high-density_cable_interconnect)|
 |**Data Transfer Rate**|Up to 320 MByte/sec.|
 
+#### Note on bracket height
+
+Note that by default the controller has a standard height (120 mm) bracket that won't fit into a low-profile (79.2 mm) slot! When these controllers were sold new, they came with a replacement low-profile bracket, but these are often not included with used ones. The low-profile replacement brackets are sometimes sold separately on eBay.
+
 ## Procedure for reading a tape

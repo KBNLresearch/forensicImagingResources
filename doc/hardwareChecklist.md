@@ -140,3 +140,5 @@ The following resources all use standard unix tools:
 * [Adaptec SCSI controller specifications](https://storage.microsemi.com/en-us/support/scsi/)
 * [Startech PCI Express to PCI Adapter Card](https://www.startech.com/nl/en/Cards-Adapters/Slot-Extension/PCI-Express-to-PCI-Adapter-Card~PEX1PCI1)
 * [Sintech PCI-E Express X1 to Dual PCI Riser Extender Card](https://www.amazon.com/gp/product/B00KZHDSLQ?psc=1&redirect=true&ref_=oh_aui_detailpage_o07_s00)
+* [Server-side Preservation of Dynamic Websites](http://publications.beeldengeluid.nl/pub/633/)
+* [Disk Image Formats](https://wiki.harvard.edu/confluence/display/digitalpreservation/Disk+Image+Formats)
