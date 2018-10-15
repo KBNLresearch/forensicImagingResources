@@ -13,7 +13,7 @@
 |**Connection**|USB 2.0/1.1|
 |**Type of floppy disk**|High Density (2HD) 1.44 MByte,Normal Density (2DD), 720 kByte|
 
-## Procedure for reading a tape
+## Procedure for creating a disk image
 
 ### Guymager
 
