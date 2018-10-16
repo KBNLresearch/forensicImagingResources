@@ -23,6 +23,6 @@ Below setup notes describe how to set up BitCurator with MATE as a replacement f
 
 - Pinta (lightweight image editor, useful for e.g. editing/cropping screen shots):
 
-    sudo apt install pinta
+        sudo apt install pinta
 
 - Visual Studio Code (useful for taking notes and writing documentation thanks to good Markdown support)
