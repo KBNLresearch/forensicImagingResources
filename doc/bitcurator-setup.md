@@ -6,8 +6,8 @@ Below setup notes describe how to set up BitCurator with MATE as a replacement f
 
 2. Install the MATE desktop using the below commands:
 
-    sudo apt update
-    sudo apt install ubuntu-mate-desktop
+        sudo apt update
+        sudo apt install ubuntu-mate-desktop
 
 3. When the *package configuration* dialog pops up, select the *lightdm* display manager:
 
@@ -17,7 +17,7 @@ Below setup notes describe how to set up BitCurator with MATE as a replacement f
 
 6. To make the BitCurator-specific context menus work, copy the *scripts* folder in `/home/bcadmin/.local/share/nautilus` to `/home/bcadmin/.config/caja`:
 
-    cp -a /home/bcadmin/.local/share/nautilus/scripts /home/bcadmin/.config/caja/scripts
+        cp -a /home/bcadmin/.local/share/nautilus/scripts /home/bcadmin/.config/caja/scripts
 
 ## Additional software
 
