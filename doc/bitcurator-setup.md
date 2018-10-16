@@ -19,4 +19,4 @@ Below setup notes describe how to set up BitCurator with MATE as a replacement f
 
         cp -a /home/bcadmin/.local/share/nautilus/scripts /home/bcadmin/.config/caja/scripts
 
-7. Optionally replace the default MATE wallpaper (which annoyingly has a similat colour as the folder icons on the desktop!) with one of the wallpapers in `/usr/share/backgrounds`.
+7. Optionally replace the default MATE wallpaper (which annoyingly has a similar colour as the folder icons on the desktop!) with one of the wallpapers in `/usr/share/backgrounds`.
