@@ -18,11 +18,3 @@ Below setup notes describe how to set up BitCurator with MATE as a replacement f
 6. To make the BitCurator-specific context menus work, copy the *scripts* folder in `/home/bcadmin/.local/share/nautilus` to `/home/bcadmin/.config/caja`:
 
         cp -a /home/bcadmin/.local/share/nautilus/scripts /home/bcadmin/.config/caja/scripts
-
-## Additional software
-
-- Pinta (lightweight image editor, useful for e.g. editing/cropping screen shots):
-
-        sudo apt install pinta
-
-- Visual Studio Code (useful for taking notes and writing documentation thanks to good Markdown support)
