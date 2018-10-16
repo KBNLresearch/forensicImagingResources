@@ -58,12 +58,13 @@
 
     ![](./img/floppy-35-guymager3.png)
 
+9. Remove the floppy from the floppy disk drive.
+
 The above steps result in two files:
 
 - A file with extension *.dd*, which is the actual disk image.
 - A file with extension *.info*, which contains information about the imaging process.
 
-10. Remove the floppy from the floppy disk drive.
 
 ## Remarks
 
