@@ -11,7 +11,9 @@
 |**Model**|[Tableau Forensic SATA/IDE Bridge](https://www.guidancesoftware.com/tableau/hardware/t35u)|
 |:--|:--|
 |**Connectors: Host (Left) Side**|USB 3.0 Standard-B connector|
-|**Connectors: Device (Right) Side**|USB 3.0 Standard-A connector|
+|**Connectors: Device (Right) Side**|SATA signal connector, IDE signal connector, 4-pin 3M drive power connector (power to SATA or IDE hard disk)|
+|**SATA Device Compatibility**|SATA 1 or SATA 2 hard disk devices|
+|**IDE Device Compatibility**|Parallel ATA hard disk devices with Logical Block Addressing (LBA) support|
 
 ## Connecting the write blocker
 
