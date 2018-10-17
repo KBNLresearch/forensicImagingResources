@@ -25,7 +25,7 @@
 
 1. Connect the hard disk drive to one of the connectors at the right-hand side of the write blocker using the appropriate (SATA/IDE) cables. Note that for a SATA drive you need to connect two cables: one data cable and a power cable! See the image below:
 
-    ![](./img/sata-wb.jpg) <!-- TODO insert photograph-->
+    ![](./img/sata-wb.jpg)
 
 2. Press the power button on the write blocker.
 
