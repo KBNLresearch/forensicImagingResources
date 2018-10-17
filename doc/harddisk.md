@@ -17,19 +17,21 @@
 
 1. Hook up the write blocker to the workstation using the blue USB cable (use the left-hand port on the write blocker).
 
-2. Connect the write blocker' s power supply to the DC In (at top) and make sure the power cord is plugged into to a power socket.
+2. Connect the write blocker' s power supply to the DC In (top left) and make sure the power cord is plugged into to a power socket.
 
 ## Procedure for creating a disk image
 
 ### Guymager
 
-1. Press the power button on the write blocker (if it is not switched on already).
+1. Connect the hard disk drive to one of the connectors at the right-hand side of the write blocker using the appropriate (SATA/IDE) cables. Note that for a SATA drive you need to connect two cables: one data cable and a power cable! See the image below:
 
-2. Connect the flash drive to the right-hand USB connector on the write blocker.
+    ![](./img/sata-wb.jpg) <!-- TODO insert photograph-->
+
+2. Press the power button on the write blocker.
 
 3. Start Guymager. Result:
 
-    ![](./img/flash-guymager1.png)
+    ![](./img/hdd-guymager1.png)
 
 4. Right-click on the entry for the flash drive, and select *Acquire image*.
 
@@ -41,7 +43,7 @@
     - Check *Calculate SHA-256* (and uncheck the *MD5* and *SHA-1* options).
     - Check *Verify image after acquisition*.
 
-    ![](./img/flash-guymager2.png)
+    ![](./img/hdd-guymager2.png)
 
 6. Press the *Start* button and watch the progress indicator.
 
