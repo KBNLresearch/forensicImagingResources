@@ -1,14 +1,14 @@
-# USB flash drive
+# Hard disk drive (internal)
 
 ## Introduction
 
-[USB flash drive](https://en.wikipedia.org/wiki/USB_flash_drive).
+[Hard disk drive](https://en.wikipedia.org/wiki/Hard_disk_drive).
 
 ## Hardware
 
 ### Write blocker
 
-|**Model**|[Tableau Forensic USB 3.0 Bridge](https://www.guidancesoftware.com/tableau/hardware/t8u)|
+|**Model**|[Tableau Forensic SATA/IDE Bridge](https://www.guidancesoftware.com/tableau/hardware/t35u)|
 |:--|:--|
 |**Connectors: Host (Left) Side**|USB 3.0 Standard-B connector|
 |**Connectors: Device (Right) Side**|USB 3.0 Standard-A connector|
