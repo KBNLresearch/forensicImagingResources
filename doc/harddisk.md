@@ -49,7 +49,7 @@
 
 7. If all went well, the *State* field will read *Finished - Verified & ok*.
 
-    ![](./img/flash-guymager3.png)
+    ![](./img/hdd-guymager3.png)
 
 The above steps result in two files:
 
@@ -58,6 +58,6 @@ The above steps result in two files:
 
 8. Open a file manager window, right-click on the flash drive icon, and select *Eject*.
 
-    ![](./img/flash-eject.png)
+    ![](./img/hdd-eject.png)
 
 9. You can now safely remove the flash drive from the write blocker.
