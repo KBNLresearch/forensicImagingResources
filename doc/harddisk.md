@@ -66,7 +66,12 @@ The above steps result in two files:
 
 9. You can now safely remove the hard disk drive from the write blocker.
 
+
+<!-- 
+
 ## Exporting files from disk image
+
+TODO: in test of below procedure with 320GB dd imag, generating the directory tree takes forever, perhaps better to export directly using tsk_recover or indirectly using the tools by Tim Walsh. For the moment description is based on manual analysis.
 
 1. Launch the *BitCurator Disk Image Access* application (located in the *Forensics and Reporting* folder on the desktop)
 
@@ -74,4 +79,37 @@ The above steps result in two files:
 
 2. Click on the *Open disk image* button (top-left) and select the disk image that we just created. The application now starts to generate a DFXML file, and a directory tree. For large disk images this will take a while.
 
-<!-- TODO: in test of 320GB dd image generating the directory tree takes forever, perhaps better to export directly using tsk_recover or indirectly using the tools by Tim Walsh -->
+-->
+
+## Get information about the disk image
+
+From the terminal, type:
+
+    disktype testsata.dd
+
+Result:
+
+    --- testsata.dd
+    Regular file, size 298.1 GiB (320072933376 bytes)
+    DOS/MBR partition map
+    Partition 1: 350 MiB (367001600 bytes, 716800 sectors from 2048, bootable)
+    Type 0x07 (HPFS/NTFS)
+    NTFS file system
+        Volume size 350.0 MiB (367001088 bytes, 716799 sectors)
+    Partition 2: 297.7 GiB (319703482368 bytes, 624420864 sectors from 718848)
+    Type 0x07 (HPFS/NTFS)
+    NTFS file system
+        Volume size 297.7 GiB (319703481856 bytes, 624420863 sectors)
+
+So in this case our disk image contains 2 partitions:
+
+- A 350 MiB boot partition
+- A 298 GiB partition
+
+The second partition starts at sector 718848 (byte offset 512*718848 = 368050176).
+
+## Export files from disk image
+
+To export the second partition:
+
+    tsk_recover -a -o 718848 ./image/testsata.dd ./fsOut
