@@ -142,3 +142,4 @@ The following resources all use standard unix tools:
 * [Sintech PCI-E Express X1 to Dual PCI Riser Extender Card](https://www.amazon.com/gp/product/B00KZHDSLQ?psc=1&redirect=true&ref_=oh_aui_detailpage_o07_s00)
 * [Server-side Preservation of Dynamic Websites](http://publications.beeldengeluid.nl/pub/633/)
 * [Disk Image Formats](https://wiki.harvard.edu/confluence/display/digitalpreservation/Disk+Image+Formats)
+* [Automated Processing of Disk Images and Directories in BitCurator (Tim Walsh)](https://www.bitarchivist.net/blog/2017-05-01-buf2017/)
