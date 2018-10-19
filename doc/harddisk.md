@@ -65,3 +65,11 @@ The above steps result in two files:
     ![](./img/hdd-unmount.png)
 
 9. You can now safely remove the hard disk drive from the write blocker.
+
+## Exporting files from disk image
+
+1. Launch the *BitCurator Disk Image Access* application (located in the *Forensics and Reporting* folder on the desktop)
+
+    ![](./img/bc-disk-image-access1.png)
+
+2. Click on the *Open disk image* button (top-left) and select the disk image that we just created. The application now starts to generate a DFXML file, and a directory tree. For large disk images this will take a while.
