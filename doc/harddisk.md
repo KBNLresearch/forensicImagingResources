@@ -73,3 +73,5 @@ The above steps result in two files:
     ![](./img/bc-disk-image-access1.png)
 
 2. Click on the *Open disk image* button (top-left) and select the disk image that we just created. The application now starts to generate a DFXML file, and a directory tree. For large disk images this will take a while.
+
+<!-- TODO: in test of 320GB dd image generating the directory tree takes forever, perhaps better to export directly using tsk_recover or indirectly using the tools by Tim Walsh -->
