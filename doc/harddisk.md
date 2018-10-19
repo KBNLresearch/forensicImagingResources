@@ -58,8 +58,10 @@ The above steps result in two files:
 - A file with extension *.dd*, which is the actual disk image.
 - A file with extension *.info*, which contains information about the imaging process.
 
-8. Open a file manager window, right-click on the flash drive icon, and select *Eject*.
+<!-- TODO: verify unmount procedure, not tested! -->
 
-    ![](./img/hdd-eject.png)
+8. Open a file manager window, right-click on the hdd drive icon, and select *Unmount*.
 
-9. You can now safely remove the flash drive from the write blocker.
+    ![](./img/hdd-unmount.png)
+
+9. You can now safely remove the hard disk drive from the write blocker.
