@@ -116,3 +116,5 @@ the open position:
 - [Recovering NTBackup Tapes](https://www.108.bz/posts/it/recovering-ntbackup-tapes/)
 
 - [Linux Set the Block Size for a SCSI Tape Device](https://www.cyberciti.biz/faq/rhel-centos-debian-set-tape-blocksize/)
+
+- [mtftar](https://github.com/sjmurdoch/mtftar) - mtftar is a tool for translating a MTF stream to a TAR stream
