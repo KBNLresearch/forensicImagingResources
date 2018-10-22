@@ -30,4 +30,89 @@
 
 Note that by default the controller has a standard height (120 mm) bracket that won't fit into a low-profile (79.2 mm) slot! When these controllers were sold new, they came with a replacement low-profile bracket, but these are often not included with used ones. The low-profile replacement brackets are sometimes sold separately on eBay.
 
-## Procedure for reading a tape
+## Software
+
+Additional software for working with tape devices:
+
+    sudo apt install lsscsi
+
+## General tape commands
+
+List installed SCSI tape devices:
+
+    lsscsi
+
+Result:
+
+    [0:0:2:0]    tape    HP       C1533A           A708  /dev/st0 
+    [1:0:0:0]    disk    ATA      WDC WD2500AAKX-6 1H18  /dev/sda 
+    [3:0:0:0]    cd/dvd  hp       DVD A  DH16ABSH  YHDD  /dev/sr0 
+    [7:0:0:0]    disk    WD       Elements 25A2    1021  /dev/sdb
+
+So our tape device is ` /dev/st0`.
+
+Display tape status:
+
+    sudo mt -f /dev/st0 status
+
+Result:
+
+    drive type = 114
+    drive status = 318767104
+    sense key error = 0
+    residue count = 0
+    file number = 0
+    block number = 0
+
+Rewind tape:
+
+    sudo mt -f /dev/st0 rewind
+
+Eject tape:
+
+    sudo mt -f /dev/st0 eject
+
+## Loading a tape
+
+1. Check the write-protect tab on the bottom of the tape, and slide it to
+the open position:
+
+    ![](./img/dds-protect.jpg)
+
+2. Insert the tape into the drive. Make sure tat the printed side is on top, and that the tape is inserted in the direction of the arrow symbol on the tape:
+
+    ![](./img/dds-insert.jpg)
+
+## Procedure for reading an NTBackup tape
+
+1. Load the tape
+
+2. Determine the block size by entering:
+
+        sudo dd if=/dev/st0 of=tmp.dd ibs=128 count=1
+
+    If this results in a *Cannot allocate memory* error message, repeat the above command with a larger ibs value (e.g. 256). Repeat until the error goes away and some data is read. For instance:
+
+        sudo dd if=/dev/st0 of=tmp.dd ibs=512 count=1
+
+    Results in:
+
+        1+0 records in
+        1+0 records out
+        512 bytes copied, 0.308845 s, 1.7 kB/s
+    
+    Which means that the block size is 512 bytes.
+
+ 3. Read blocks (note that we're using the non-rewinding tape device ` /dev/nst0` here):
+
+        for f in `seq 1 10`; do sudo dd if=/dev/nst0 of=tapeblock`printf "%06g" $f`.bin ibs=512; done
+
+    Question: why 10 iterations? What does each iteration represent (a backup session? something else?)
+
+## Resources
+
+- [15 Useful Linux and Unix Tape Managements Commands For Sysadmins](https://www.cyberciti.biz/hardware/unix-linux-basic-tape-management-commands/)
+
+- [Recovering NTBackup Tapes](https://www.108.bz/posts/it/recovering-ntbackup-tapes/)
+
+- [Linux Set the Block Size for a SCSI Tape Device](https://www.cyberciti.biz/faq/rhel-centos-debian-set-tape-blocksize/)
