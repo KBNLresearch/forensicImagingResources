@@ -79,7 +79,7 @@ the open position:
 
     ![](./img/dds-protect.jpg)
 
-2. Insert the tape into the drive. Make sure tat the printed side is on top, and that the tape is inserted in the direction of the arrow symbol on the tape:
+2. Insert the tape into the drive. Make sure the printed side is on top, and that the tape is inserted in the direction of the arrow symbol:
 
     ![](./img/dds-insert.jpg)
 
