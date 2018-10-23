@@ -36,6 +36,14 @@ Additional software for working with tape devices:
 
     sudo apt install lsscsi
 
+Software for translating Microsoft NTBackup stream (MTF) to TAR:
+
+<https://sourceforge.net/projects/slackbuildsdirectlinks/files/mtftar/mtftar.tar.gz>
+
+Download above TAR, extract to directory, go to directory and then build using:
+
+    make
+
 ## General tape commands
 
 List installed SCSI tape devices:
@@ -49,8 +57,13 @@ Result:
     [3:0:0:0]    cd/dvd  hp       DVD A  DH16ABSH  YHDD  /dev/sr0 
     [7:0:0:0]    disk    WD       Elements 25A2    1021  /dev/sdb
 
-So our tape device is ` /dev/st0`.
+So our tape device is `/dev/st0`. For reading however we will use the " non-rewind" tape device which is `/dev/nst0`. The difference betweeen these devices:
 
+- When using `/dev/st0`, the tape is automatically rewound after each read/write operation (e.g. using *dd*).
+- When using `/dev/nst0`, the tape is left at its current position after each read/write operation.
+
+The [*mt*](https://linux.die.net/man/1/mt) command is used for all tape operations. It must be run as root (so use *sudo*).
+ 
 Display tape status:
 
     sudo mt -f /dev/st0 status
@@ -107,7 +120,41 @@ the open position:
 
         for f in `seq 1 10`; do sudo dd if=/dev/nst0 of=tapeblock`printf "%06g" $f`.bin ibs=512; done
 
+    Output:
+
+        2251822+0 records in
+        2251822+0 records out
+        1152932864 bytes (1.2 GB, 1.1 GiB) copied, 5253.08 s, 219 kB/s
+        1667+0 records in
+        1667+0 records out
+        853504 bytes (854 kB, 834 KiB) copied, 3.23535 s, 264 kB/s
+        0+0 records in
+        0+0 records out
+        0 bytes copied, 0.0167298 s, 0.0 kB/s
+        dd: error reading '/dev/nst0': Input/output error
+        0+0 records in
+        0+0 records out
+        0 bytes copied, 0.00017777 s, 0.0 kB/s
+
     Question: why 10 iterations? What does each iteration represent (a backup session? something else?)
+
+4. Rewind the tape:
+
+        sudo mt -f /dev/st0 rewind
+
+5. Eject the tape:
+
+        sudo mt -f /dev/st0 eject
+
+## Processing the extracted files
+
+
+
+1. Join extracted files together using something like this:
+
+        cat tapeblock000001.bin tapeblock000002.bin > tape.bin
+
+
 
 ## Resources
 
@@ -117,4 +164,10 @@ the open position:
 
 - [Linux Set the Block Size for a SCSI Tape Device](https://www.cyberciti.biz/faq/rhel-centos-debian-set-tape-blocksize/)
 
+- [Reading VMS tapes from Linux](https://www.tldp.org/HOWTO/VMS-to-Linux-HOWTO/x838.html)
+
+- [Reading Tapes Written on Other Systems](http://www.astro.sunysb.edu/sysman/fits.html)
+
 - [mtftar](https://github.com/sjmurdoch/mtftar) - mtftar is a tool for translating a MTF stream to a TAR stream
+
+- [Microsoft™ Tape Format Specification Version 1.00a](http://laytongraphics.com/mtf/MTF_100a.PDF)
