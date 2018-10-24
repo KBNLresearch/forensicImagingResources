@@ -46,7 +46,7 @@ fi
 # Write some general info to log file
 echo "*** Tape extraction log ***" >> $logFile
 dateStart=$(date)
-echo "*** Start date/time "$dateStart"  ***" >> $logFile
+echo "*** Start date/time "$dateStart" ***" >> $logFile
 
 # Get tape status, append output to log file
 echo "*** Tape status ***" >> $logFile
@@ -102,8 +102,16 @@ do
     fi
 done
 
+# Create checksum file
+workDir=$PWD
+cd $dirOut
+checksumFile=$prefix.sha512
+sha512sum * > $checksumFile
+cd $workDir
+echo "*** Created checksum file ***" >> $logFile
+
 dateEnd=$(date)
-echo "*** End date/time "$dateEnd"  ***" >> $logFile
+echo "*** End date/time "$dateEnd" ***" >> $logFile
 
 # Rewind and eject the tape
 mt -f $TAPEnr rewind
