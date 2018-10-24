@@ -27,7 +27,7 @@ dirOut=$(readlink -f $2)
 TAPEnr=/dev/nst0
 
 # Initial block size
-bSize=4K
+bSize=4096
 # Flag that indicates block size was found
 bSizeFound=false
 # Output file prefix
