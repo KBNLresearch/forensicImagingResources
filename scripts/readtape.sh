@@ -86,7 +86,7 @@ do
     # Read subsequent files until dd exit status not 0
     ofName=$dirOut/$prefix`printf "%06g" $index`.dd
     echo "*** Processing file # "$index" ("$ofName") ***" >> $logFile
-    dd if=$TAPEnr of=$ofName ibs=$bSize conv=noerror,sync >> $logFile 2>&1
+    dd if=$TAPEnr of=$ofName bs=$bSize conv=noerror,sync >> $logFile 2>&1
     ddStatus=$?
     if [[ $ddStatus -eq 0 ]]; then
         # Increase index 

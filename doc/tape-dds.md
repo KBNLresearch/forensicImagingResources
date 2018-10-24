@@ -111,6 +111,22 @@ From [forensicswiki](https://www.forensicswiki.org/wiki/Dd):
 
 See also tape-specific comments in *Cautions* section!
 
+## Make test tape
+
+Erase existing tape (short erase):
+
+    sudo mt -f /dev/st0 erase 1
+
+Rewind:
+
+    mt rewind -f /dev/st0
+
+Write two sessions:
+
+    sudo tar -cf /dev/nst0 /home/bcadmin/jpylyzer-test-files
+    sudo tar -cf /dev/nst0 /home/bcadmin/forensicImagingResources
+
+
 ## Procedure for reading an NTBackup tape
 
 1. Load the tape
