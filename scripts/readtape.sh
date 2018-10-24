@@ -27,7 +27,7 @@ dirOut=$(readlink -f $2)
 TAPEnr=/dev/nst0
 
 # Initial block size
-bSize=128
+bSize=4K
 # Flag that indicates block size was found
 bSizeFound=false
 # Output file prefix
@@ -52,31 +52,24 @@ echo "*** Start date/time "$dateStart" ***" >> $logFile
 echo "*** Tape status ***" >> $logFile
 mt -f $TAPEnr status >> $logFile 2>&1
 
-# Code below commented out because block size values of < 4K
-# result in extremely bad performance (source: https://www.forensicswiki.org/wiki/Dd)
-# Use fixed 4K value instead 
-
 # Determine the block size by trial and error
-#while [ $bSizeFound == "false" ]
-#do
-#    # Try reading 1 block from tape
-#    echo "*** Guessing block size, trial value "$bSize" ***" >> $logFile
-#    dd if=$TAPEnr of=/dev/null ibs=$bSize count=1 >> $logFile 2>&1
-#    ddStatus=$?
-#    if [[ $ddStatus -eq 0 ]]; then
-#        # dd exit status 0: block size found
-#        echo "*** Block size found! ***" >> $logFile
-#        bSizeFound=true
-#    else
-#        # dd exit status not 0, try again with larger block size
-#        let bSize=$bSize*2
-#    fi
-#done
-## Rewind the tape
-#mt -f $TAPEnr rewind
-
-# Fixed block size value (as per suggestion at https://www.forensicswiki.org/wiki/Dd)
-bSize=4K
+while [ $bSizeFound == "false" ]
+do
+    # Try reading 1 block from tape
+    echo "*** Guessing block size, trial value "$bSize" ***" >> $logFile
+    dd if=$TAPEnr of=/dev/null bs=$bSize count=1 >> $logFile 2>&1
+    ddStatus=$?
+    if [[ $ddStatus -eq 0 ]]; then
+        # dd exit status 0: block size found
+        echo "*** Block size found! ***" >> $logFile
+        bSizeFound=true
+    else
+        # dd exit status not 0, try again with larger block size
+        let bSize=$bSize*2
+    fi
+done
+# Rewind the tape
+mt -f $TAPEnr rewind
 
 echo "*** Block size = "$bSize" ***" >> $logFile
 
