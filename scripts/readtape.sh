@@ -44,7 +44,6 @@ if [ -f $logFile ] ; then
 fi
 
 # Write some general info to log file
-
 echo "*** Tape extraction log ***" >> $logFile
 dateStart=$(date)
 echo "*** Start date/time "$dateStart"  ***" >> $logFile
@@ -53,29 +52,35 @@ echo "*** Start date/time "$dateStart"  ***" >> $logFile
 echo "*** Tape status ***" >> $logFile
 mt -f $TAPEnr status >> $logFile 2>&1
 
-# Determine the block size by trial and error
+# Code below commented out because block size values of < 4K
+# result in extremely bad performance (source: https://www.forensicswiki.org/wiki/Dd)
+# Use fixed 4K value instead 
 
-while [ $bSizeFound == "false" ]
-do
-    # Try reading 1 block from tape
-    echo "*** Guessing block size, trial value "$bSize" ***" >> $logFile
-    dd if=$TAPEnr of=/dev/null ibs=$bSize count=1 >> $logFile 2>&1
-    ddStatus=$?
-    if [[ $ddStatus -eq 0 ]]; then
-        # dd exit status 0: block size found
-        echo "*** Block size found! ***" >> $logFile
-        bSizeFound=true
-    else
-        # dd exit status not 0, try again with larger block size
-        let bSize=$bSize*2
-    fi
-done
+# Determine the block size by trial and error
+#while [ $bSizeFound == "false" ]
+#do
+#    # Try reading 1 block from tape
+#    echo "*** Guessing block size, trial value "$bSize" ***" >> $logFile
+#    dd if=$TAPEnr of=/dev/null ibs=$bSize count=1 >> $logFile 2>&1
+#    ddStatus=$?
+#    if [[ $ddStatus -eq 0 ]]; then
+#        # dd exit status 0: block size found
+#        echo "*** Block size found! ***" >> $logFile
+#        bSizeFound=true
+#    else
+#        # dd exit status not 0, try again with larger block size
+#        let bSize=$bSize*2
+#    fi
+#done
+## Rewind the tape
+#mt -f $TAPEnr rewind
+
+# Fixed block size value (as per suggestion at https://www.forensicswiki.org/wiki/Dd)
+bSize=4K
 
 echo "*** Block size = "$bSize" ***" >> $logFile
 
-# Rewind the tape
-mt -f $TAPEnr rewind
-
+# Create images of files on tape
 while [ $endOfTape == "false" ]
 do
     # Read subsequent files until dd exit status not 0
