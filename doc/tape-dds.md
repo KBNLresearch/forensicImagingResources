@@ -96,6 +96,21 @@ the open position:
 
     ![](./img/dds-insert.jpg)
 
+
+## Note on dd usage
+
+From [forensicswiki](https://www.forensicswiki.org/wiki/Dd):
+
+> Having a bigger blocksize is more efficient, but if you use a 1MB block as an example and have a read error in the first sector, then dd will null fill the entire MB. Thus you should use as small a blocksize as feasible.
+>
+> But with linux if you go below 4KB blocksize, you can hit really bad performance issues. It can be as much as 10x slower to use the default 512 byte block as it is to use a 4KB block.
+>
+> Without noerror and sync, you basically don't have a forensic image. For forensic images they are mandatory.
+
+> dd by itself does not hash, that is why the alternate command is provided. 
+
+See also tape-specific comments in *Cautions* section!
+
 ## Procedure for reading an NTBackup tape
 
 1. Load the tape
