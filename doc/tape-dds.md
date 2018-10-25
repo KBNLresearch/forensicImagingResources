@@ -113,13 +113,42 @@ See also tape-specific comments in *Cautions* section!
 
 ## Make test tape
 
+Do a short erase:
+
+    sudo mt -f /dev/st0 erase 1
+
 Write two sessions:
 
-    sudo tar -cf /dev/nst0 /home/bcadmin/jpylyzer-test-files
-    sudo tar -cf /dev/nst0 /home/bcadmin/forensicImagingResources
-    sudo tar -cf /dev/nst0 /media/bcadmin/Elements/testBitCurator/testfloppy
+    sudo tar -cvf /dev/nst0 /home/bcadmin/jpylyzer-test-files
+    sudo tar -cvf /dev/nst0 /home/bcadmin/forensicImagingResources
+    sudo tar -cvf /dev/nst0 /media/bcadmin/Elements/testBitCurator/testfloppy
 
-BUT after running extraction script the resulting files are incomplete and/or not readable!
+Extract:
+
+    sudo dd if=/dev/nst0 of=session1conv.dd bs=16384 conv=noerror,sync
+
+Result: 46.5 MB file. When unpacking as tar the archives are incomplete and/or not readable!
+
+Second attempt, omitting the *conv* swich:
+
+    sudo dd if=/dev/nst0 of=session1conv.dd bs=16384
+
+Result: 29.1 MB file. Unpacking as tar works!
+
+From the [dd documentation](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/dd.html):
+
+> sync
+>    Pad every input block to the size of the ibs= buffer, appending null bytes. (If either block or unblock is also specified, append <space> characters, rather than null bytes.)
+
+A comparison of the 2 extracted files in a hex editor shows a block of around 6000 null bytes are inserted around offset 10240, adding about 6000 bytes. Try this:
+
+    sudo dd if=/dev/nst0 of=session1convbs10240.dd bs=10240 conv=noerror,sync
+
+Result: produces valid TAR archive of 29.1 MB. From the [tar docs](https://www.gnu.org/software/tar/manual/html_node/Blocking.html):
+
+> In a standard tar file (no options), the block size is 512 and the record size is 10240, for a blocking factor of 20.
+
+So method for estimating block size might need further refinement.
 
 ## Procedure for reading an NTBackup tape
 
@@ -140,6 +169,21 @@ BUT after running extraction script the resulting files are incomplete and/or no
         512 bytes copied, 0.308845 s, 1.7 kB/s
     
     Which means that the block size is 512 bytes.
+
+    An alternative method is described [here](https://www.linuxquestions.org/questions/linux-general-1/reading-%27unknown%27-data-from-a-tape-4175500596/#post5147408):
+
+    > Easiest way to find the actual block size for a given file on the tape is to run
+    >
+    >   `dd if=/dev/nst0 of=/dev/null bs=64k count=1`
+    >
+    > and look at the number of bytes dd reports for that single block.
+    >
+    > Most basic way to compare:
+    >
+    >
+    >   `cmp <(dd if=/dev/nst0 bs=32k) <(dd if=/dev/nst1 bs=32k) && echo OK`
+    >
+    > Adjust the block size as you wish, of course, as long as it is large enough.
 
  3. Read blocks (note that we're using the non-rewinding tape device ` /dev/nst0` here):
 
@@ -196,3 +240,5 @@ BUT after running extraction script the resulting files are incomplete and/or no
 - [mtftar](https://github.com/sjmurdoch/mtftar) - mtftar is a tool for translating a MTF stream to a TAR stream
 
 - [Microsoft™ Tape Format Specification Version 1.00a](http://laytongraphics.com/mtf/MTF_100a.PDF)
+
+- [reading 'unknown' data from a tape](https://www.linuxquestions.org/questions/linux-general-1/reading-%27unknown%27-data-from-a-tape-4175500596/)
