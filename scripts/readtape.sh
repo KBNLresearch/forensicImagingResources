@@ -65,7 +65,7 @@ do
         bSizeFound=true
     else
         # dd exit status not 0, try again with larger block size
-        let bSize=$bSize*2
+        let bSize=$bSize+512
     fi
 done
 # Rewind the tape
