@@ -113,9 +113,12 @@ See also tape-specific comments in *Cautions* section!
 
 ## Make test tape
 
-Do a short erase:
+<strike>Do a short erase:
 
-    sudo mt -f /dev/st0 erase 1
+    sudo mt -f /dev/st0 erase 1 
+</strike>
+
+**NOTE** don 't do an erase (not even a short one) because it takes forever and the only way to stop it is a full system reboot!
 
 Write two sessions:
 
@@ -140,7 +143,7 @@ From the [dd documentation](http://pubs.opengroup.org/onlinepubs/9699919799/util
 > sync
 >    Pad every input block to the size of the ibs= buffer, appending null bytes. (If either block or unblock is also specified, append <space> characters, rather than null bytes.)
 
-A comparison of the 2 extracted files in a hex editor shows a block of around 6000 null bytes are inserted around offset 10240, adding about 6000 bytes. Try this:
+A comparison of the 2 extracted files in a hex editor shows a block of around 6000 null bytes are inserted around offset 10240, adding about 6000 bytes. So let' s try the extraction with a block sixe of 10240 bytes:
 
     sudo dd if=/dev/nst0 of=session1convbs10240.dd bs=10240 conv=noerror,sync
 
@@ -148,7 +151,18 @@ Result: produces valid TAR archive of 29.1 MB. From the [tar docs](https://www.g
 
 > In a standard tar file (no options), the block size is 512 and the record size is 10240, for a blocking factor of 20.
 
-So method for estimating block size might need further refinement.
+Solution: estimate block size by successively adding 512 bytes to start value.
+
+TODO: 
+
+- What if the actual block size is SMALLER than 4096 bytes (current start value)? Would assume that this would result in addition of padding bytes.
+
+- What if the block sizes varie across tape sessions?
+
+Try with ddrescue:
+
+    sudo ddrescue -b 10240 -v /dev/nst0 session1.dd session1.log
+    
 
 ## Procedure for reading an NTBackup tape
 
