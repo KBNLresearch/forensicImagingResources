@@ -247,6 +247,8 @@ Try with ddrescue:
 
 ## Resources
 
+- [How to use the DAT-tape with Linux](http://www.cs.inf.ethz.ch/stricker/lab/linux_tape.html)
+
 - [15 Useful Linux and Unix Tape Managements Commands For Sysadmins](https://www.cyberciti.biz/hardware/unix-linux-basic-tape-management-commands/)
 
 - [Recovering NTBackup Tapes](https://www.108.bz/posts/it/recovering-ntbackup-tapes/)
