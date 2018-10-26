@@ -270,3 +270,5 @@ Try with ddrescue:
 - [Purpose of ibs/obs/bs in dd](https://stackoverflow.com/questions/1354938/purpose-of-ibs-obs-bs-in-dd) - one of the answers explains particular importance of block size in case of tapes
 
 - [Duplicating a tape drive using dd ](https://www.linuxquestions.org/questions/linux-newbie-8/duplicating-a-tape-drive-using-dd-4175592839/) - more info on block size.
+
+- [What does dd conv=sync,noerror do?](https://superuser.com/questions/622541/what-does-dd-conv-sync-noerror-do) - confirms that using these flags is generally a bad idea
