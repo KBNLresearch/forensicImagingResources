@@ -27,8 +27,8 @@ dirOut=$(readlink -f $2)
 TAPEnr=/dev/nst0
 
 # Initial block size
+#bSize=4096
 bSize=512
-bSize=4096
 # Flag that indicates block size was found
 bSizeFound=false
 # Output file prefix
@@ -78,7 +78,7 @@ echo "*** Block size = "$bSize" ***" >> $logFile
 while [ $endOfTape == "false" ]
 do
     # Read subsequent files until dd exit status not 0
-    ofName=$dirOut/"session"$prefix`printf "%06g" $index`.dd
+    ofName=$dirOut/"session"`printf "%06g" $index`.dd
     echo "*** Processing file # "$index" ("$ofName") ***" >> $logFile
     # Note: conv=sync flag can result in padding bytes if block size is too
     # large, so disabled for now
