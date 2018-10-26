@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Extract contents of a tape. Each file on the tape is extracted as a separate file.
+# Extract contents of a tape. Each session on the tape is extracted as a separate file.
 #
 # Script must be executed as root (sudo)
 #
@@ -27,6 +27,7 @@ dirOut=$(readlink -f $2)
 TAPEnr=/dev/nst0
 
 # Initial block size
+bSize=512
 bSize=4096
 # Flag that indicates block size was found
 bSizeFound=false
@@ -79,7 +80,10 @@ do
     # Read subsequent files until dd exit status not 0
     ofName=$dirOut/$prefix`printf "%06g" $index`.dd
     echo "*** Processing file # "$index" ("$ofName") ***" >> $logFile
-    dd if=$TAPEnr of=$ofName bs=$bSize conv=noerror,sync >> $logFile 2>&1
+    # Note: conv=sync flag can result in padding bytes if block size is too
+    # large, so disabled for now
+    #dd if=$TAPEnr of=$ofName bs=$bSize conv=noerror,sync >> $logFile 2>&1
+    dd if=$TAPEnr of=$ofName bs=$bSize conv=noerror >> $logFile 2>&1
     ddStatus=$?
     if [[ $ddStatus -eq 0 ]]; then
         # Increase index 
