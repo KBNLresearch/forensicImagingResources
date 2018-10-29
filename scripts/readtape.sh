@@ -6,6 +6,74 @@
 #
 
 # **************
+# Functions
+# **************
+
+findBlocksize ()
+{   # Find block size for this session
+
+    # Initial block size
+    bSize=512
+    # Flag that indicates block size was found
+    bSizeFound=false
+
+    while [ $bSizeFound == "false" ]
+    do
+        # Try reading 1 block from tape
+        echo "*** Guessing block size for session # "$index", trial value "$bSize" ***" >> $logFile
+        dd if=$TAPEnr of=/dev/null bs=$bSize count=1 >> $logFile 2>&1
+        ddStatus=$?
+        # Position tape 1 record backward (i.e. to the start of this session)
+        mt -f $TAPEnr bsr 1 >> $logFile 2>&1
+        if [[ $ddStatus -eq 0 ]]; then
+            # dd exit status 0: block size found
+            bSizeFound=true
+        else
+            # dd exit status not 0, try again with larger block size
+            let bSize=$bSize+512
+        fi
+    done
+}
+
+processSession ()
+{   # Process one session
+
+    # Determine block size for this session
+    findBlocksize
+    echo "*** Block size = "$bSize" ***" >> $logFile
+
+    # Name of output file for this session
+    ofName=$dirOut/"session"`printf "%06g" $index`.dd
+
+    echo "*** Processing session # "$index" ("$ofName") ***" >> $logFile
+    # Note 1: conv=sync flag can result in padding bytes if block size is too
+    # large, so disabled for now
+    # Note 2: conv=noerror flag causes infinite loop when reading beyond last
+    # session on tape, so disabled that as well!
+    #dd if=$TAPEnr of=$ofName bs=$bSize conv=noerror,sync >> $logFile 2>&1
+    dd if=$TAPEnr of=$ofName bs=$bSize >> $logFile 2>&1
+    ddStatus=$?
+    echo "*** dd exit code = " $ddStatus" ***" >> $logFile
+ 
+    # Increase index
+    let index=$index+1
+
+    # Try to position tape 1 record forward; if this fails this means
+    # the end of the tape was reached
+    mt -f $TAPEnr fsr 1 >> $logFile 2>&1
+    mtStatus=$?
+
+    if [[ $mtStatus -eq 0 ]]; then
+        # Another session exists. Position tape one record backward
+        mt -f $TAPEnr bsr 1 >> $logFile 2>&1
+    else
+        # No further sessions, end of tape reached
+        echo "*** Reached end of tape ***" >> $logFile
+        endOfTape=true
+    fi
+}
+
+# **************
 # USER I/O
 # **************
 
@@ -48,63 +116,11 @@ echo "*** Start date/time "$dateStart" ***" >> $logFile
 echo "*** Tape status ***" >> $logFile
 mt -f $TAPEnr status >> $logFile
 
-# Process one session
+# Iterate over all sessions on tape until end is detected
 while [ $endOfTape == "false" ]
 do
-    # Determine block size for this session
-    # Initial block size
-    bSize=512
-    # Flag that indicates block size was found
-    bSizeFound=false
-    while [ $bSizeFound == "false" ]
-    do
-        # Try reading 1 block from tape
-        echo "*** Guessing block size for session # "$index", trial value "$bSize" ***" >> $logFile
-        dd if=$TAPEnr of=/dev/null bs=$bSize count=1 >> $logFile 2>&1
-        ddStatus=$?
-        # Position tape 1 record backward (i.e. to the start of this session)
-        mt -f $TAPEnr bsr 1 >> $logFile 2>&1
-        if [[ $ddStatus -eq 0 ]]; then
-            # dd exit status 0: block size found
-            echo "*** Block size = "$bSize" ***" >> $logFile
-            bSizeFound=true
-        else
-            # dd exit status not 0, try again with larger block size
-            let bSize=$bSize+512
-        fi
-    done
-
-    # Name of output file for this session
-    ofName=$dirOut/"session"`printf "%06g" $index`.dd
-
-    echo "*** Processing session # "$index" ("$ofName") ***" >> $logFile
-    # Note 1: conv=sync flag can result in padding bytes if block size is too
-    # large, so disabled for now
-    # Note 2: conv=noerror flag causes infinite loop when reading beyond last
-    # session on tape, so disabled that as well!
-    #dd if=$TAPEnr of=$ofName bs=$bSize conv=noerror,sync >> $logFile 2>&1
-    #dd if=$TAPEnr of=$ofName bs=$bSize conv=noerror >> $logFile 2>&1
-    #dd if=$TAPEnr of=$ofName bs=$bSize >> $logFile 2>&1
-    dd if=$TAPEnr of=$ofName bs=$bSize >> $logFile 2>&1
-    ddStatus=$?
-    echo "*** dd exit code = " $ddStatus" ***" >> $logFile
- 
-    # Increase index
-    let index=$index+1
-
-    # Try to position tape 1 record forward; if this fails this means
-    # the end of the tape was reached
-    mt -f $TAPEnr fsr 1 >> $logFile 2>&1
-    mtStatus=$?
-
-    if [[ $mtStatus -eq 0 ]]; then
-        # Another session exists. Position tape one record backward
-        mt -f $TAPEnr bsr 1 >> $logFile 2>&1
-    else
-        # No further sessions, end of tape reached
-        echo "*** Reached end of tape ***" >> $logFile
-        endOfTape=true
-    fi
+    # Process one session
+    processSession
 done
 
 # Create checksum file
