@@ -73,72 +73,70 @@ processSession ()
     fi
 }
 
-main ()
-{   # Main function
+# **************
+# Main code
+# **************
 
-    # Check command line args
-    if [ "$#" -ne 2 ] ; then
-    echo "Usage: readtape.sh prefix dirOut" >&2
-    exit 1
-    fi
+# Check command line args
+if [ "$#" -ne 2 ] ; then
+echo "Usage: readtape.sh prefix dirOut" >&2
+exit 1
+fi
 
-    if ! [ -d "$2" ] ; then
-    echo "dirOut must be a directory" >&2
-    exit 1
-    fi
+if ! [ -d "$2" ] ; then
+echo "dirOut must be a directory" >&2
+exit 1
+fi
 
-    # Normalise dirOut to absolute path
-    dirOut=$(readlink -f $2)
+# Normalise dirOut to absolute path
+dirOut=$(readlink -f $2)
 
-    # Non-rewind tape device
-    TAPEnr=/dev/nst0
+# Non-rewind tape device
+TAPEnr=/dev/nst0
 
-    # Flag that indicates end of tape was reached
-    endOfTape=false
-    # Output file prefix
-    prefix=$1
-    # Session index
-    session=1
-    logFile=$dirOut/$prefix.log
+# Flag that indicates end of tape was reached
+endOfTape=false
+# Output file prefix
+prefix=$1
+# Session index
+session=1
+logFile=$dirOut/$prefix.log
 
-    # Remove log file if it already exists
-    if [ -f $logFile ] ; then
-        rm $logFile
-    fi
+# Remove log file if it already exists
+if [ -f $logFile ] ; then
+    rm $logFile
+fi
 
-    # Write some general info to log file
-    echo "*** Tape extraction log ***" >> $logFile
-    dateStart=$(date)
-    echo "*** Start date/time "$dateStart" ***" >> $logFile
+# Write some general info to log file
+echo "*** Tape extraction log ***" >> $logFile
+dateStart=$(date)
+echo "*** Start date/time "$dateStart" ***" >> $logFile
 
-    # Get tape status, output to log file
-    echo "*** Tape status ***" >> $logFile
-    mt -f $TAPEnr status >> $logFile
+# Get tape status, output to log file
+echo "*** Tape status ***" >> $logFile
+mt -f $TAPEnr status >> $logFile
 
-    # Iterate over all sessions on tape until end is detected
-    while [ $endOfTape == "false" ]
-    do
-        # Process one session
-        processSession
-    done
+# Iterate over all sessions on tape until end is detected
+while [ $endOfTape == "false" ]
+do
+    # Process one session
+    processSession
+done
 
-    # Create checksum file
-    workDir=$PWD
-    cd $dirOut
-    checksumFile=$prefix.sha512
-    sha512sum *.dd > $checksumFile
-    cd $workDir
-    echo "*** Created checksum file ***" >> $logFile
+# Create checksum file
+workDir=$PWD
+cd $dirOut
+checksumFile=$prefix.sha512
+sha512sum *.dd > $checksumFile
+cd $workDir
+echo "*** Created checksum file ***" >> $logFile
 
-    # Rewind and eject the tape
-    echo "*** Rewinding tape ***" >> $logFile
-    mt -f $TAPEnr rewind >> $logFile 2>&1
-    echo "*** Ejecting tape ***" >> $logFile
-    mt -f $TAPEnr eject >> $logFile 2>&1
+# Rewind and eject the tape
+echo "*** Rewinding tape ***" >> $logFile
+mt -f $TAPEnr rewind >> $logFile 2>&1
+echo "*** Ejecting tape ***" >> $logFile
+mt -f $TAPEnr eject >> $logFile 2>&1
 
-    # Write end date/time to log
-    dateEnd=$(date)
-    echo "*** End date/time "$dateEnd" ***" >> $logFile
-}
-
-main
+# Write end date/time to log
+dateEnd=$(date)
+echo "*** End date/time "$dateEnd" ***" >> $logFile
