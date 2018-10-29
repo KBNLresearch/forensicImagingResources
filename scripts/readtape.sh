@@ -48,7 +48,7 @@ echo "*** Start date/time "$dateStart" ***" >> $logFile
 echo "*** Tape status ***" >> $logFile
 mt -f $TAPEnr status >> $logFile
 
-# Create images of sessions on tape
+# Process one session
 while [ $endOfTape == "false" ]
 do
     # Determine block size for this session
@@ -59,7 +59,7 @@ do
     while [ $bSizeFound == "false" ]
     do
         # Try reading 1 block from tape
-        echo "*** Guessing block size for session "$index", trial value "$bSize" ***" >> $logFile
+        echo "*** Guessing block size for session # "$index", trial value "$bSize" ***" >> $logFile
         dd if=$TAPEnr of=/dev/null bs=$bSize count=1 >> $logFile 2>&1
         ddStatus=$?
         # Position tape 1 record backward (i.e. to the start of this session)
@@ -74,10 +74,10 @@ do
         fi
     done
 
-    # Name of output file
+    # Name of output file for this session
     ofName=$dirOut/"session"`printf "%06g" $index`.dd
 
-    echo "*** Processing file # "$index" ("$ofName") ***" >> $logFile
+    echo "*** Processing session # "$index" ("$ofName") ***" >> $logFile
     # Note 1: conv=sync flag can result in padding bytes if block size is too
     # large, so disabled for now
     # Note 2: conv=noerror flag causes infinite loop when reading beyond last
