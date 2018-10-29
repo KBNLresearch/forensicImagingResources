@@ -20,7 +20,7 @@ findBlocksize ()
     while [ $bSizeFound == "false" ]
     do
         # Try reading 1 block from tape
-        echo "*** Guessing block size for session # "$index", trial value "$bSize" ***" >> $logFile
+        echo "*** Guessing block size for session # "$session", trial value "$bSize" ***" >> $logFile
         dd if=$TAPEnr of=/dev/null bs=$bSize count=1 >> $logFile 2>&1
         ddStatus=$?
         # Position tape 1 record backward (i.e. to the start of this session)
@@ -43,9 +43,9 @@ processSession ()
     echo "*** Block size = "$bSize" ***" >> $logFile
 
     # Name of output file for this session
-    ofName=$dirOut/"session"`printf "%06g" $index`.dd
+    ofName=$dirOut/"session"`printf "%06g" $session`.dd
 
-    echo "*** Processing session # "$index" ("$ofName") ***" >> $logFile
+    echo "*** Processing session # "$session" ("$ofName") ***" >> $logFile
     # Note 1: conv=sync flag can result in padding bytes if block size is too
     # large, so disabled for now
     # Note 2: conv=noerror flag causes infinite loop when reading beyond last
@@ -55,8 +55,8 @@ processSession ()
     ddStatus=$?
     echo "*** dd exit code = " $ddStatus" ***" >> $logFile
  
-    # Increase index
-    let index=$index+1
+    # Increase session
+    let session=$session+1
 
     # Try to position tape 1 record forward; if this fails this means
     # the end of the tape was reached
@@ -97,8 +97,8 @@ main ()
     endOfTape=false
     # Output file prefix
     prefix=$1
-    # File index
-    index=1
+    # Session index
+    session=1
     logFile=$dirOut/$prefix.log
 
     # Remove log file if it already exists
