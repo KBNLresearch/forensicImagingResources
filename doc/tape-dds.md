@@ -169,6 +169,19 @@ Try with ddrescue:
 
     sudo ddrescue -b 10240 -v /dev/nst0 session1.dd session1.log
     
+## Block / record size tests
+
+Write with 1024 byte record size:
+
+    sudo tar -cvf /dev/nst0 -b2 /media/bcadmin/Elements/testBitCurator/testfloppy
+
+Write with 4096 byte record size:
+
+    sudo tar -cvf /dev/nst0 -b8 /media/bcadmin/Elements/testBitCurator/testfloppy
+
+Write with 8192 byte record size:
+
+    sudo tar -cvf /dev/nst0 -b16 /media/bcadmin/Elements/testBitCurator/testfloppy
 
 ## Procedure for reading an NTBackup tape
 

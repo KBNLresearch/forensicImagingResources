@@ -26,11 +26,8 @@ dirOut=$(readlink -f $2)
 # Non-rewind tape device
 TAPEnr=/dev/nst0
 
-# Initial block size
-bSize=4096
-#bSize=512
-# Flag that indicates block size was found
-bSizeFound=false
+# Flag that indicates end of tape was reached
+endOfTape=false
 # Output file prefix
 prefix=$1
 # File index
@@ -47,80 +44,39 @@ echo "*** Tape extraction log ***" >> $logFile
 dateStart=$(date)
 echo "*** Start date/time "$dateStart" ***" >> $logFile
 
-# Forward tape to EOM (this way we can use mt status
-# to determine the number of files/sessions)
-sudo mt -f $TAPEnr eom
-
-# Get tape status, output to array (split at newline)
-IFS=$'\n' tapeStatus=$(mt -f $TAPEnr status)
+# Get tape status, output to log file
 echo "*** Tape status ***" >> $logFile
+mt -f $TAPEnr status >> $logFile
 
-# Parse status output (actualy we only need fileNumber)
-for item in ${tapeStatus[*]}
+# Create images of sessions on tape
+while [ $endOfTape == "false" ]
 do
-    echo $item >> $logFile
-    if [[ $item == *"drive type"* ]]; then
-        # Split at equal sign, 2nd item is value
-        tmp=$(echo $item | cut -f2 -d=)
-        # Strip whitespace
-        driveType="$(echo -e "${tmp}" | tr -d '[:space:]')"
-    fi
+    # Determine block size for this session
+    # Initial block size
+    bSize=512
+    # Flag that indicates block size was found
+    bSizeFound=false
+    while [ $bSizeFound == "false" ]
+    do
+        # Try reading 1 block from tape
+        echo "*** Guessing block size for session "$index", trial value "$bSize" ***" >> $logFile
+        dd if=$TAPEnr of=/dev/null bs=$bSize count=1 >> $logFile 2>&1
+        ddStatus=$?
+        # Position tape 1 record backward (i.e. to the start of this session)
+        mt -f $TAPEnr bsr 1
+        if [[ $ddStatus -eq 0 ]]; then
+            # dd exit status 0: block size found
+            echo "*** Block size = "$bSize" ***" >> $logFile
+            bSizeFound=true
+        else
+            # dd exit status not 0, try again with larger block size
+            let bSize=$bSize+512
+        fi
+    done
 
-    if [[ $item == *"drive status"* ]]; then
-        tmp=$(echo $item | cut -f2 -d=)
-        driveStatus="$(echo -e "${tmp}" | tr -d '[:space:]')"
-    fi
-
-    if [[ $item == *"sense key error"* ]]; then
-        tmp=$(echo $item | cut -f2 -d=)
-        senseKeyError="$(echo -e "${tmp}" | tr -d '[:space:]')"
-    fi
-
-    if [[ $item == *"residue count"* ]]; then
-        tmp=$(echo $item | cut -f2 -d=)
-        residueCount="$(echo -e "${tmp}" | tr -d '[:space:]')"
-    fi
-
-    if [[ $item == *"file number"* ]]; then
-        tmp=$(echo $item | cut -f2 -d=)
-        fileNumber="$(echo -e "${tmp}" | tr -d '[:space:]')"
-    fi
-
-    if [[ $item == *"block number"* ]]; then
-        tmp=$(echo $item | cut -f2 -d=)
-        blockNumber="$(echo -e "${tmp}" | tr -d '[:space:]')"
-    fi
-done
-
-# Rewind the tape
-mt -f $TAPEnr rewind
-
-# Determine the block size by trial and error
-while [ $bSizeFound == "false" ]
-do
-    # Try reading 1 block from tape
-    echo "*** Guessing block size, trial value "$bSize" ***" >> $logFile
-    dd if=$TAPEnr of=/dev/null bs=$bSize count=1 >> $logFile 2>&1
-    ddStatus=$?
-    if [[ $ddStatus -eq 0 ]]; then
-        # dd exit status 0: block size found
-        echo "*** Block size found! ***" >> $logFile
-        bSizeFound=true
-    else
-        # dd exit status not 0, try again with larger block size
-        let bSize=$bSize+512
-    fi
-done
-
-# Rewind the tape
-mt -f $TAPEnr rewind
-
-echo "*** Block size = "$bSize" ***" >> $logFile
-
-# Create images of files on tape
-for i in $(seq 1 $fileNumber)
-do
+    # Name of output file
     ofName=$dirOut/"session"`printf "%06g" $index`.dd
+
     echo "*** Processing file # "$index" ("$ofName") ***" >> $logFile
     # Note 1: conv=sync flag can result in padding bytes if block size is too
     # large, so disabled for now
@@ -132,15 +88,30 @@ do
     dd if=$TAPEnr of=$ofName bs=$bSize >> $logFile 2>&1
     ddStatus=$?
     echo "*** dd exit code = " $ddStatus" ***" >> $logFile
-    # Increase index 
+ 
+    # Increase index
     let index=$index+1
+
+    # Try to position tape 1 record forward; if this fails this means
+    # the end of the tape was reached
+    mt -f $TAPEnr fsr 1
+    mtStatus=$?
+
+    if [[ $mtStatus -eq 0 ]]; then
+        # Another session exists. Position tape one record backward
+        mt -f $TAPEnr bsr 1
+    else
+        # No further sessions, end of tape reached
+        echo "*** Reached end of tape ***" >> $logFile
+        endOfTape=true
+    fi
 done
 
 # Create checksum file
 workDir=$PWD
 cd $dirOut
 checksumFile=$prefix.sha512
-sha512sum * > $checksumFile
+sha512sum *.dd > $checksumFile
 cd $workDir
 echo "*** Created checksum file ***" >> $logFile
 
