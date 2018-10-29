@@ -62,6 +62,7 @@ processSession ()
     # the end of the tape was reached
     mt -f $TAPEnr fsr 1 >> $logFile 2>&1
     mtStatus=$?
+    echo "*** mt exit code = " $mtStatus" ***" >> $logFile
 
     if [[ $mtStatus -eq 0 ]]; then
         # Another session exists. Position tape one record backward
