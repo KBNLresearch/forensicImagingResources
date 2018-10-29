@@ -63,7 +63,7 @@ do
         dd if=$TAPEnr of=/dev/null bs=$bSize count=1 >> $logFile 2>&1
         ddStatus=$?
         # Position tape 1 record backward (i.e. to the start of this session)
-        mt -f $TAPEnr bsr 1
+        mt -f $TAPEnr bsr 1 >> $logFile 2>&1
         if [[ $ddStatus -eq 0 ]]; then
             # dd exit status 0: block size found
             echo "*** Block size = "$bSize" ***" >> $logFile
@@ -94,12 +94,12 @@ do
 
     # Try to position tape 1 record forward; if this fails this means
     # the end of the tape was reached
-    mt -f $TAPEnr fsr 1
+    mt -f $TAPEnr fsr 1 >> $logFile 2>&1
     mtStatus=$?
 
     if [[ $mtStatus -eq 0 ]]; then
         # Another session exists. Position tape one record backward
-        mt -f $TAPEnr bsr 1
+        mt -f $TAPEnr bsr 1 >> $logFile 2>&1
     else
         # No further sessions, end of tape reached
         echo "*** Reached end of tape ***" >> $logFile
@@ -115,9 +115,12 @@ sha512sum *.dd > $checksumFile
 cd $workDir
 echo "*** Created checksum file ***" >> $logFile
 
+# Rewind and eject the tape
+echo "*** Rewinding tape ***" >> $logFile
+mt -f $TAPEnr rewind >> $logFile 2>&1
+echo "*** Ejecting tape ***" >> $logFile
+mt -f $TAPEnr eject >> $logFile 2>&1
+
+# Write end date/time to log
 dateEnd=$(date)
 echo "*** End date/time "$dateEnd" ***" >> $logFile
-
-# Rewind and eject the tape
-mt -f $TAPEnr rewind
-mt -f $TAPEnr eject
