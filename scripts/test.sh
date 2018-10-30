@@ -32,6 +32,7 @@ EOF
 tapeDevice=/dev/nst0
 # Initial block size
 blockSize=512
+sessions=""
 # Output prefix
 prefix="session"
 # Output extension

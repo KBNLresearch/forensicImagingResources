@@ -9,11 +9,36 @@
 # Functions
 # **************
 
+show_help ()
+{ # Show help message
+cat << EOF
+Usage: ${0##*/} [-h] [-d device] [-b blockSize] [-s sessions] [-p prefix]
+                [-e extension] dirOut
+
+Read contents of tape. Each session is stored as a separate file. 
+
+positional arguments:
+
+    dirOut          output directory
+
+optional arguments:
+
+    -h              display this help message and exit
+    -d device       non-rewind tape device (default: /dev/nst0)
+    -b blockSize    initial block size (must be a multiple of 512)
+    -s sessions     comma-separated list of sessions to extract
+    -p prefix       output prefix
+    -e extension    output file extension
+    -f              fill blocks that give read errors with null bytes
+
+EOF
+}
+
 findBlocksize ()
 {   # Find block size for this session
 
     # Initial block size
-    bSize=512
+    bSize=$blockSize
     # Flag that indicates block size was found
     bSizeFound=false
 
@@ -21,10 +46,10 @@ findBlocksize ()
     do
         # Try reading 1 block from tape
         echo "*** Guessing block size for session # "$session", trial value "$bSize" ***" >> $logFile
-        dd if=$TAPEnr of=/dev/null bs=$bSize count=1 >> $logFile 2>&1
+        dd if=$tapeDevice of=/dev/null bs=$bSize count=1 >> $logFile 2>&1
         ddStatus=$?
         # Position tape 1 record backward (i.e. to the start of this session)
-        mt -f $TAPEnr bsr 1 >> $logFile 2>&1
+        mt -f $tapeDevice bsr 1 >> $logFile 2>&1
         if [[ $ddStatus -eq 0 ]]; then
             # dd exit status 0: block size found
             bSizeFound=true
@@ -43,15 +68,15 @@ processSession ()
     echo "*** Block size = "$bSize" ***" >> $logFile
 
     # Name of output file for this session
-    ofName=$dirOut/"session"`printf "%06g" $session`.dd
+    ofName=$dirOut/"$prefix"`printf "%06g" $session`.$extension
 
     echo "*** Processing session # "$session" ("$ofName") ***" >> $logFile
     # Note 1: conv=sync flag can result in padding bytes if block size is too
     # large, so disabled for now
     # Note 2: conv=noerror flag causes infinite loop when reading beyond last
     # session on tape, so disabled that as well!
-    #dd if=$TAPEnr of=$ofName bs=$bSize conv=noerror,sync >> $logFile 2>&1
-    dd if=$TAPEnr of=$ofName bs=$bSize >> $logFile 2>&1
+    #dd if=$tapeDevice of=$ofName bs=$bSize conv=noerror,sync >> $logFile 2>&1
+    dd if=$tapeDevice of=$ofName bs=$bSize >> $logFile 2>&1
     ddStatus=$?
     echo "*** dd exit code = " $ddStatus" ***" >> $logFile
  
@@ -60,13 +85,13 @@ processSession ()
 
     # Try to position tape 1 record forward; if this fails this means
     # the end of the tape was reached
-    mt -f $TAPEnr fsr 1 >> $logFile 2>&1
+    mt -f $tapeDevice fsr 1 >> $logFile 2>&1
     mtStatus=$?
     echo "*** mt exit code = " $mtStatus" ***" >> $logFile
 
     if [[ $mtStatus -eq 0 ]]; then
         # Another session exists. Position tape one record backward
-        mt -f $TAPEnr bsr 1 >> $logFile 2>&1
+        mt -f $tapeDevice bsr 1 >> $logFile 2>&1
     else
         # No further sessions, end of tape reached
         echo "*** Reached end of tape ***" >> $logFile
@@ -78,30 +103,90 @@ processSession ()
 # Main code
 # **************
 
-# Check command line args
-if [ "$#" -ne 2 ] ; then
-echo "Usage: readtape.sh prefix dirOut" >&2
-exit 1
-fi
-
-if ! [ -d "$2" ] ; then
-echo "dirOut must be a directory" >&2
-exit 1
-fi
-
-# Normalise dirOut to absolute path
-dirOut=$(readlink -f $2)
+# Initialize command line variables
 
 # Non-rewind tape device
-TAPEnr=/dev/nst0
+tapeDevice=/dev/nst0
+# Initial block size
+blockSize=512
+sessions=""
+# Output prefix
+prefix="session"
+# Output extension
+extension="dd"
+fill=false
+
+OPTIND=1
+
+# Read variable from command line
+while getopts ":h:fd:b:s:p:e:" opt; do
+    case $opt in
+        h)
+            show_help
+            exit 0
+            ;;
+        f)  fill=true
+            ;;
+        d)  tapeDevice=$OPTARG
+            ;;
+        b)  blockSize=$OPTARG
+            ;;
+        s)  sessions=$OPTARG
+            ;;
+        p)  prefix=$OPTARG
+            ;;
+        e)  extension=$OPTARG
+            ;;
+        *)
+            show_help >&2
+            exit 1
+            ;;
+    esac
+done
+shift "$((OPTIND-1))"
+
+# Check command line args
+if [ "$#" -ne 1 ] ; then
+    show_help
+    exit 1
+fi
+
+# Positional arguments
+# dirOut, normalise to absolute path
+dirOut=$(readlink -f $1)
+
+if ! [ -d $dirOut ] ; then
+    echo "ERROR: dirOut must be a directory" >&2
+    exit 1
+fi
+
+# Check if block size is valid (i.e. a multiple of 512) by comparing integer
+# division of blockSize by 512 against floating-point division
+blocksInt=$(($blockSize / 512))
+blocksFloat=$(echo "$blockSize/512" | bc -l )
+# This yields 1 if block size is valid, and 0 otherwise 
+blocksizeValid=$(echo "$blocksInt == $blocksFloat" |bc -l)
+
+if ! [ $blocksizeValid -eq 1 ] ; then
+    echo "ERROR: invalid blockSize, must be a multiple of 512!" >&2
+    exit 1
+fi
+
+# Parse sessions string to array
+sessionsArr=$(echo $sessions | tr "," "\n")
+
+## TEST
+for session in $sessionsArr
+do
+    echo "> [$session]"
+done
+## TEST
 
 # Flag that indicates end of tape was reached
 endOfTape=false
-# Output file prefix
-prefix=$1
 # Session index
 session=1
-logFile=$dirOut/$prefix.log
+logFile=$dirOut/readtape.log
 
 # Remove log file if it already exists
 if [ -f $logFile ] ; then
@@ -112,10 +197,18 @@ fi
 echo "*** Tape extraction log ***" >> $logFile
 dateStart=$(date)
 echo "*** Start date/time "$dateStart" ***" >> $logFile
+echo "*** Command-line arguments ***" >> $logFile
+echo "dirOut = "$dirOut >> $logFile
+echo "fill = "$fill >> $logFile
+echo "tapeDevice = "$tapeDevice >> $logFile 
+echo "blockSize = "$blockSize >> $logFile
+echo "sessions = "$sessions >> $logFile
+echo "prefix = "$prefix >> $logFile
+echo "extension = "$extension >> $logFile
 
 # Get tape status, output to log file
 echo "*** Tape status ***" >> $logFile
-mt -f $TAPEnr status >> $logFile
+mt -f $tapeDevice status >> $logFile
 
 # Iterate over all sessions on tape until end is detected
 while [ $endOfTape == "false" ]
@@ -134,9 +227,9 @@ echo "*** Created checksum file ***" >> $logFile
 
 # Rewind and eject the tape
 echo "*** Rewinding tape ***" >> $logFile
-mt -f $TAPEnr rewind >> $logFile 2>&1
+mt -f $tapeDevice rewind >> $logFile 2>&1
 echo "*** Ejecting tape ***" >> $logFile
-mt -f $TAPEnr eject >> $logFile 2>&1
+mt -f $tapeDevice eject >> $logFile 2>&1
 
 # Write end date/time to log
 dateEnd=$(date)
