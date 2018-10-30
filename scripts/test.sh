@@ -26,6 +26,14 @@ optional arguments:
 EOF
 }
 
+containsElement ()
+{
+  local e match="$1"
+  shift
+  for e; do [[ "$e" == "$match" ]] && return 0; done
+  return 1
+}
+
 # Initialize variables
 
 # Non-rewind tape device
@@ -94,15 +102,6 @@ if ! [ $blocksizeValid -eq 1 ] ; then
     exit 1
 fi
 
-# Parse sessions string to array
-sessionsArr=$(echo $sessions | tr "," "\n")
-
-for session in $sessionsArr
-do
-    echo "> [$session]"
-done
-
-
 # Rest of the program here.
 # If there are input files (for example) that follow the options, they
 # will remain in the "$@" positional parameters.
@@ -121,3 +120,42 @@ if [ "$fill" = "true" ] ; then
     blockSize=512
     echo "*** Reset blockSize to 512 because -f flag is used  ***"
 fi
+
+endOfTape=false
+
+session=1
+
+# Iterate over all sessions on tape until end is detected
+while [ $endOfTape == "false" ]
+do
+    # Process one session
+
+    # Set initial value of extractSessionFlag depending on sessions parameter
+    if [ -z $sessions ] ; then
+        extractSession=true
+    else
+        extractSession=false
+    fi
+
+    # Only extract sessions defined by sessions parameter
+    # (if session parameter is empty all sessions are extracted)
+    for i in ${sessions//,/ }
+        do
+        if [ $i == $session ] ; then
+            extractSession=true
+        fi
+    done
+
+    # TODO in extraction script:
+    # - Extract session if extractSession = true
+    # - Forward to next session if extractSession = false
+    
+    if [ $session -gt 10 ] ; then
+        endOfTape=true
+    fi
+
+    echo $session, " process = "$processSession
+
+    # Increase session
+    let session=$session+1
+done

@@ -81,9 +81,6 @@ processSession ()
 
     ddStatus=$?
     echo "*** dd exit code = " $ddStatus" ***" >> $logFile
- 
-    # Increase session
-    let session=$session+1
 
     # Try to position tape 1 record forward; if this fails this means
     # the end of the tape was reached
@@ -203,16 +200,6 @@ if [ "$fill" = "true" ] ; then
     echo "*** Reset blockSize to 512 because -f flag is used  ***" >> $logFile
 fi
 
-# Parse sessions string to array
-sessionsArr=$(echo $sessions | tr "," "\n")
-
-## TEST
-for session in $sessionsArr
-do
-    echo "> [$session]"
-done
-## TEST
-
 # Flag that indicates end of tape was reached
 endOfTape=false
 # Session index
@@ -227,6 +214,8 @@ while [ $endOfTape == "false" ]
 do
     # Process one session
     processSession
+    # Increase session
+    let session=$session+1
 done
 
 # Create checksum file
