@@ -26,14 +26,6 @@ optional arguments:
 EOF
 }
 
-containsElement ()
-{
-  local e match="$1"
-  shift
-  for e; do [[ "$e" == "$match" ]] && return 0; done
-  return 1
-}
-
 # Initialize variables
 
 # Non-rewind tape device
@@ -149,7 +141,7 @@ do
     # TODO in extraction script:
     # - Extract session if extractSession = true
     # - Forward to next session if extractSession = false
-    
+
     if [ $session -gt 10 ] ; then
         endOfTape=true
     fi
