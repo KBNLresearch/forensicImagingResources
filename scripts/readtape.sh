@@ -71,12 +71,14 @@ processSession ()
     ofName=$dirOut/"$prefix"`printf "%06g" $session`.$extension
 
     echo "*** Processing session # "$session" ("$ofName") ***" >> $logFile
-    # Note 1: conv=sync flag can result in padding bytes if block size is too
-    # large, so disabled for now
-    # Note 2: conv=noerror flag causes infinite loop when reading beyond last
-    # session on tape, so disabled that as well!
-    #dd if=$tapeDevice of=$ofName bs=$bSize conv=noerror,sync >> $logFile 2>&1
-    dd if=$tapeDevice of=$ofName bs=$bSize >> $logFile 2>&1
+
+    if [ "$fill" = "true" ] ; then
+        # Invoke dd with conv=noerror,sync options
+        dd if=$tapeDevice of=$ofName bs=$bSize conv=noerror,sync >> $logFile 2>&1
+    else
+        dd if=$tapeDevice of=$ofName bs=$bSize >> $logFile 2>&1
+    fi
+
     ddStatus=$?
     echo "*** dd exit code = " $ddStatus" ***" >> $logFile
  
@@ -160,32 +162,7 @@ if ! [ -d $dirOut ] ; then
     exit 1
 fi
 
-# Check if block size is valid (i.e. a multiple of 512) by comparing integer
-# division of blockSize by 512 against floating-point division
-blocksInt=$(($blockSize / 512))
-blocksFloat=$(echo "$blockSize/512" | bc -l )
-# This yields 1 if block size is valid, and 0 otherwise 
-blocksizeValid=$(echo "$blocksInt == $blocksFloat" |bc -l)
-
-if ! [ $blocksizeValid -eq 1 ] ; then
-    echo "ERROR: invalid blockSize, must be a multiple of 512!" >&2
-    exit 1
-fi
-
-# Parse sessions string to array
-sessionsArr=$(echo $sessions | tr "," "\n")
-
-## TEST
-for session in $sessionsArr
-do
-    echo "> [$session]"
-done
-## TEST
-
-# Flag that indicates end of tape was reached
-endOfTape=false
-# Session index
-session=1
+# Log file
 logFile=$dirOut/readtape.log
 
 # Remove log file if it already exists
@@ -205,6 +182,41 @@ echo "blockSize = "$blockSize >> $logFile
 echo "sessions = "$sessions >> $logFile
 echo "prefix = "$prefix >> $logFile
 echo "extension = "$extension >> $logFile
+
+# Check if block size is valid (i.e. a multiple of 512) by comparing integer
+# division of blockSize by 512 against floating-point division
+blocksInt=$(($blockSize / 512))
+blocksFloat=$(echo "$blockSize/512" | bc -l )
+# This yields 1 if block size is valid, and 0 otherwise 
+blocksizeValid=$(echo "$blocksInt == $blocksFloat" |bc -l)
+
+if ! [ $blocksizeValid -eq 1 ] ; then
+    echo "ERROR: invalid blockSize, must be a multiple of 512!" >&2
+    exit 1
+fi
+
+if [ "$fill" = "true" ] ; then
+    # dd's conv=sync flag results in padding bytes for each block if block 
+    # size is too large, so override user-defined value with default
+    # if -f flag was used
+    blockSize=512
+    echo "*** Reset blockSize to 512 because -f flag is used  ***" >> $logFile
+fi
+
+# Parse sessions string to array
+sessionsArr=$(echo $sessions | tr "," "\n")
+
+## TEST
+for session in $sessionsArr
+do
+    echo "> [$session]"
+done
+## TEST
+
+# Flag that indicates end of tape was reached
+endOfTape=false
+# Session index
+session=1
 
 # Get tape status, output to log file
 echo "*** Tape status ***" >> $logFile

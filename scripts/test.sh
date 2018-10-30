@@ -113,3 +113,11 @@ echo "blockSize = "$blockSize
 echo "sessions = "$sessions
 echo "extension = "$extension
 echo "fill = "$fill
+
+if [ "$fill" = "true" ] ; then
+    # dd's conv=sync flag results in padding bytes for each block if block 
+    # size is too large, so override user-defined value with default
+    # if -f flag was used
+    blockSize=512
+    echo "*** Reset blockSize to 512 because -f flag is used  ***"
+fi
