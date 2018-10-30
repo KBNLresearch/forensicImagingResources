@@ -1,5 +1,5 @@
-#!/bin/sh
-# POSIX
+#!/bin/bash
+
 
 show_help() {
 cat << EOF
@@ -77,16 +77,9 @@ fi
 dirOut=$1
 
 if ! [ -d $dirOut ] ; then
-    echo "dirOut must be a directory" >&2
+    echo "ERROR: dirOut must be a directory" >&2
     exit 1
 fi
-
-echo "prefix = "$prefix
-echo "dirOut = "$dirOut
-echo "blockSize = "$blockSize
-echo "sessions = "$sessions
-echo "extension = "$extension
-echo "fill = "$fill
 
 # Check if block size is valid (i.e. a multiple of 512) by comparing integer
 # division of blockSize by 512 against floating-point division
@@ -96,7 +89,7 @@ blocksFloat=$(echo "$blockSize/512" | bc -l )
 blocksizeValid=$(echo "$blocksInt == $blocksFloat" |bc -l)
 
 if ! [ $blocksizeValid -eq 1 ] ; then
-    echo "invalid blockSize, must be a multiple of 512!" >&2
+    echo "ERROR: invalid blockSize, must be a multiple of 512!" >&2
     exit 1
 fi
 
@@ -112,3 +105,10 @@ done
 # Rest of the program here.
 # If there are input files (for example) that follow the options, they
 # will remain in the "$@" positional parameters.
+
+echo "prefix = "$prefix
+echo "dirOut = "$dirOut
+echo "blockSize = "$blockSize
+echo "sessions = "$sessions
+echo "extension = "$extension
+echo "fill = "$fill
