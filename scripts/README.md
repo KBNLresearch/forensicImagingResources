@@ -15,19 +15,19 @@ This script extracts data from a tape using the [dd](http://pubs.opengroup.org/o
 
 |Argument|Description|
 |:-|:-|
-|`dirOut`|output directory|
+|`dirOut`|Output directory|
 
 ### Optional arguments
 
 |Argument|Description|
 |:-|:-|
-|`-h`|display help message and exit|
-|`-d device`|non-rewind tape device (default: `/dev/nst0`)|
-|`-b blockSize`|initial block size (must be a multiple of 512)|
-|`-s sessions`|comma-separated list of sessions to extract (default: extract all sessions)|
-|`-p prefix`|output prefix (default: `session`)|
-|`-e extension`|output file extension (default: `.dd`)|
-|`-f`|fill blocks that give read errors with null bytes|
+|`-h`|Display help message and exit|
+|`-d device`|Non-rewind tape device (default: `/dev/nst0`)|
+|`-b blockSize`|Initial block size in bytes (must be a multiple of 512). This is used as a starting value for the script's built-in block size estimation procedure. Block sizes smaller than 4096 are reported to give poor performance, and this option can be useful to speed up the extraction process in such cases. Note that `-b` is ignored if the `-f` (fill) option is also used.|
+|`-s sessions`|Comma-separated list of sessions to extract (default: extract all sessions)|
+|`-p prefix`|Output prefix (default: `session`)|
+|`-e extension`|Output file extension (default: `.dd`)|
+|`-f`|Fill blocks that give read errors with null bytes|
 
 ### Example
 
