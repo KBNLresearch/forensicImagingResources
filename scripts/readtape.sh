@@ -63,24 +63,30 @@ findBlocksize ()
 processSession ()
 {   # Process one session
 
-    # Determine block size for this session
-    findBlocksize
-    echo "*** Block size = "$bSize" ***" >> $logFile
+    if [ "$extractSession" = "true" ] ; then
+        # Determine block size for this session
+        findBlocksize
+        echo "*** Block size = "$bSize" ***" >> $logFile
 
-    # Name of output file for this session
-    ofName=$dirOut/"$prefix"`printf "%06g" $session`.$extension
+        # Name of output file for this session
+        ofName=$dirOut/"$prefix"`printf "%06g" $session`.$extension
 
-    echo "*** Processing session # "$session" ("$ofName") ***" >> $logFile
+        echo "*** Extracting session # "$session" to file "$ofName" ***" >> $logFile
 
-    if [ "$fill" = "true" ] ; then
-        # Invoke dd with conv=noerror,sync options
-        dd if=$tapeDevice of=$ofName bs=$bSize conv=noerror,sync >> $logFile 2>&1
+        if [ "$fill" = "true" ] ; then
+            # Invoke dd with conv=noerror,sync options
+            dd if=$tapeDevice of=$ofName bs=$bSize conv=noerror,sync >> $logFile 2>&1
+        else
+            dd if=$tapeDevice of=$ofName bs=$bSize >> $logFile 2>&1
+        fi
+
+        ddStatus=$?
+        echo "*** dd exit code = " $ddStatus" ***" >> $logFile
     else
-        dd if=$tapeDevice of=$ofName bs=$bSize >> $logFile 2>&1
+        # Fast-forward tape to next session
+        echo "*** Skipping session # "$session", fast-forward to next session ***" >> $logFile
+        mt -f $tapeDevice fsf 1 >> $logFile 2>&1
     fi
-
-    ddStatus=$?
-    echo "*** dd exit code = " $ddStatus" ***" >> $logFile
 
     # Try to position tape 1 record forward; if this fails this means
     # the end of the tape was reached
@@ -212,7 +218,22 @@ mt -f $tapeDevice status >> $logFile
 # Iterate over all sessions on tape until end is detected
 while [ $endOfTape == "false" ]
 do
-    # Process one session
+    # Set initial value of extractSessionFlag depending on sessions parameter
+    if [ -z $sessions ] ; then
+        extractSession=true
+    else
+        extractSession=false
+    fi
+
+    # Only extract sessions defined by sessions parameter
+    # (if session parameter is empty all sessions are extracted)
+    for i in ${sessions//,/ }
+        do
+        if [ $i == $session ] ; then
+            extractSession=true
+        fi
+    done
+
     processSession
     # Increase session
     let session=$session+1
