@@ -234,8 +234,9 @@ do
         fi
     done
 
+    # Call session processing function 
     processSession
-    # Increase session
+    # Increase session number
     let session="$session"+1
 done
 
