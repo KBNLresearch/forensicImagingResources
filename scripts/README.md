@@ -2,7 +2,7 @@
 
 This directory contains various scripts for extracting data from a variety of carriers, and for the subsequent processing of these data.
 
-## readtape.sh
+## [readtape.sh](./readtape.sh)
 
 This script extracts data from a tape using the [dd](http://pubs.opengroup.org/onlinepubs/9699919799/utilities/dd.html) command. It is format-agnostic, and only extracts raw bytestreams. By default the script tries to extract all "sessions" (i.e. sequential files) up to the end of the tape. Each session is stored as a separate file. After the extraction is done it also generates a checksum file with SHA-512 hashes of the extracted files. Note that the script must be run as superuser.
 
