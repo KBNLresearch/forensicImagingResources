@@ -256,8 +256,6 @@ Write with 8192 byte record size:
 
         cat tapeblock000001.bin tapeblock000002.bin > tape.bin
 
-
-
 ## Resources
 
 - [How to use the DAT-tape with Linux](http://www.cs.inf.ethz.ch/stricker/lab/linux_tape.html)
