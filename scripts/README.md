@@ -41,7 +41,7 @@ The script uses an iterative process to establish the block size for each sessio
 
 The following example extracts the contents of a tape to the current working directory:
 
-`sudo readtape.sh .`
+    sudo readtape.sh .
 
 The following output is generated:
 
@@ -51,4 +51,8 @@ The following output is generated:
 
 The example below extracts only the 2nd and 3rd session of a tape:
 
-`sudo readtape.sh -s 2,3 .`
+    sudo readtape.sh -s 2,3 .
+
+This example sets the initial block size estimate to 8192 bytes, extracts only sessions 1 and 2, and writes the output using file prefix `bullsh` and extension `img`:
+
+    sudo readtape.sh -b 8192 -s 1,2 -p bullsh -e img .
