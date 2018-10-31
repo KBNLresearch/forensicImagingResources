@@ -244,7 +244,7 @@ done
 workDir="$PWD"
 cd "$dirOut"
 checksumFile="$prefix"".sha512"
-sha512sum *.dd > "$checksumFile"
+sha512sum *."$extension" > "$checksumFile"
 cd "$workDir"
 echo "*** Created checksum file ***" >> "$logFile"
 
