@@ -2,7 +2,7 @@
 
 ## Introduction
 
-[Digital Linear Tape (DLT)](https://en.wikipedia.org/wiki/Digital_Linear_Tape) is is a family of tape formats that were developed by Digital Equipment Corporation (DEC)from 1984 onwards.
+[Digital Linear Tape (DLT)](https://www.wikidata.org/wiki/Q1224765) is is a family of tape formats that were developed by Digital Equipment Corporation (DEC) from 1984 onwards.
 
 ## Hardware
 
@@ -20,10 +20,10 @@
 
 ### SCSI controller
 
-|**Model**|[Adaptec SCSI Card 29320LPE](https://storage.microsemi.com/en-us/support/scsi/u320/asc-29320lpe/)|
+|**Model**|[Adaptec SCSI Card 29320LPE](https://web.archive.org/web/20161203082125/https://storage.microsemi.com/en-us/support/scsi/u320/asc-29320lpe/)|
 |:--|:--|
-|**Bus System Interface Type**|[PCI Express](https://en.wikipedia.org/wiki/PCI_Express) x1|
-|**External Connectors**|[68-pin VHDCI](https://en.wikipedia.org/wiki/Very-high-density_cable_interconnect)|
+|**Bus System Interface Type**|[PCI Express](https://www.wikidata.org/wiki/Q206924) x1|
+|**External Connectors**|[68-pin VHDCI](https://www.wikidata.org/wiki/Q4052507)|
 |**Data Transfer Rate**|Up to 320 MByte/sec.|
 
 #### Note on bracket height
@@ -41,8 +41,6 @@ the leftmost position. The orange indicator must be visible:
 
     ![](./img/dlt-insert.jpg)
 
-
-
 ## Procedure for reading a tape
 
 During first test run of script the following message was printed to the console while reading: 
@@ -56,4 +54,4 @@ Reading of 18.6 GB tape: takes about 1.5 hr.
 
 ## Resources
 
-- [Write protect in DLT IV Data cartridge](https://community.hpe.com/t5/StoreEver-Tape-Storage/Write-protect-in-DLT-IV-Data-cartridge/td-p/129718)
+- [Write protect in DLT IV Data cartridge](https://web.archive.org/web/20181031154114/https://community.hpe.com/t5/StoreEver-Tape-Storage/Write-protect-in-DLT-IV-Data-cartridge/td-p/129718https://community.hpe.com/t5/StoreEver-Tape-Storage/Write-protect-in-DLT-IV-Data-cartridge/td-p/129718)
