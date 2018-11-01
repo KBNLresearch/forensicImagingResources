@@ -12,8 +12,8 @@
 show_help ()
 { # Show help message
 cat << EOF
-Usage: ${0##*/} [-h] [-d device] [-b blockSize] [-s sessions] [-p prefix]
-                [-e extension] dirOut
+Usage: ${0##*/} [-h] [-f] [-d device] [-b blockSize] [-s sessions]
+                [-p prefix] [-e extension] dirOut
 
 Read contents of tape. Each session is stored as a separate file. 
 
@@ -24,12 +24,12 @@ positional arguments:
 optional arguments:
 
     -h              display this help message and exit
+    -f              fill blocks that give read errors with null bytes
     -d device       non-rewind tape device (default: /dev/nst0)
     -b blockSize    initial block size (must be a multiple of 512)
     -s sessions     comma-separated list of sessions to extract
     -p prefix       output prefix
     -e extension    output file extension
-    -f              fill blocks that give read errors with null bytes
 
 EOF
 }
