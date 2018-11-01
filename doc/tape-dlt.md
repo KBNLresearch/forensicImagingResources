@@ -16,7 +16,7 @@
 |**Connector**|68 pin HD D-Sub (HD-68) (see also 5th from top [here](http://www.paralan.com/sediff.html))|
 |**Cable**|At the outgoing side is a male VHDCI SCSI connector (bottommost [here](http://www.paralan.com/sediff.html))|
 |**Workstation connection**|Can be connected directly with workstation's SCSI controller (which has a female VHDCI connector)|
-|**Documentation**|-[IBM 7205 Model 440 40 GB External Digital Linear Tape  Drive  Enhances  Data  Storage](https://web.archive.org/web/20181101131555/https://www-01.ibm.com/common/ssi/rep_ca/2/897/ENUS101-062/ENUS101-062.PDF)<br>-[7205 Model 440 Digital Linear Tape Drive Setup and Operator Guide](https://web.archive.org/web/20181101132208/http://ps-2.kev009.com/basil.holloway/ALL%20PDF/a4100501.pdf)|
+|**Documentation**|<ul><li>[IBM 7205 Model 440 40 GB External Digital Linear Tape  Drive  Enhances  Data  Storage](https://web.archive.org/web/20181101131555/https://www-01.ibm.com/common/ssi/rep_ca/2/897/ENUS101-062/ENUS101-062.PDF)</li><li>[7205 Model 440 Digital Linear Tape Drive Setup and Operator Guide](https://web.archive.org/web/20181101132208/http://ps-2.kev009.com/basil.holloway/ALL%20PDF/a4100501.pdf)</li></ul>|
 
 ### SCSI controller
 
