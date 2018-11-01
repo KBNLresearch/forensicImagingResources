@@ -31,6 +31,10 @@
 
 Note that by default the controller has a standard height (120 mm) bracket that won't fit into a low-profile (79.2 mm) slot! When these controllers were sold new, they came with a replacement low-profile bracket, but these are often not included with used ones. The low-profile replacement brackets are sometimes sold separately on eBay.
 
+### Connecting / disconnecting the tape reader
+
+Always make sure that both the tape reader and the computer are switched off before connecting or disconnecting. Not doing so may cause damage to the computer, the tape reader or both.
+
 ## Software
 
 Additional software for working with tape devices:

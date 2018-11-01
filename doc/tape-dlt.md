@@ -30,27 +30,52 @@
 
 Note that by default the controller has a standard height (120 mm) bracket that won't fit into a low-profile (79.2 mm) slot! When these controllers were sold new, they came with a replacement low-profile bracket, but these are often not included with used ones. The low-profile replacement brackets are sometimes sold separately on eBay.
 
-## Loading a tape
+## Connecting / disconnecting the tape reader
 
-1. Check the write-protect tab on the bottom of the tape, and slide it to
-the leftmost position. The orange indicator must be visible:
-
-    ![](./img/dlt-protect.jpg)
-
-2. Insert the tape into the drive. Make sure the printed side is on top, and that the tape is inserted in the direction of the arrow symbol:
-
-    ![](./img/dlt-insert.jpg)
+Always make sure that both the tape reader and the computer are switched off before connecting or disconnecting. Not doing so may cause damage to the computer, the tape reader or both.
 
 ## Procedure for reading a tape
 
-During first test run of script the following message was printed to the console while reading: 
+1. Check the write-protect tab on the bottom of the cartridge, and slide it to the leftmost position. The orange indicator must be visible:
 
+    ![](./img/dlt-protect.jpg)
 
-    ###!!! [Parent][DispatchAsyncMessage] Error: PClientSourceOp::Msg___delete__ Route error: message sent to unknown actor ID
+2. Lift the cartridge insert/release handle:
 
-Unclear if this is even related to the imaging script. A Google search on this error returns almost exclusively hits that are related to bugs in Firefox. Interestingly Firefox was launched from the same terminal window, so maybe Firefox somehow sent this back to its parent process?
+    ![](./img/dlt-lift.jpg)
 
-Reading of 18.6 GB tape: takes about 1.5 hr.
+3. Insert the tape cartridge into the drive. Make sure the printed side is on top, and that the tape is inserted in the direction of the arrow symbol:
+
+    ![](./img/dlt-insert.jpg)
+
+4. Lower the cartridge insert/release handle:
+
+    ![](./img/dlt-lower-handle.jpg)
+
+    The loaded tape should now look like this:
+
+    ![](./img/dlt-loaded.jpg)
+
+    The green "tape in use" indicator light (2nd from the top) now starts blinking. Once the tape is completely loaded the blinking stops and the indicator light is lit solid.
+
+5. Check that the green "write-protected" indicator light (top-right) is lit:
+
+    ![](./img/dlt-wp-indicator.jpg)
+
+6. Create an empty directory that will be used to store the extracted tape contents.
+
+7. Open this directory in a terminal window, and run the [tape extraction script](../scripts/readtape.sh). The script must be run as superuser (sudo). The following command runs the script with default options:
+
+        sudo ~/scripts/readtape.sh .
+
+    Now wait for the script to finish (depending on the amount of data on the tape this may take several hours).
+
+10. When the script is finished, wait until the "tape in use" indicator light stops blinking. Now lift the cartridge insert/release handle:
+
+    ![](./img/dlt-unloaded.jpg)
+
+11. Take out the tape cartridge. All done!
+
 
 ## Resources
 
