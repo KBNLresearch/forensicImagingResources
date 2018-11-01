@@ -2,28 +2,29 @@
 
 ## Introduction
 
-[Digital Data Storage (DDS)](https://en.wikipedia.org/wiki/Digital_Data_Storage) is a family of tape formats that are based on [digital audio tape](https://en.wikipedia.org/wiki/Digital_audio_tape) (DAT).
+[Digital Data Storage (DDS)](https://www.wikidata.org/wiki/Q1224723) is a family of tape formats that are based on [digital audio tape](https://www.wikidata.org/wiki/Q597615) (DAT).
 
 ## Hardware
 
 ### Tape reader
 
-|**Model**|[HP SureStore DAT8](http://www.hp.com/ecomcat/hpcatalog/specs/S4112B.htm)|
+|**Model**|[HP SureStore DAT8](https://web.archive.org/web/20180606153928/http://www.hp.com/ecomcat/hpcatalog/specs/S4112B.htm)|
 |:--|:--|
 |**Media**|DDS-2 (8 GB), DDS-1 (2.6 GB and 4 GB)|
 |**Interface**|Single-ended, narrow SCSI-2|
-|**Connector**|50-contact, centronics-type connector ("SCSI-1 Connector" AKA "Alternative 2, A-cable connector"), female (see also the topmost connector [here](http://www.paralan.com/sediff.html))[^1]|
+|**Connector**|50-contact, centronics-type connector ("SCSI-1 Connector" AKA "Alternative 2, A-cable connector"), female (see also the topmost connector [here](https://web.archive.org/web/20180606154144/http://www.paralan.com/sediff.html))[^1]|
 |**Cable**|Attached to the device is a [Single Ended HD68 TO LD50 SCSI Cable](https://web.archive.org/web/20180606100950/http://www.itinstock.com/hp-c5665-61001-single-ended-hd68-to-ld50-scsi-cable-1-meter-40938-p.asp). The connector other end is a 68-pin DB68 (MD68) male connector (also known as High-Density or HD 68 and Half-Pitch or HP68)|
 |**Workstation connection**|With this [HD68 to VHDCI adapter](https://web.archive.org/web/20181002103944/https://www.ramelectronics.net/sm-044-r.aspx) the reader can be hooked up to the workstation's SCSI controller (which has a female VHDCI connector)|
+|**Documentation**|<ul><li>[HP Surestore and StorageWorks DAT - HP DAT Accessories and Part Numbers](https://web.archive.org/web/20181101135618/https://support.hpe.com/hpsc/doc/public/display?docId=emr_na-lpg50205)</li><li>[HP SureStore DAT - Sun Workstation Configuration](https://web.archive.org/save/https://support.hpe.com/hpsc/doc/public/display?docId=emr_na-lpg51069)</li></ul>|
 
 [^1]: This is somewhat strange, since the specs explicitly state the drive has a SCSI-2 interface
 
 ### SCSI controller
 
-|**Model**|[Adaptec SCSI Card 29320LPE](https://storage.microsemi.com/en-us/support/scsi/u320/asc-29320lpe/)|
+|**Model**|[Adaptec SCSI Card 29320LPE](https://web.archive.org/web/20161203082125/https://storage.microsemi.com/en-us/support/scsi/u320/asc-29320lpe/)|
 |:--|:--|
-|**Bus System Interface Type**|[PCI Express](https://en.wikipedia.org/wiki/PCI_Express) x1|
-|**External Connectors**|[68-pin VHDCI](https://en.wikipedia.org/wiki/Very-high-density_cable_interconnect)|
+|**Bus System Interface Type**|[PCI Express](https://www.wikidata.org/wiki/Q206924) x1|
+|**External Connectors**|[68-pin VHDCI](https://www.wikidata.org/wiki/Q4052507)|
 |**Data Transfer Rate**|Up to 320 MByte/sec.|
 
 #### Note on bracket height
@@ -96,12 +97,6 @@ the open position:
 
     ![](./img/dds-insert.jpg)
 
-## Identify tape archive format
-
-Reas
-    sudo dd if=/dev/nst0 of=header.dd bs=20k count=1
-
-Then
 
 ## Note on dd usage
 
@@ -259,6 +254,8 @@ Write with 8192 byte record size:
 ## Resources
 
 - [How to use the DAT-tape with Linux](http://www.cs.inf.ethz.ch/stricker/lab/linux_tape.html)
+
+- [HP Surestore and StorageWorks DAT - HP DAT Accessories and Part Numbers](https://web.archive.org/web/20181101135618/https://support.hpe.com/hpsc/doc/public/display?docId=emr_na-lpg50205)
 
 - [15 Useful Linux and Unix Tape Managements Commands For Sysadmins](https://www.cyberciti.biz/hardware/unix-linux-basic-tape-management-commands/)
 
