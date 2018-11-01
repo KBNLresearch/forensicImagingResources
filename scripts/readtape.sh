@@ -229,9 +229,9 @@ do
     # (if session parameter is empty all sessions are extracted)
     for i in ${sessions//,/ }
         do
-        if [ "$i" == "$session" ] ; then
-            extractSession="true"
-        fi
+            if [ "$i" == "$session" ] ; then
+                extractSession="true"
+            fi
     done
 
     # Call session processing function 
