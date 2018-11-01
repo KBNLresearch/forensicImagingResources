@@ -13,8 +13,8 @@
 |**Media**|DLT IV (and possibly DLT III)|
 |**SCSI Signaling Type**|Low Voltage Differential (LVD)|
 |**Interface**|Fast Wide SCSI|
-|**Connector**|68 pin HD D-Sub (HD-68) (see also 5th from top [here](http://www.paralan.com/sediff.html))|
-|**Cable**|At the outgoing side is a male VHDCI SCSI connector (bottommost [here](http://www.paralan.com/sediff.html))|
+|**Connector**|68 pin HD D-Sub (HD-68) (see also 5th from top [here](https://web.archive.org/web/20180606154144/http://www.paralan.com/sediff.html))|
+|**Cable**|At the outgoing side is a male VHDCI SCSI connector (bottommost [here](https://web.archive.org/web/20180606154144/http://www.paralan.com/sediff.html))|
 |**Workstation connection**|Can be connected directly with workstation's SCSI controller (which has a female VHDCI connector)|
 |**Documentation**|<ul><li>[IBM 7205 Model 440 40 GB External Digital Linear Tape  Drive  Enhances  Data  Storage](https://web.archive.org/web/20181101131555/https://www-01.ibm.com/common/ssi/rep_ca/2/897/ENUS101-062/ENUS101-062.PDF)</li><li>[7205 Model 440 Digital Linear Tape Drive Setup and Operator Guide](https://web.archive.org/web/20181101132208/http://ps-2.kev009.com/basil.holloway/ALL%20PDF/a4100501.pdf)</li></ul>|
 
@@ -52,17 +52,13 @@ Always make sure that both the tape reader and the computer are switched off bef
 
     ![](./img/dlt-lower-handle.jpg)
 
-    The loaded tape should now look like this:
-
-    ![](./img/dlt-loaded.jpg)
-
-    The green "tape in use" indicator light (2nd from the top) now starts blinking. Once the tape is completely loaded the blinking stops and the indicator light is lit solid.
+    The green "tape in use" indicator light (2nd from the top) now starts blinking. Once the tape is completely loaded, the blinking stops and the indicator light is lit solid.
 
 5. Check that the green "write-protected" indicator light (top-right) is lit:
 
     ![](./img/dlt-wp-indicator.jpg)
 
-6. Create an empty directory that will be used to store the extracted tape contents.
+6. Create an empty directory for storing the extracted tape contents.
 
 7. Open this directory in a terminal window, and run the [tape extraction script](../scripts/readtape.sh). The script must be run as superuser (sudo). The following command runs the script with default options:
 
