@@ -8,7 +8,7 @@
 
 ### Tape reader
 
-|**Model**|[IBM 7205 440](https://www.cnet.com/products/ibm-7205-440-tape-drive-dlt-scsi/specs/)|
+|**Model**|[IBM 7205 440](https://web.archive.org/web/20181101132449/https://www-01.ibm.com/common/ssi/cgi-bin/ssialias?infotype=DD&subtype=SM&htmlfid=649/ENUS7205-440)|
 |:--|:--|
 |**Media**|DLT IV (and possibly DLT III)|
 |**SCSI Signaling Type**|Low Voltage Differential (LVD)|
@@ -16,6 +16,7 @@
 |**Connector**|68 pin HD D-Sub (HD-68) (see also 5th from top [here](http://www.paralan.com/sediff.html))|
 |**Cable**|At the outgoing side is a male VHDCI SCSI connector (bottommost [here](http://www.paralan.com/sediff.html))|
 |**Workstation connection**|Can be connected directly with workstation's SCSI controller (which has a female VHDCI connector)|
+|**Documentation**|-[IBM 7205 Model 440 40 GB External Digital Linear Tape  Drive  Enhances  Data  Storage](https://web.archive.org/web/20181101131555/https://www-01.ibm.com/common/ssi/rep_ca/2/897/ENUS101-062/ENUS101-062.PDF)<br>-[7205 Model 440 Digital Linear Tape Drive Setup and Operator Guide](https://web.archive.org/web/20181101132208/http://ps-2.kev009.com/basil.holloway/ALL%20PDF/a4100501.pdf)|
 
 ### SCSI controller
 
@@ -50,6 +51,8 @@ During first test run of script the following message was printed to the console
     ###!!! [Parent][DispatchAsyncMessage] Error: PClientSourceOp::Msg___delete__ Route error: message sent to unknown actor ID
 
 Unclear if this is even related to the imaging script. A Google search on this error returns almost exclusively hits that are related to bugs in Firefox. Interestingly Firefox was launched from the same terminal window, so maybe Firefox somehow sent this back to its parent process?
+
+Reading of 18.6 GB tape: takes about 1.5 hr.
 
 ## Resources
 
