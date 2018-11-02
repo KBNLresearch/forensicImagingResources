@@ -71,8 +71,3 @@ Always make sure that both the tape reader and the computer are switched off bef
     ![](./img/dlt-unloaded.jpg)
 
 11. Take out the tape cartridge. All done!
-
-
-## Resources
-
-- [Write protect in DLT IV Data cartridge](https://web.archive.org/web/20181031154114/https://community.hpe.com/t5/StoreEver-Tape-Storage/Write-protect-in-DLT-IV-Data-cartridge/td-p/129718https://community.hpe.com/t5/StoreEver-Tape-Storage/Write-protect-in-DLT-IV-Data-cartridge/td-p/129718)
