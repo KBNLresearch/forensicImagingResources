@@ -9,31 +9,6 @@
 # Functions
 # **************
 
-show_help ()
-{ # Show help message
-cat << EOF
-Usage: ${0##*/} [-h] [-f] [-d device] [-b blockSize] [-s sessions]
-                [-p prefix] [-e extension] dirOut
-
-Read contents of tape. Each session is stored as a separate file. 
-
-positional arguments:
-
-    dirOut          output directory
-
-optional arguments:
-
-    -h              display this help message and exit
-    -f              fill blocks that give read errors with null bytes
-    -d device       non-rewind tape device (default: /dev/nst0)
-    -b blockSize    initial block size (must be a multiple of 512)
-    -s sessions     comma-separated list of sessions to extract
-    -p prefix       output prefix
-    -e extension    output file extension
-
-EOF
-}
-
 getUserInput ()
 {   # Get user input through GUI dialog
     userInput=$(yad --width=400 --title="Read tape" \
@@ -87,7 +62,7 @@ processSession ()
 
         echo "*** Extracting session # ""$session"" to file ""$ofName"" ***" >> "$logFile"
 
-        if [ "$fill" = "true" ] ; then
+        if [ "$fill" = "TRUE" ] ; then
             # Invoke dd with conv=noerror,sync options
             dd if="$tapeDevice" of="$ofName" bs="$bSize" conv=noerror,sync >> "$logFile" 2>&1
         else
@@ -122,7 +97,7 @@ processSession ()
 # Main code
 # **************
 
-# Initialize command line variables
+# Initialize command user-defined variables
 
 # Non-rewind tape device
 tapeDevice="/dev/nst0"
@@ -150,12 +125,6 @@ prefix="$(cut -d'|' -f5 <<<$userInput)"
 extension="$(cut -d'|' -f6 <<<$userInput)"
 fill="$(cut -d'|' -f7 <<<$userInput)"
 
-echo $dirOut
-echo $blockSize
-
-# Normalise dirOut to absolute path
-dirOut="$(readlink -f "$dirOut")"
-
 if ! [ -d "$dirOut" ] ; then
     echo "ERROR: dirOut must be a directory" >&2
     exit 1
@@ -169,17 +138,87 @@ if [ -f "$logFile" ] ; then
     rm "$logFile"
 fi
 
-find $dirOut -name '*.jpg' 2>&1 | tee -a ${logFile} | yad --width=400 --height=300 \
-    --title="Progress" \
-    --form \
-    --scroll
-    --field="Progress":TXT \
+# Write some general info to log file
+echo "*** Tape extraction log ***" >> "$logFile"
+dateStart="$(date)"
+echo "*** Start date/time ""$dateStart"" ***" >> "$logFile"
+echo "*** Command-line arguments ***" >> "$logFile"
+echo "dirOut = ""$dirOut" >> "$logFile"
+echo "fill = ""$fill" >> "$logFile"
+echo "tapeDevice = ""$tapeDevice" >> "$logFile" 
+echo "blockSize = ""$blockSize" >> "$logFile"
+echo "sessions = ""$sessions" >> "$logFile"
+echo "prefix = ""$prefix" >> "$logFile"
+echo "extension = ""$extension" >> "$logFile"
 
+# Check if block size is valid (i.e. a multiple of 512) by comparing integer
+# division of blockSize by 512 against floating-point division
+blocksInt=$(($blockSize / 512))
+blocksFloat=$(echo "$blockSize/512" | bc -l )
+# This yields 1 if block size is valid, and 0 otherwise 
+blocksizeValid=$(echo "$blocksInt == $blocksFloat" |bc -l)
 
-#find $dirOut -name '*.jpg' 2>&1 | tee -a ${logFile} | yad --width=400 --height=300 \
-#    --title="Doing stuff ..." --progress \
-#    --pulsate --text="Doing stuff ..." \
-#    --auto-kill \
-#    --percentage=10
+if ! [ "$blocksizeValid" -eq 1 ] ; then
+    echo "ERROR: invalid blockSize, must be a multiple of 512!" >&2
+    exit 1
+fi
 
-#     --auto-kill --auto-close \
+if [ "$fill" = "TRUE" ] ; then
+    # dd's conv=sync flag results in padding bytes for each block if block 
+    # size is too large, so override user-defined value with default
+    # if -f flag was used
+    blockSize=512
+    echo "*** Reset blockSize to 512 because -f flag is used  ***" >> "$logFile"
+fi
+
+# Flag that indicates end of tape was reached
+endOfTape="false"
+# Session index
+session="1"
+
+# Get tape status, output to log file
+echo "*** Tape status ***" >> "$logFile"
+mt -f "$tapeDevice" status >> "$logFile"
+
+# Iterate over all sessions on tape until end is detected
+while [ "$endOfTape" == "false" ]
+do
+    # Set initial value of extractSessionFlag depending on sessions parameter
+    if [ -z "$sessions" ] ; then
+        extractSession="true"
+    else
+        extractSession="false"
+    fi
+
+    # Only extract sessions defined by sessions parameter
+    # (if session parameter is empty all sessions are extracted)
+    for i in ${sessions//,/ }
+        do
+            if [ "$i" == "$session" ] ; then
+                extractSession="true"
+            fi
+    done
+
+    # Call session processing function 
+    processSession
+    # Increase session number
+    let session="$session"+1
+done
+
+# Create checksum file
+workDir="$PWD"
+cd "$dirOut"
+checksumFile="$prefix"".sha512"
+sha512sum *."$extension" > "$checksumFile"
+cd "$workDir"
+echo "*** Created checksum file ***" >> "$logFile"
+
+# Rewind and eject the tape
+echo "*** Rewinding tape ***" >> "$logFile"
+mt -f "$tapeDevice" rewind >> "$logFile" 2>&1
+echo "*** Ejecting tape ***" >> "$logFile"
+mt -f "$tapeDevice" eject >> "$logFile" 2>&1
+
+# Write end date/time to log
+dateEnd="$(date)"
+echo "*** End date/time ""$dateEnd"" ***" >> "$logFile"
