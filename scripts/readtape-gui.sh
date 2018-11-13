@@ -35,10 +35,10 @@ findBlocksize ()
     do
         # Try reading 1 block from tape
         echo "# Guessing block size for session # ""$session"", trial value ""$bSize" | tee -a "$logFile"
-        dd if="$tapeDevice" of=/dev/null bs="$bSize" count=1 2>&1 | tee -a "$logFile"
+        dd if="$tapeDevice" of=/dev/null bs="$bSize" count=1 >> "$logFile" 2>&1
         ddStatus="$?"
         # Position tape 1 record backward (i.e. to the start of this session)
-        mt -f "$tapeDevice" bsr 1 2>&1 | tee -a "$logFile"
+        mt -f "$tapeDevice" bsr 1 >> "$logFile" 2>&1
         if [[ "$ddStatus" -eq 0 ]]; then
             # dd exit status 0: block size found
             bSizeFound="true"
@@ -64,9 +64,9 @@ processSession ()
 
         if [ "$fill" = "TRUE" ] ; then
             # Invoke dd with conv=noerror,sync options
-            dd if="$tapeDevice" of="$ofName" bs="$bSize" conv=noerror,sync 2>&1 | tee -a "$logFile"
+            dd if="$tapeDevice" of="$ofName" bs="$bSize" conv=noerror,sync >> "$logFile" 2>&1
         else
-            dd if="$tapeDevice" of="$ofName" bs="$bSize" 2>&1 | tee -a "$logFile"
+            dd if="$tapeDevice" of="$ofName" bs="$bSize" >> "$logFile" 2>&1
         fi
 
         ddStatus="$?"
@@ -74,18 +74,18 @@ processSession ()
     else
         # Fast-forward tape to next session
         echo "# Skipping session # ""$session"", fast-forward to next session" | tee -a "$logFile"
-        mt -f "$tapeDevice" fsf 1 2>&1 | tee -a "$logFile"
+        mt -f "$tapeDevice" fsf 1 >> "$logFile" 2>&1
     fi
 
     # Try to position tape 1 record forward; if this fails this means
     # the end of the tape was reached
-    mt -f "$tapeDevice" fsr 1 2>&1 | tee -a "$logFile"
+    mt -f "$tapeDevice" fsr 1 >> "$logFile" 2>&1
     mtStatus="$?"
     echo "# mt exit code = " "$mtStatus" | tee -a "$logFile"
 
     if [[ "$mtStatus" -eq 0 ]]; then
         # Another session exists. Position tape one record backward
-        mt -f "$tapeDevice" bsr 1 2>&1 | tee -a "$logFile"
+        mt -f "$tapeDevice" bsr 1 >> "$logFile" 2>&1
     else
         # No further sessions, end of tape reached
         echo "# Reached end of tape" | tee -a "$logFile"
