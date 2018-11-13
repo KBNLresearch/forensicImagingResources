@@ -9,7 +9,32 @@
 # Functions
 # **************
 
-getUserInput ()
+show_help ()
+{ # Show help message
+cat << EOF
+Usage: ${0##*/} [-h] [-f] [-d device] [-b blockSize] [-s sessions]
+                [-p prefix] [-e extension] dirOut
+
+Read contents of tape. Each session is stored as a separate file. 
+
+positional arguments:
+
+    dirOut          output directory
+
+optional arguments:
+
+    -h              display this help message and exit
+    -f              fill blocks that give read errors with null bytes
+    -d device       non-rewind tape device (default: /dev/nst0)
+    -b blockSize    initial block size (must be a multiple of 512)
+    -s sessions     comma-separated list of sessions to extract
+    -p prefix       output prefix
+    -e extension    output file extension
+
+EOF
+}
+
+getUserInputGUI ()
 {   # Get user input through GUI dialog
     userInput=$(yad --width=400 --title="Read tape" \
     --form \
@@ -21,6 +46,58 @@ getUserInput ()
     --field="Extension" "$extension" \
     --field="Fill failed blocks":CHK $fill \
     )
+
+    # Parse yad output into variables
+    dirOut="$(cut -d'|' -f1 <<<$userInput)"
+    tapeDevice="$(cut -d'|' -f2 <<<$userInput)"
+    blockSize="$(cut -d'|' -f3 <<<$userInput)"
+    # Needed because yad adds ",0000" to numerical value, apparently this 
+    # fix is not needed with mthe most recent version of yad
+    blockSize="$(cut -d',' -f1 <<<"$blockSize")"
+    sessions="$(cut -d'|' -f4 <<<$userInput)"
+    prefix="$(cut -d'|' -f5 <<<$userInput)"
+    extension="$(cut -d'|' -f6 <<<$userInput)"
+    fill="$(cut -d'|' -f7 <<<$userInput)"
+
+    # Fill flag to lowercase (yad/getopts compatibility)
+    fill=$(echo "$fill" | tr '[:upper:]' '[:lower:]')
+}
+
+getUserInputCLI ()
+{
+    # Get user input through command-line interface
+    OPTIND="1"
+
+    # Optional arguments
+    while getopts ":h:fd:b:s:p:e:" opt; do
+        case "$opt" in
+            h)
+                show_help
+                exit 0
+                ;;
+            f)  fill="true"
+                ;;
+            d)  tapeDevice="$OPTARG"
+                ;;
+            b)  blockSize="$OPTARG"
+                ;;
+            s)  sessions="$OPTARG"
+                ;;
+            p)  prefix="$OPTARG"
+                ;;
+            e)  extension="$OPTARG"
+                ;;
+            *)
+                show_help >&2
+                exit 1
+                ;;
+        esac
+    done
+    shift "$((OPTIND-1))"
+
+    # Positional arguments
+    # dirOut, normalise to absolute path
+    dirOut="$(readlink -f $1)"
 }
 
 findBlocksize ()
@@ -62,7 +139,7 @@ processSession ()
 
         echo "# Extracting session # ""$session"" to file ""$ofName" | tee -a "$logFile"
 
-        if [ "$fill" = "TRUE" ] ; then
+        if [ "$fill" = "true" ] ; then
             # Invoke dd with conv=noerror,sync options
             dd if="$tapeDevice" of="$ofName" bs="$bSize" conv=noerror,sync >> "$logFile" 2>&1
         else
@@ -208,7 +285,7 @@ processTest ()
         echo "# Loop number ""$counter" | tee -a "$logFile"
         sleep 0.5
         let counter=$counter+1
-        if [ $counter == 50 ] ; then
+        if [ $counter == 10 ] ; then
             stop="true"
         fi
     done
@@ -218,8 +295,10 @@ processTest ()
 # Main code
 # **************
 
-# Initialize command user-defined variables
+# Gui mode flag
+GUIMode="false"
 
+# Initialize user-defined variables
 # Non-rewind tape device
 tapeDevice="/dev/nst0"
 # Initial block size
@@ -229,26 +308,41 @@ sessions=""
 prefix="session"
 # Output extension
 extension="dd"
-fill="FALSE"
+fill="false"
 
-# Get user input through GUI
-getUserInput
+# Set GUIMode switch to " true" if no command line args were given
+if [ "$#" -ne 1 ] ; then
+    GUIMode="true"
+fi
 
-# Parse yad output into variables
-dirOut="$(cut -d'|' -f1 <<<$userInput)"
-tapeDevice="$(cut -d'|' -f2 <<<$userInput)"
-blockSize="$(cut -d'|' -f3 <<<$userInput)"
-# Needed because yad adds ",0000" to numerical value, apparently this 
-# fix is not needed with mthe most recent version of yad
-blockSize="$(cut -d',' -f1 <<<"$blockSize")"
-sessions="$(cut -d'|' -f4 <<<$userInput)"
-prefix="$(cut -d'|' -f5 <<<$userInput)"
-extension="$(cut -d'|' -f6 <<<$userInput)"
-fill="$(cut -d'|' -f7 <<<$userInput)"
+echo "GUIMode = ""$GUIMode"
 
-if ! [ -d "$dirOut" ] ; then
-    echo "ERROR: dirOut must be a directory" >&2
-    exit 1
+if [ "$GUIMode" = "true" ] ; then
+    # Get user input through GUI
+    getUserInputGUI
+fi
+
+if [ "$GUIMode" = "false" ] ; then
+    # Get user input through CLI
+    getUserInputCLI
+
+    # Check if dirOut exists
+    if ! [ -d "$dirOut" ] ; then
+        echo "ERROR: dirOut must be a directory" >&2
+        exit 1
+    fi
+
+    # Check if block size is valid (i.e. a multiple of 512) by comparing integer
+    # division of blockSize by 512 against floating-point division
+    blocksInt=$(("$blockSize" / 512))
+    blocksFloat=$(echo "$blockSize/512" | bc -l )
+    # This yields 1 if block size is valid, and 0 otherwise 
+    blocksizeValid=$(echo "$blocksInt == $blocksFloat" |bc -l)
+
+    if ! [ "$blocksizeValid" -eq 1 ] ; then
+        echo "ERROR: invalid blockSize, must be a multiple of 512!" >&2
+        exit 1
+    fi
 fi
 
 # Log file
@@ -259,12 +353,13 @@ if [ -f "$logFile" ] ; then
     rm "$logFile"
 fi
 
-# Call main processing function. All logging output is redirected
-# to a yad --progress window. Note that height of logging widget
-# is limited due to bug in yad 0.38.2 (GTK+ 3.22.30),
+# Call main processing function. In GUI mode all logging output
+# is redirected to a yad --progress window. Note that height of
+# logging widget is limited due to bug in yad 0.38.2 (GTK+ 3.22.30),
 # see https://bugzilla.redhat.com/show_bug.cgi?id=1479070
 
-processTest | yad --progress \
+if [ "$GUIMode" = "true" ] ; then
+    processTest | yad --progress \
     --width=400 --height=300 \
     --title="Tape extraction" \
     --pulsate \
@@ -276,6 +371,13 @@ processTest | yad --progress \
     --auto-kill \
     --no-buttons
 
-# Display notification when script has finished
-yad --text "Finished! \n\nLog written to file:\n\n""$logFile" \
---button=gtk-ok:1
+    # Display notification when script has finished
+    yad --text "Finished! \n\nLog written to file:\n\n""$logFile" \
+    --button=gtk-ok:1
+fi
+
+if [ "$GUIMode" = "false" ] ; then
+    # CLI mode
+    processTest
+    echo "Finished! Log written to file: ""$logFile"
+fi
