@@ -183,6 +183,24 @@ processTape ()
     echo "# End date/time ""$dateEnd" | tee -a "$logFile"
 }
 
+processTest ()
+{
+    # Process a tape
+
+    # Write some general info to log file
+    echo "# Tape extraction log" | tee -a "$logFile"
+    dateStart="$(date)"
+    echo "# Start date/time ""$dateStart" | tee -a "$logFile"
+    echo "# Command-line arguments" | tee -a "$logFile"
+    echo "dirOut = ""$dirOut" | tee -a "$logFile"
+    echo "fill = ""$fill" | tee -a "$logFile"
+    echo "tapeDevice = ""$tapeDevice" | tee -a "$logFile" 
+    echo "blockSize = ""$blockSize" | tee -a "$logFile"
+    echo "sessions = ""$sessions" | tee -a "$logFile"
+    echo "prefix = ""$prefix" | tee -a "$logFile"
+    echo "extension = ""$extension" | tee -a "$logFile"
+}
+
 # **************
 # Main code
 # **************
@@ -229,16 +247,15 @@ if [ -f "$logFile" ] ; then
 fi
 
 # Call main processing function. All logging output is redirected
-# to a yad text-info widget
-#processTape  | yad --text-info \
-#    --width=400 --height=600 \
-#    --title="Progress" \
-#    --scroll \
-#    --no-buttons
-
-processTape | yad --progress \
+# to a yad --progress widget
+process | yad --progress \
     --width=400 --height=600 \
-    --title="Progress" \
+    --title="Tape extraction" \
     --scroll \
     --enable-log \
-    --log-expanded
+    --log-expanded \
+    --auto-close
+
+# Display notification when script has finished
+yad --text "Finished! \n\nLog written to file:\n\n""$logFile" \
+--button=gtk-ok:1
