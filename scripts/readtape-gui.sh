@@ -101,14 +101,14 @@ processTape ()
     echo "# Tape extraction log" | tee -a "$logFile"
     dateStart="$(date)"
     echo "# Start date/time ""$dateStart" | tee -a "$logFile"
-    echo "# Command-line arguments" | tee -a "$logFile"
-    echo "dirOut = ""$dirOut" | tee -a "$logFile"
-    echo "fill = ""$fill" | tee -a "$logFile"
-    echo "tapeDevice = ""$tapeDevice" | tee -a "$logFile" 
-    echo "blockSize = ""$blockSize" | tee -a "$logFile"
-    echo "sessions = ""$sessions" | tee -a "$logFile"
-    echo "prefix = ""$prefix" | tee -a "$logFile"
-    echo "extension = ""$extension" | tee -a "$logFile"
+    echo "# User input" | tee -a "$logFile"
+    echo "# dirOut = ""$dirOut" | tee -a "$logFile"
+    echo "# fill = ""$fill" | tee -a "$logFile"
+    echo "# tapeDevice = ""$tapeDevice" | tee -a "$logFile" 
+    echo "# blockSize = ""$blockSize" | tee -a "$logFile"
+    echo "# sessions = ""$sessions" | tee -a "$logFile"
+    echo "# prefix = ""$prefix" | tee -a "$logFile"
+    echo "# extension = ""$extension" | tee -a "$logFile"
 
     # Check if block size is valid (i.e. a multiple of 512) by comparing integer
     # division of blockSize by 512 against floating-point division
@@ -118,7 +118,8 @@ processTape ()
     blocksizeValid=$(echo "$blocksInt == $blocksFloat" |bc -l)
 
     if ! [ "$blocksizeValid" -eq 1 ] ; then
-        echo "ERROR: invalid blockSize, must be a multiple of 512!" >&2
+        echo "# ERROR: invalid blockSize, must be a multiple of 512!" | tee -a "$logFile"
+    f
         exit 1
     fi
 
@@ -185,7 +186,7 @@ processTape ()
 
 processTest ()
 {
-    # Process a tape
+    # Test function
 
     # Write some general info to log file
     echo "# Tape extraction log" | tee -a "$logFile"
@@ -199,6 +200,18 @@ processTest ()
     echo "sessions = ""$sessions" | tee -a "$logFile"
     echo "prefix = ""$prefix" | tee -a "$logFile"
     echo "extension = ""$extension" | tee -a "$logFile"
+
+    counter=1
+    stop="false"
+    while [ $stop == "false" ]
+    do
+        echo "# Loop number ""$counter" | tee -a "$logFile"
+        sleep 0.5
+        let counter=$counter+1
+        if [ $counter == 50 ] ; then
+            stop="true"
+        fi
+    done
 }
 
 # **************
@@ -247,14 +260,21 @@ if [ -f "$logFile" ] ; then
 fi
 
 # Call main processing function. All logging output is redirected
-# to a yad --progress widget
-processTape | yad --progress \
-    --width=400 --height=600 \
+# to a yad --progress window. Note that height of logging widget
+# is limited due to bug in yad 0.38.2 (GTK+ 3.22.30),
+# see https://bugzilla.redhat.com/show_bug.cgi?id=1479070
+
+processTest | yad --progress \
+    --width=400 --height=300 \
     --title="Tape extraction" \
-    --scroll \
+    --pulsate \
     --enable-log \
     --log-expanded \
-    --auto-close
+    --log-height=500 \
+    --scroll \
+    --auto-close \
+    --auto-kill \
+    --no-buttons
 
 # Display notification when script has finished
 yad --text "Finished! \n\nLog written to file:\n\n""$logFile" \
