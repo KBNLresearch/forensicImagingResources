@@ -382,8 +382,13 @@ if [ "$GUIMode" = "true" ] ; then
     processTest | yad --text-info \
     --width=400 --height=300 \
     --title="Tape extraction" \
-    --tail
+    --tail \
+    & export Yad_PID=$!
     
+    echo $Yad_PID
+    # This kills process too soon?
+    kill -USR1 $Yad_PID
+
     # Display notification when script has finished
     yad --text "Finished! \n\nLog written to file:\n\n""$logFile" \
     --button=gtk-ok:1
