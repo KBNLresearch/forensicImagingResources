@@ -64,10 +64,9 @@ getUserInputGUI ()
 }
 
 getUserInputCLI ()
-{
-    # Get user input through command-line interface
+{   # Get user input through command-line interface
     OPTIND="1"
-
+    echo "--- CLI function ---"
     # Optional arguments
     while getopts ":h:fd:b:s:p:e:" opt; do
         case "$opt" in
@@ -98,6 +97,14 @@ getUserInputCLI ()
     # Positional arguments
     # dirOut, normalise to absolute path
     dirOut="$(readlink -f $1)"
+
+    echo $dirOut
+    
+    # Check command line args
+    if [ "$#" -ne 1 ] ; then
+        show_help
+        exit 1
+    fi
 }
 
 findBlocksize ()
@@ -358,19 +365,25 @@ fi
 # logging widget is limited due to bug in yad 0.38.2 (GTK+ 3.22.30),
 # see https://bugzilla.redhat.com/show_bug.cgi?id=1479070
 
+#if [ "$GUIMode" = "true" ] ; then
+#    processTest | yad --progress \
+#    --width=400 --height=300 \
+#    --title="Tape extraction" \
+#    --pulsate \
+#    --enable-log \
+#    --log-expanded \
+#    --log-height=500 \
+#    --scroll \
+#    --auto-close \
+#    --auto-kill \
+#    --no-buttons
+
 if [ "$GUIMode" = "true" ] ; then
-    processTest | yad --progress \
+    processTest | yad --text-info \
     --width=400 --height=300 \
     --title="Tape extraction" \
-    --pulsate \
-    --enable-log \
-    --log-expanded \
-    --log-height=500 \
-    --scroll \
-    --auto-close \
-    --auto-kill \
-    --no-buttons
-
+    --tail
+    
     # Display notification when script has finished
     yad --text "Finished! \n\nLog written to file:\n\n""$logFile" \
     --button=gtk-ok:1
