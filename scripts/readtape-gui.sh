@@ -181,6 +181,11 @@ processTape ()
 {
     # Process a tape
 
+    # Flag that is true once processing is finished
+    finishedFlag="false"
+    # Pipe value to temp file to allow access outside subprocess
+    echo "$finishedFlag" >/dev/shm/fflag
+
     # Write some general info to log file
     echo "# Tape extraction log" | tee -a "$logFile"
     dateStart="$(date)"
@@ -266,11 +271,20 @@ processTape ()
     # Write end date/time to log
     dateEnd="$(date)"
     echo "# End date/time ""$dateEnd" | tee -a "$logFile"
+
+    # Update finishedFlag and write to temp file
+    finishedFlag="true"
+    echo "$finishedFlag" >/dev/shm/fflag
 }
 
 processTest ()
 {
     # Test function
+
+    # Flag that is true once processing is finished
+    finishedFlag="false"
+    # Pipe value to temp file to allow access outside subprocess
+    echo "$finishedFlag" >/dev/shm/fflag
 
     # Write some general info to log file
     echo "# Tape extraction log" | tee -a "$logFile"
@@ -294,6 +308,30 @@ processTest ()
         let counter=$counter+1
         if [ $counter == 10 ] ; then
             stop="true"
+        fi
+    done
+
+    # Update finishedFlag and write to temp file
+    finishedFlag="true"
+    echo "$finishedFlag" >/dev/shm/fflag
+}
+
+killIfFinished ()
+{
+    # This function monitors the value of finishedFlag
+    # (through temp file) and kills yad once its value 
+    # becomes "true"
+
+    killedFlag="false"
+
+    while [ "$killedFlag" == "false" ]
+    do
+        sleep 2
+        # Read value of finishedFlag from temp file
+        finishedFlag=$(</dev/shm/fflag)
+        if [ "$finishedFlag" = "true" ] ; then
+            kill "$yad_pid"
+            killedFlag="true"
         fi
     done
 }
@@ -361,10 +399,8 @@ if [ -f "$logFile" ] ; then
 fi
 
 # Call main processing function. In GUI mode all logging output
-# is redirected to a yad --progress window. Note that height of
-# logging widget is limited due to bug in yad 0.38.2 (GTK+ 3.22.30),
-# see https://bugzilla.redhat.com/show_bug.cgi?id=1479070
-
+# is redirected to a yad --progress window. 
+#
 #if [ "$GUIMode" = "true" ] ; then
 #    processTest | yad --progress \
 #    --width=400 --height=300 \
@@ -378,16 +414,24 @@ fi
 #    --auto-kill \
 #    --no-buttons
 
+# NOTE: height of logging widget is limited due to bug in yad 0.38.2 
+# (GTK+ 3.22.30), see https://bugzilla.redhat.com/show_bug.cgi?id=1479070
+# Because of this we use a --text-info window instead, but this needs some
+# additional trickery to auto-close on completion
+
 if [ "$GUIMode" = "true" ] ; then
+    # Run main processing function as a subprocess
     processTest | yad --text-info \
     --width=400 --height=300 \
     --title="Tape extraction" \
     --tail \
-    & export Yad_PID=$!
+    --no-buttons &
+
+    # PID of yad subprocess
+    yad_pid=$(echo $!)
     
-    echo $Yad_PID
-    # This kills process too soon?
-    kill -USR1 $Yad_PID
+    # Kill yad when main processing function has finished
+    killIfFinished
 
     # Display notification when script has finished
     yad --text "Finished! \n\nLog written to file:\n\n""$logFile" \
