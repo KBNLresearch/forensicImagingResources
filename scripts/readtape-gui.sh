@@ -343,15 +343,18 @@ waitUntilFinished ()
 GUIMode="false"
 
 # Initialize user-defined variables
+
 # Non-rewind tape device
 tapeDevice="/dev/nst0"
 # Initial block size
 blockSize="512"
+# Sessions string
 sessions=""
 # Output prefix
 prefix="session"
 # Output extension
 extension="dd"
+# Fill flag
 fill="false"
 
 # Set GUIMode switch to " true" if no command line args were given
@@ -391,11 +394,11 @@ if [ $blocksizeValid -eq 0 ] ; then
             validateBlocksize
         done
     else
+        # In CLI mode print error message and exit
         echo "ERROR: invalid blockSize, must be a multiple of 512!" >&2
         exit 1
     fi
 fi
-
 
 # Log file
 logFile="$dirOut""/readtape.log"
@@ -404,27 +407,6 @@ logFile="$dirOut""/readtape.log"
 if [ -f "$logFile" ] ; then
     rm "$logFile"
 fi
-
-# Call main processing function. In GUI mode all logging output
-# is redirected to a yad --progress window. 
-#
-#if [ "$GUIMode" = "true" ] ; then
-#    processTest | yad --progress \
-#    --width=400 --height=300 \
-#    --title="Tape extraction" \
-#    --pulsate \
-#    --enable-log \
-#    --log-expanded \
-#    --log-height=500 \
-#    --scroll \
-#    --auto-close \
-#    --auto-kill \
-#    --no-buttons
-
-# NOTE: height of logging widget is limited due to bug in yad 0.38.2 
-# (GTK+ 3.22.30), see https://bugzilla.redhat.com/show_bug.cgi?id=1479070
-# Because of this we use a --text-info window instead, but this needs some
-# additional trickery to auto-close on completion
 
 if [ "$GUIMode" = "true" ] ; then
     # Run main processing function as a subprocess
