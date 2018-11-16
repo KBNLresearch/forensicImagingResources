@@ -39,7 +39,7 @@ getUserInputGUI ()
 {   # Get user input through GUI dialog
     userInput=$(yad --width=400 --title="Read tape" \
     --form \
-    --field="Output Directory":DIR "$DIR" \
+    --field="Output Directory":DIR "$HOME" \
     --field="Tape Device" "$tapeDevice" \
     --field="Initial Block Size":NUM "$blockSize"[!"$blockSize"..10485760[!512![!0]]] \
     --field="Sessions" "$sessions" \
@@ -376,6 +376,7 @@ if [ "$blocksizeValid" -eq 0 ] ; then
     if [ "$GUIMode" = "true" ] ; then
         while [ "$blocksizeValid" -eq 0 ]
         do
+            # Keep showing the data entry form until blockSize is valid
             yad --title "ERROR" \
             --text="invalid blockSize, must be a multiple of 512!"
             # Reset blockSize to default
