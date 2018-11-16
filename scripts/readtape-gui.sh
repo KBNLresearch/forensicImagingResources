@@ -67,7 +67,8 @@ getUserInputGUI ()
 
 getUserInputCLI ()
 {   # Get user input through command-line interface
-    OPTIND="1"
+    local OPTIND
+    #OPTIND="1"
     echo "--- CLI function ---"
     # Optional arguments
     while getopts ":h:fd:b:s:p:e:" opt; do
@@ -360,7 +361,7 @@ extension="dd"
 fill="false"
 
 # Set GUIMode switch to " true" if no command line args were given
-if [ "$#" -ne 1 ] ; then
+if [ "$#" == 0 ] ; then
     GUIMode="true"
 fi
 
@@ -373,7 +374,7 @@ fi
 
 if [ "$GUIMode" = "false" ] ; then
     # Get user input through CLI
-    getUserInputCLI
+    getUserInputCLI "$@"
 
     # Check if dirOut exists
     if ! [ -d "$dirOut" ] ; then
