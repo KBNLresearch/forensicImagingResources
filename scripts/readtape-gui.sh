@@ -365,14 +365,10 @@ if [ "$#" == 0 ] ; then
     GUIMode="true"
 fi
 
-echo "GUIMode = ""$GUIMode"
-
 if [ "$GUIMode" = "true" ] ; then
     # Get user input through GUI
     getUserInputGUI
-fi
-
-if [ "$GUIMode" = "false" ] ; then
+else
     # Get user input through CLI
     getUserInputCLI "$@"
 
@@ -446,9 +442,7 @@ if [ "$GUIMode" = "true" ] ; then
     # Kill text-info window
     kill "$yad_pid"
 
-fi
-
-if [ "$GUIMode" = "false" ] ; then
+else
     # CLI mode
     processTest
     echo "Finished! Log written to file: ""$logFile"
