@@ -138,6 +138,16 @@ findBlocksize ()
 }
 
 
+validateBlocksize ()
+{   # Check if block size is valid (i.e. a multiple of 512) by comparing integer
+    # division of blockSize by 512 against floating-point division
+    blocksInt=$(($blockSize / 512))
+    blocksFloat=$(echo "$blockSize/512" | bc -l )
+    # This yields 1 if block size is valid, and 0 otherwise 
+    blocksizeValid=$(echo "$blocksInt == $blocksFloat" |bc -l)
+}
+
+
 processSession ()
 {   # Process one session
 
@@ -357,18 +367,28 @@ else
         exit 1
     fi
 
-    # Check if block size is valid (i.e. a multiple of 512) by comparing integer
-    # division of blockSize by 512 against floating-point division
-    blocksInt=$(($blockSize / 512))
-    blocksFloat=$(echo "$blockSize/512" | bc -l )
-    # This yields 1 if block size is valid, and 0 otherwise 
-    blocksizeValid=$(echo "$blocksInt == $blocksFloat" |bc -l)
+fi
 
-    if ! [ "$blocksizeValid" -eq 1 ] ; then
+# Check if block size is valid (i.e. a multiple of 512)
+validateBlocksize
+
+if [ "$blocksizeValid" -eq 0 ] ; then
+    if [ "$GUIMode" = "true" ] ; then
+        while [ "$blocksizeValid" -eq 0 ]
+        do
+            yad --title "ERROR" \
+            --text="invalid blockSize, must be a multiple of 512!"
+            # Reset blockSize to default
+            blockSize="512"
+            getUserInputGUI
+            validateBlocksize
+        done
+    else
         echo "ERROR: invalid blockSize, must be a multiple of 512!" >&2
         exit 1
     fi
 fi
+
 
 # Log file
 logFile="$dirOut""/readtape.log"
