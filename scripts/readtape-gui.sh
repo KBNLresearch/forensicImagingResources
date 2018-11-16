@@ -46,7 +46,7 @@ getUserInputGUI ()
     --field="Prefix" "$prefix" \
     --field="Extension" "$extension" \
     --field="Fill failed blocks":CHK $fill \
-    )
+    2> /dev/null)
 
     # Exit if user pressed Cancel button
     status="$?"
@@ -384,7 +384,7 @@ if [ $blocksizeValid -eq 0 ] ; then
             # Keep showing the data entry form until blockSize is valid
             yad --title "ERROR" \
             --text="Invalid blockSize, must be a multiple of 512!" \
-            --button=OK:0 
+            --button=OK:0  2> /dev/null
             # Reset blockSize to default
             blockSize="512"
             getUserInputGUI
@@ -432,7 +432,7 @@ if [ "$GUIMode" = "true" ] ; then
     --width=400 --height=300 \
     --title="Tape extraction" \
     --tail \
-    --no-buttons &
+    --no-buttons 2> /dev/null &  
 
     # PID of yad subprocess
     yad_pid=$(echo $!)
@@ -443,7 +443,7 @@ if [ "$GUIMode" = "true" ] ; then
     # Display notification
     yad --text "Finished! \n\nLog written to file:\n\n""$logFile" \
     --on-top \
-    --button=gtk-ok:1
+    --button=gtk-ok:1  2> /dev/null
 
     # Kill text-info window
     kill "$yad_pid"
