@@ -34,6 +34,7 @@ optional arguments:
 EOF
 }
 
+
 getUserInputGUI ()
 {   # Get user input through GUI dialog
     userInput=$(yad --width=400 --title="Read tape" \
@@ -62,6 +63,7 @@ getUserInputGUI ()
     # Fill flag to lowercase (yad/getopts compatibility)
     fill=$(echo "$fill" | tr '[:upper:]' '[:lower:]')
 }
+
 
 getUserInputCLI ()
 {   # Get user input through command-line interface
@@ -107,6 +109,7 @@ getUserInputCLI ()
     fi
 }
 
+
 findBlocksize ()
 {   # Find block size for this session
 
@@ -132,6 +135,7 @@ findBlocksize ()
         fi
     done
 }
+
 
 processSession ()
 {   # Process one session
@@ -176,6 +180,7 @@ processSession ()
         endOfTape="true"
     fi
 }
+
 
 processTape ()
 {
@@ -277,6 +282,7 @@ processTape ()
     echo "$finishedFlag" >/dev/shm/fflag
 }
 
+
 processTest ()
 {
     # Test function
@@ -316,25 +322,23 @@ processTest ()
     echo "$finishedFlag" >/dev/shm/fflag
 }
 
-killIfFinished ()
+
+waitUntilFinished ()
 {
     # This function monitors the value of finishedFlag
-    # (through temp file) and kills yad once its value 
+    # (through temp file) and  waits until its value 
     # becomes "true"
 
-    killedFlag="false"
+    finishedFlag=$(</dev/shm/fflag)
 
-    while [ "$killedFlag" == "false" ]
+    while [ "$finishedFlag" == "false" ]
     do
         sleep 2
         # Read value of finishedFlag from temp file
         finishedFlag=$(</dev/shm/fflag)
-        if [ "$finishedFlag" = "true" ] ; then
-            kill "$yad_pid"
-            killedFlag="true"
-        fi
     done
 }
+
 
 # **************
 # Main code
@@ -430,12 +434,17 @@ if [ "$GUIMode" = "true" ] ; then
     # PID of yad subprocess
     yad_pid=$(echo $!)
     
-    # Kill yad when main processing function has finished
-    killIfFinished
+    # Wait until main processing function has finished
+    waitUntilFinished
 
-    # Display notification when script has finished
+    # Display notification
     yad --text "Finished! \n\nLog written to file:\n\n""$logFile" \
+    --on-top \
     --button=gtk-ok:1
+
+    # Kill text-info window
+    kill "$yad_pid"
+
 fi
 
 if [ "$GUIMode" = "false" ] ; then
