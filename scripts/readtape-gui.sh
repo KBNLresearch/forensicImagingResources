@@ -205,27 +205,6 @@ processTape ()
     echo "# prefix = ""$prefix" | tee -a "$logFile"
     echo "# extension = ""$extension" | tee -a "$logFile"
 
-    # Check if block size is valid (i.e. a multiple of 512) by comparing integer
-    # division of blockSize by 512 against floating-point division
-    blocksInt=$(($blockSize / 512))
-    blocksFloat=$(echo "$blockSize/512" | bc -l )
-    # This yields 1 if block size is valid, and 0 otherwise 
-    blocksizeValid=$(echo "$blocksInt == $blocksFloat" |bc -l)
-
-    if ! [ "$blocksizeValid" -eq 1 ] ; then
-        echo "# ERROR: invalid blockSize, must be a multiple of 512!" | tee -a "$logFile"
-    f
-        exit 1
-    fi
-
-    if [ "$fill" = "TRUE" ] ; then
-        # dd's conv=sync flag results in padding bytes for each block if block 
-        # size is too large, so override user-defined value with default
-        # if -f flag was used
-        blockSize=512
-        echo "# Reset blockSize to 512 because -f flag is used " | tee -a "$logFile"
-    fi
-
     # Flag that indicates end of tape was reached
     endOfTape="false"
     # Session index
@@ -380,7 +359,7 @@ else
 
     # Check if block size is valid (i.e. a multiple of 512) by comparing integer
     # division of blockSize by 512 against floating-point division
-    blocksInt=$(("$blockSize" / 512))
+    blocksInt=$(($blockSize / 512))
     blocksFloat=$(echo "$blockSize/512" | bc -l )
     # This yields 1 if block size is valid, and 0 otherwise 
     blocksizeValid=$(echo "$blocksInt == $blocksFloat" |bc -l)
