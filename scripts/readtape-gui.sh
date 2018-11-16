@@ -48,28 +48,33 @@ getUserInputGUI ()
     --field="Fill failed blocks":CHK $fill \
     )
 
-    # Parse yad output into variables
-    dirOut="$(cut -d'|' -f1 <<<$userInput)"
-    tapeDevice="$(cut -d'|' -f2 <<<$userInput)"
-    blockSize="$(cut -d'|' -f3 <<<$userInput)"
-    # Needed because yad adds ",0000" to numerical value, apparently this 
-    # fix is not needed with mthe most recent version of yad
-    blockSize="$(cut -d',' -f1 <<<"$blockSize")"
-    sessions="$(cut -d'|' -f4 <<<$userInput)"
-    prefix="$(cut -d'|' -f5 <<<$userInput)"
-    extension="$(cut -d'|' -f6 <<<$userInput)"
-    fill="$(cut -d'|' -f7 <<<$userInput)"
+    # Exit if user pressed Cancel button
+    status="$?"
 
-    # Fill flag to lowercase (yad/getopts compatibility)
-    fill=$(echo "$fill" | tr '[:upper:]' '[:lower:]')
+    if [ $status -eq 1 ] ; then
+        exit 1
+    else
+        # Parse yad output into variables
+        dirOut="$(cut -d'|' -f1 <<<$userInput)"
+        tapeDevice="$(cut -d'|' -f2 <<<$userInput)"
+        blockSize="$(cut -d'|' -f3 <<<$userInput)"
+        # Needed because yad adds ",0000" to numerical value, apparently this 
+        # fix is not needed with mthe most recent version of yad
+        blockSize="$(cut -d',' -f1 <<<"$blockSize")"
+        sessions="$(cut -d'|' -f4 <<<$userInput)"
+        prefix="$(cut -d'|' -f5 <<<$userInput)"
+        extension="$(cut -d'|' -f6 <<<$userInput)"
+        fill="$(cut -d'|' -f7 <<<$userInput)"
+
+        # Fill flag to lowercase (yad/getopts compatibility)
+        fill=$(echo "$fill" | tr '[:upper:]' '[:lower:]')
+    fi
 }
 
 
 getUserInputCLI ()
 {   # Get user input through command-line interface
     local OPTIND
-    #OPTIND="1"
-    echo "--- CLI function ---"
     # Optional arguments
     while getopts ":h:fd:b:s:p:e:" opt; do
         case "$opt" in
@@ -372,13 +377,13 @@ fi
 # Check if block size is valid (i.e. a multiple of 512)
 validateBlocksize
 
-if [ "$blocksizeValid" -eq 0 ] ; then
+if [ $blocksizeValid -eq 0 ] ; then
     if [ "$GUIMode" = "true" ] ; then
-        while [ "$blocksizeValid" -eq 0 ]
+        while [ $blocksizeValid -eq 0 ]
         do
             # Keep showing the data entry form until blockSize is valid
             yad --title "ERROR" \
-            --text="invalid blockSize, must be a multiple of 512!"
+            --text="Invalid blockSize, must be a multiple of 512!"
             # Reset blockSize to default
             blockSize="512"
             getUserInputGUI
