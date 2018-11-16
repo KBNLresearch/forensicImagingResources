@@ -383,7 +383,8 @@ if [ $blocksizeValid -eq 0 ] ; then
         do
             # Keep showing the data entry form until blockSize is valid
             yad --title "ERROR" \
-            --text="Invalid blockSize, must be a multiple of 512!"
+            --text="Invalid blockSize, must be a multiple of 512!" \
+            --button=OK:0 
             # Reset blockSize to default
             blockSize="512"
             getUserInputGUI
