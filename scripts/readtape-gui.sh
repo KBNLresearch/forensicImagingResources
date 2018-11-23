@@ -34,40 +34,47 @@ optional arguments:
 EOF
 }
 
+
 getUserInputGUI ()
 {   # Get user input through GUI dialog
     userInput=$(yad --width=400 --title="Read tape" \
     --form \
-    --field="Output Directory":DIR "$DIR" \
+    --field="Output Directory":DIR "$HOME" \
     --field="Tape Device" "$tapeDevice" \
     --field="Initial Block Size":NUM "$blockSize"[!"$blockSize"..10485760[!512![!0]]] \
     --field="Sessions" "$sessions" \
     --field="Prefix" "$prefix" \
     --field="Extension" "$extension" \
     --field="Fill failed blocks":CHK $fill \
-    )
+    2> /dev/null)
 
-    # Parse yad output into variables
-    dirOut="$(cut -d'|' -f1 <<<$userInput)"
-    tapeDevice="$(cut -d'|' -f2 <<<$userInput)"
-    blockSize="$(cut -d'|' -f3 <<<$userInput)"
-    # Needed because yad adds ",0000" to numerical value, apparently this 
-    # fix is not needed with mthe most recent version of yad
-    blockSize="$(cut -d',' -f1 <<<"$blockSize")"
-    sessions="$(cut -d'|' -f4 <<<$userInput)"
-    prefix="$(cut -d'|' -f5 <<<$userInput)"
-    extension="$(cut -d'|' -f6 <<<$userInput)"
-    fill="$(cut -d'|' -f7 <<<$userInput)"
+    # Exit if user pressed Cancel button
+    status="$?"
 
-    # Fill flag to lowercase (yad/getopts compatibility)
-    fill=$(echo "$fill" | tr '[:upper:]' '[:lower:]')
+    if [ $status -eq 1 ] ; then
+        exit 1
+    else
+        # Parse yad output into variables
+        dirOut="$(cut -d'|' -f1 <<<$userInput)"
+        tapeDevice="$(cut -d'|' -f2 <<<$userInput)"
+        blockSize="$(cut -d'|' -f3 <<<$userInput)"
+        # Needed because yad adds ",0000" to numerical value, apparently this 
+        # fix is not needed with mthe most recent version of yad
+        blockSize="$(cut -d',' -f1 <<<"$blockSize")"
+        sessions="$(cut -d'|' -f4 <<<$userInput)"
+        prefix="$(cut -d'|' -f5 <<<$userInput)"
+        extension="$(cut -d'|' -f6 <<<$userInput)"
+        fill="$(cut -d'|' -f7 <<<$userInput)"
+
+        # Fill flag to lowercase (yad/getopts compatibility)
+        fill=$(echo "$fill" | tr '[:upper:]' '[:lower:]')
+    fi
 }
 
-getUserInputCLI ()
-{
-    # Get user input through command-line interface
-    OPTIND="1"
 
+getUserInputCLI ()
+{   # Get user input through command-line interface
+    local OPTIND
     # Optional arguments
     while getopts ":h:fd:b:s:p:e:" opt; do
         case "$opt" in
@@ -98,7 +105,16 @@ getUserInputCLI ()
     # Positional arguments
     # dirOut, normalise to absolute path
     dirOut="$(readlink -f $1)"
+
+    echo $dirOut
+    
+    # Check command line args
+    if [ "$#" -ne 1 ] ; then
+        show_help
+        exit 1
+    fi
 }
+
 
 findBlocksize ()
 {   # Find block size for this session
@@ -125,6 +141,17 @@ findBlocksize ()
         fi
     done
 }
+
+
+validateBlocksize ()
+{   # Check if block size is valid (i.e. a multiple of 512) by comparing integer
+    # division of blockSize by 512 against floating-point division
+    blocksInt=$(($blockSize / 512))
+    blocksFloat=$(echo "$blockSize/512" | bc -l )
+    # This yields 1 if block size is valid, and 0 otherwise 
+    blocksizeValid=$(echo "$blocksInt == $blocksFloat" |bc -l)
+}
+
 
 processSession ()
 {   # Process one session
@@ -170,9 +197,15 @@ processSession ()
     fi
 }
 
+
 processTape ()
 {
     # Process a tape
+
+    # Flag that is true once processing is finished
+    finishedFlag="false"
+    # Pipe value to temp file to allow access outside subprocess
+    echo "$finishedFlag" >/dev/shm/fflag
 
     # Write some general info to log file
     echo "# Tape extraction log" | tee -a "$logFile"
@@ -186,27 +219,6 @@ processTape ()
     echo "# sessions = ""$sessions" | tee -a "$logFile"
     echo "# prefix = ""$prefix" | tee -a "$logFile"
     echo "# extension = ""$extension" | tee -a "$logFile"
-
-    # Check if block size is valid (i.e. a multiple of 512) by comparing integer
-    # division of blockSize by 512 against floating-point division
-    blocksInt=$(($blockSize / 512))
-    blocksFloat=$(echo "$blockSize/512" | bc -l )
-    # This yields 1 if block size is valid, and 0 otherwise 
-    blocksizeValid=$(echo "$blocksInt == $blocksFloat" |bc -l)
-
-    if ! [ "$blocksizeValid" -eq 1 ] ; then
-        echo "# ERROR: invalid blockSize, must be a multiple of 512!" | tee -a "$logFile"
-    f
-        exit 1
-    fi
-
-    if [ "$fill" = "TRUE" ] ; then
-        # dd's conv=sync flag results in padding bytes for each block if block 
-        # size is too large, so override user-defined value with default
-        # if -f flag was used
-        blockSize=512
-        echo "# Reset blockSize to 512 because -f flag is used " | tee -a "$logFile"
-    fi
 
     # Flag that indicates end of tape was reached
     endOfTape="false"
@@ -259,11 +271,21 @@ processTape ()
     # Write end date/time to log
     dateEnd="$(date)"
     echo "# End date/time ""$dateEnd" | tee -a "$logFile"
+
+    # Update finishedFlag and write to temp file
+    finishedFlag="true"
+    echo "$finishedFlag" >/dev/shm/fflag
 }
+
 
 processTest ()
 {
     # Test function
+
+    # Flag that is true once processing is finished
+    finishedFlag="false"
+    # Pipe value to temp file to allow access outside subprocess
+    echo "$finishedFlag" >/dev/shm/fflag
 
     # Write some general info to log file
     echo "# Tape extraction log" | tee -a "$logFile"
@@ -289,7 +311,29 @@ processTest ()
             stop="true"
         fi
     done
+
+    # Update finishedFlag and write to temp file
+    finishedFlag="true"
+    echo "$finishedFlag" >/dev/shm/fflag
 }
+
+
+waitUntilFinished ()
+{
+    # This function monitors the value of finishedFlag
+    # (through temp file) and  waits until its value 
+    # becomes "true"
+
+    finishedFlag=$(</dev/shm/fflag)
+
+    while [ "$finishedFlag" == "false" ]
+    do
+        sleep 2
+        # Read value of finishedFlag from temp file
+        finishedFlag=$(</dev/shm/fflag)
+    done
+}
+
 
 # **************
 # Main code
@@ -299,32 +343,31 @@ processTest ()
 GUIMode="false"
 
 # Initialize user-defined variables
+
 # Non-rewind tape device
 tapeDevice="/dev/nst0"
 # Initial block size
 blockSize="512"
+# Sessions string
 sessions=""
 # Output prefix
 prefix="session"
 # Output extension
 extension="dd"
+# Fill flag
 fill="false"
 
 # Set GUIMode switch to " true" if no command line args were given
-if [ "$#" -ne 1 ] ; then
+if [ "$#" == 0 ] ; then
     GUIMode="true"
 fi
-
-echo "GUIMode = ""$GUIMode"
 
 if [ "$GUIMode" = "true" ] ; then
     # Get user input through GUI
     getUserInputGUI
-fi
-
-if [ "$GUIMode" = "false" ] ; then
+else
     # Get user input through CLI
-    getUserInputCLI
+    getUserInputCLI "$@"
 
     # Check if dirOut exists
     if ! [ -d "$dirOut" ] ; then
@@ -332,14 +375,26 @@ if [ "$GUIMode" = "false" ] ; then
         exit 1
     fi
 
-    # Check if block size is valid (i.e. a multiple of 512) by comparing integer
-    # division of blockSize by 512 against floating-point division
-    blocksInt=$(("$blockSize" / 512))
-    blocksFloat=$(echo "$blockSize/512" | bc -l )
-    # This yields 1 if block size is valid, and 0 otherwise 
-    blocksizeValid=$(echo "$blocksInt == $blocksFloat" |bc -l)
+fi
 
-    if ! [ "$blocksizeValid" -eq 1 ] ; then
+# Check if block size is valid (i.e. a multiple of 512)
+validateBlocksize
+
+if [ $blocksizeValid -eq 0 ] ; then
+    if [ "$GUIMode" = "true" ] ; then
+        while [ $blocksizeValid -eq 0 ]
+        do
+            # Keep showing the data entry form until blockSize is valid
+            yad --title "ERROR" \
+            --text="Invalid blockSize, must be a multiple of 512!" \
+            --button=OK:0  2> /dev/null
+            # Reset blockSize to default
+            blockSize="512"
+            getUserInputGUI
+            validateBlocksize
+        done
+    else
+        # In CLI mode print error message and exit
         echo "ERROR: invalid blockSize, must be a multiple of 512!" >&2
         exit 1
     fi
@@ -353,30 +408,29 @@ if [ -f "$logFile" ] ; then
     rm "$logFile"
 fi
 
-# Call main processing function. In GUI mode all logging output
-# is redirected to a yad --progress window. Note that height of
-# logging widget is limited due to bug in yad 0.38.2 (GTK+ 3.22.30),
-# see https://bugzilla.redhat.com/show_bug.cgi?id=1479070
-
 if [ "$GUIMode" = "true" ] ; then
-    processTest | yad --progress \
+    # Run main processing function as a subprocess
+    processTest | yad --text-info \
     --width=400 --height=300 \
     --title="Tape extraction" \
-    --pulsate \
-    --enable-log \
-    --log-expanded \
-    --log-height=500 \
-    --scroll \
-    --auto-close \
-    --auto-kill \
-    --no-buttons
+    --tail \
+    --no-buttons 2> /dev/null &  
 
-    # Display notification when script has finished
+    # PID of yad subprocess
+    yad_pid=$(echo $!)
+    
+    # Wait until main processing function has finished
+    waitUntilFinished
+
+    # Display notification
     yad --text "Finished! \n\nLog written to file:\n\n""$logFile" \
-    --button=gtk-ok:1
-fi
+    --on-top \
+    --button=gtk-ok:1  2> /dev/null
 
-if [ "$GUIMode" = "false" ] ; then
+    # Kill text-info window
+    kill "$yad_pid"
+
+else
     # CLI mode
     processTest
     echo "Finished! Log written to file: ""$logFile"
