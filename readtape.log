@@ -1,0 +1,19 @@
+# Tape extraction log
+# Start date/time Wed Nov 14 14:29:34 CET 2018
+# Command-line arguments
+dirOut = /home/johan/forensicImagingResources
+fill = true
+tapeDevice = /dev/nst0
+blockSize = 512
+sessions = 
+prefix = session
+extension = dd
+# Loop number 1
+# Loop number 2
+# Loop number 3
+# Loop number 4
+# Loop number 5
+# Loop number 6
+# Loop number 7
+# Loop number 8
+# Loop number 9
