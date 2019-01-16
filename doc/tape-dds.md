@@ -37,7 +37,7 @@ Always make sure that both the tape reader and the computer are switched off bef
 
 ## Software
 
-[tapeimgr](https://github.com/KBNLresearch/tapeimgr)
+[tapeimgr](https://github.com/KBNLresearch/tapeimgr), running in [BitCurator](https://bitcurator.net/).
 
 ## Procedure for reading a tape
 
