@@ -35,6 +35,10 @@ Note that by default the controller has a standard height (120 mm) bracket that 
 
 Always make sure that both the tape reader and the computer are switched off before connecting or disconnecting. Not doing so may cause damage to the computer, the tape reader or both.
 
+## Software
+
+[tapeimgr](https://github.com/KBNLresearch/tapeimgr)
+
 ## Procedure for reading a tape
 
 1. Check the write-protect tab on the bottom of the tape, and slide it to
@@ -48,10 +52,22 @@ the open position:
 
 3. Create an empty directory for storing the extracted tape contents.
 
-4. Open this directory in a terminal window, and run the [tape extraction script](../scripts/readtape.sh). The script must be run as superuser (sudo). The following command runs the script with default options:
+4. Start *tapeimgr* from the OS's main menu (in Ubuntu 18.04 the *tapeimgr* item is located under *System Tools*), or by clicking the *tapeimgr* shortcut on the desktop.
 
-        sudo ~/scripts/readtape.sh .
+5. Use the *Select Output Directory* button to navigate to the empty directory created under step 3.
 
-    Now wait for the script to finish (depending on the amount of data on the tape this may take several hours).
+6. Press the *Start* button to start the extraction, and then wait for *tapeimgr* to finish (depending on the amount of data on the tape this may take several hours). You can monitor the progress of the extraction procedure in the progress window:
 
-5. The tape is automatically ejected when the script has finished. All done!
+    ![](./img/tapeimgr-2.png)
+
+    Note that the screen output is also written to a log file in the output directory. A prompt appears when the extraction has finished:
+
+    ![](./img/tapeimgr-success.png)
+
+    If the extraction finished without any errors, the output directory now contains the following files:
+
+    ![](./img/tapeimgr-files.png)
+
+    Here, **file000001.dd** through **file000003.dd** are the extracted files; **checksums.sha512** contains the SHA512 checksums of the extracted files, and **tapeimgr.log** is the log file.
+
+7. The tape is automatically ejected when *tapeimgr* has finished. All done!

@@ -34,6 +34,10 @@ Note that by default the controller has a standard height (120 mm) bracket that 
 
 Always make sure that both the tape reader and the computer are switched off before connecting or disconnecting. Not doing so may cause damage to the computer, the tape reader or both.
 
+## Software
+
+[tapeimgr](https://github.com/KBNLresearch/tapeimgr)
+
 ## Procedure for reading a tape
 
 1. Check the write-protect tab on the bottom of the cartridge, and slide it to the leftmost position. The orange indicator must be visible:
@@ -60,13 +64,25 @@ Always make sure that both the tape reader and the computer are switched off bef
 
 6. Create an empty directory for storing the extracted tape contents.
 
-7. Open this directory in a terminal window, and run the [tape extraction script](../scripts/readtape.sh). The script must be run as superuser (sudo). The following command runs the script with default options:
+7. Start *tapeimgr* from the OS's main menu (in Ubuntu 18.04 the *tapeimgr* item is located under *System Tools*), or by clicking the *tapeimgr* shortcut on the desktop.
 
-        sudo ~/scripts/readtape.sh .
+8. Use the *Select Output Directory* button to navigate to the empty directory created under step 6.
 
-    Now wait for the script to finish (depending on the amount of data on the tape this may take several hours).
+9. Press the *Start* button to start the extraction, and then wait for *tapeimgr* to finish (depending on the amount of data on the tape this may take several hours). You can monitor the progress of the extraction procedure in the progress window:
 
-10. When the script is finished, wait until the "tape in use" indicator light stops blinking. Now lift the cartridge insert/release handle:
+    ![](./img/tapeimgr-2.png)
+
+    Note that the screen output is also written to a log file in the output directory. A prompt appears when the extraction has finished:
+
+    ![](./img/tapeimgr-success.png)
+
+    If the extraction finished without any errors, the output directory now contains the following files:
+
+    ![](./img/tapeimgr-files.png)
+
+    Here, **file000001.dd** through **file000003.dd** are the extracted files; **checksums.sha512** contains the SHA512 checksums of the extracted files, and **tapeimgr.log** is the log file.
+
+10. When *tapeimgr* has finished, wait until the "tape in use" indicator light stops blinking. Now lift the cartridge insert/release handle:
 
     ![](./img/dlt-unloaded.jpg)
 
