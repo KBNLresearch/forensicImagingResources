@@ -113,7 +113,7 @@ Result: produces valid TAR archive of 29.1 MB. From the [tar docs](https://www.g
 
 Solution: estimate block size by successively adding 512 bytes to start value.
 
-TODO: 
+TODO:
 
 - What if the actual block size is SMALLER than 4096 bytes (current start value)? Would assume that this would result in addition of padding bytes.
 
@@ -122,7 +122,7 @@ TODO:
 Try with ddrescue:
 
     sudo ddrescue -b 10240 -v /dev/nst0 session1.dd session1.log
-    
+
 ## Block / record size tests
 
 Write with 1024 byte record size:
@@ -154,7 +154,7 @@ Write with 8192 byte record size:
         1+0 records in
         1+0 records out
         512 bytes copied, 0.308845 s, 1.7 kB/s
-    
+
     Which means that the block size is 512 bytes.
 
     An alternative method is described [here](https://www.linuxquestions.org/questions/linux-general-1/reading-%27unknown%27-data-from-a-tape-4175500596/#post5147408):
@@ -172,7 +172,7 @@ Write with 8192 byte record size:
     >
     > Adjust the block size as you wish, of course, as long as it is large enough.
 
- 3. Read blocks (note that we're using the non-rewinding tape device ` /dev/nst0` here):
+3. Read blocks (note that we're using the non-rewinding tape device ` /dev/nst0` here):
 
         for f in `seq 1 10`; do sudo dd if=/dev/nst0 of=tapeblock`printf "%06g" $f`.bin ibs=512; done
 
@@ -203,8 +203,6 @@ Write with 8192 byte record size:
         sudo mt -f /dev/st0 eject
 
 ## Processing the extracted files
-
-
 
 1. Join extracted files together using something like this:
 
