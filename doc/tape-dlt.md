@@ -66,7 +66,9 @@ Always make sure that both the tape reader and the computer are switched off bef
 
 7. Start *tapeimgr* from the OS's main menu (in Ubuntu 18.04 the *tapeimgr* item is located under *System Tools*), or by clicking the *tapeimgr* shortcut on the desktop.
 
-8. Use the *Select Output Directory* button to navigate to the empty directory created under step 6.
+    ![](./img/tapeimgr-1.png)
+
+8. Use the *Select Output Directory* button to navigate to the empty directory created under step 6. Use the *Description* field to enter a description of the tape (e.g. the title that is written on its inlay card).
 
 9. Press the *Start* button to start the extraction, and then wait for *tapeimgr* to finish (depending on the amount of data on the tape this may take several hours). You can monitor the progress of the extraction procedure in the progress window:
 
@@ -80,7 +82,7 @@ Always make sure that both the tape reader and the computer are switched off bef
 
     ![](./img/tapeimgr-files.png)
 
-    Here, **file000001.dd** through **file000003.dd** are the extracted files; **checksums.sha512** contains the SHA512 checksums of the extracted files, and **tapeimgr.log** is the log file.
+    Here, **file000001.dd** through **file000003.dd** are the extracted files; **checksums.sha512** contains the SHA512 checksums of the extracted files, **metadata.json** contains some basic metadata and **tapeimgr.log** is the log file.
 
 10. When *tapeimgr* has finished, wait until the "tape in use" indicator light stops blinking. Now lift the cartridge insert/release handle:
 
