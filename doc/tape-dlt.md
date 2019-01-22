@@ -68,7 +68,7 @@ Always make sure that both the tape reader and the computer are switched off bef
 
     ![](./img/tapeimgr-1.png)
 
-8. Use the *Select Output Directory* button to navigate to the empty directory created under step 6. Use the *Description* field to enter a description of the tape (e.g. the title that is written on its inlay card).
+8. Use the *Select Output Directory* button to navigate to the empty directory created under step 6. Click on the *UUID* button to generate a unique identifier. Use the *Description* field to enter a description of the tape (e.g. the title that is written on its label or inlay card). Optionally, use the *Notes* field to record anything else worth mentioning about the tape (e.g. if the *Description* is ambiguous because the writing on the tape's label is illegible, make a note of it here).
 
 9. Press the *Start* button to start the extraction, and then wait for *tapeimgr* to finish (depending on the amount of data on the tape this may take several hours). You can monitor the progress of the extraction procedure in the progress window:
 
