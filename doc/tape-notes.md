@@ -208,6 +208,13 @@ Write with 8192 byte record size:
 
         cat tapeblock000001.bin tapeblock000002.bin > tape.bin
 
+## Cleaning cartridges
+
+- [HP Cleaning Cartridge DDS for use with SureStore and all other DDS drives](https://www.bol.com/nl/p/hp-cleaning-cartridge-dds-for-use-with-surestore-and-all-other-dds-drives/9200000008139219/)
+
+- [Fujifilm DDS Cleaning Tape](https://www.fujifilm.eu/nl/producten/opnamemedia/data-storage-media/p/dds-cleaning-tape)
+
+
 ## Resources
 
 - [How to use the DAT-tape with Linux](http://www.cs.inf.ethz.ch/stricker/lab/linux_tape.html)
