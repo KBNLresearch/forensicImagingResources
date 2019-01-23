@@ -112,7 +112,7 @@ Result:
 
 Also a TAR archive.
 
-### Restoring a dump file to current directory
+### Restoring a dump file to empty directory
 
 1. Create empty directory and go to that directory in the command terminal. Then run `restore` in interactive mode on the dump file you want to extract[^1]:
 
