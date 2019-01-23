@@ -37,7 +37,7 @@ Result:
 
 ### Block size
 
-Block size of first tape: 64512 bytes. The *dump(8)* documentation says:
+Block size of first and second tapes: 64512 bytes. The *dump(8)* documentation says:
 
 >-b blocksize
 >    The number of kilobytes per dump record. The default blocksize is 10, unless the -d option has been used to specify a tape >density of 6250BPI or more, in which case the default blocksize is 32. Th maximal value is 1024. Note however that, since the IO >system slices all requests into chunks of MAXBSIZE (which can be as low as 64kB), you can experience problems with dump(8) and >restore(8) when using a higher value, depending on your kernel and/or libC versions.
@@ -112,6 +112,55 @@ Result:
 
 Also a TAR archive.
 
+### Restoring a dump file to current directory
+
+1. Create empty directory and go to that directory in the command terminal. Then run `restore` in interactive mode on the dump file you want to extract[^1]:
+
+    sudo restore -if ../../tapes-DDS/1/file000002.dd
+
+2. Inspect the contents of the dump file:
+
+        restore > ls
+    
+    Result:
+
+        5bin/        diag/        kvm/         mdec         share/       ucbinclude 
+        5include/    dict/        lddrv/       net          spool        ucblib 
+        5lib/        etc/         lib/         nserve       src          xpg2bin/
+        adm          export/      local        old/         stand        xpg2include/
+        bin/         games/       local-/      openwin/     sys          xpg2lib/
+        boot         hosts/       lost+found/  pub          tmp 
+        demo/        include/     man          sccs/        ucb/
+
+3. Use the `add`command to add directories that are to be extracted to the directory list. To extract everything: 
+
+        restore > add .
+
+4. Run the `extract` command:
+
+        restore > extract
+    
+    This results in the following prompt:
+
+        You have not read any volumes yet.
+        Unless you know which volume your file(s) are on you should start
+        with the last volume and work towards the first.
+        Specify next volume # (none if no more volumes):
+    
+5.  Now enter `1`. Response:
+
+        set owner/mode for '.'? [yn]
+
+6. Enter `n` [^2]
+
+7. When the extraction is finished, exit the interactive restore session:
+
+        restore > q
+
+[^1]: If you don't run `restore` as sudo, extraction results in a flood of `chown: Operation not permitted` messages (the files *are* extracted though).
+
+[^2]: Needs further investigation, implications of this setting and what it does are not 100% clear to me.
+
 ## Resources
 
 - [dump(8)](https://linux.die.net/man/8/dump)
@@ -119,3 +168,5 @@ Also a TAR archive.
 - [restore(8)](https://linux.die.net/man/8/restore)
 
 - [restore Linux Commands](https://www.hscripts.com/tutorials/linux-commands/restore.html)
+
+- [How to Restore UFS Files Interactively](https://docs.oracle.com/cd/E19253-01/817-5093/bkuprestoretasks-63510/index.html) (best description I've seen so far)
