@@ -80,6 +80,6 @@ If the orange "clean" indicator is lit, it is time to clean the drive:
 
 Steps:
 
-1. Insert a cleaning cartridge
+1. Insert a cleaning cartridge into the drive and wait for the clean to take place. The tape is ejected at the end.
 
 In order to avoid read errors, it is important to *not* continue reading tapes until the drive has been cleaned.
