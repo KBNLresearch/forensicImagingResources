@@ -73,3 +73,13 @@ the open position:
     Here, **file000001.dd** through **file000003.dd** are the extracted files; **checksums.sha512** contains the SHA512 checksums of the extracted files, **metadata.json** contains some basic metadata and **tapeimgr.log** is the log file.
 
 7. The tape is automatically ejected when *tapeimgr* has finished. All done!
+
+## Cleaning the tape drive
+
+If the orange "clean" indicator is lit, it is time to clean the drive:
+
+Steps:
+
+1. Insert a cleaning cartridge
+
+In order to avoid read errors, it is important to *not* continue reading tapes until the drive has been cleaned.
