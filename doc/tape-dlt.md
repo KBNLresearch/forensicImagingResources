@@ -84,8 +84,10 @@ Always make sure that both the tape reader and the computer are switched off bef
 
     Here, **file000001.dd** through **file000003.dd** are the extracted files; **checksums.sha512** contains the SHA512 checksums of the extracted files, **metadata.json** contains some basic metadata and **tapeimgr.log** is the log file.
 
-10. When *tapeimgr* has finished, wait until the "tape in use" indicator light stops blinking. Now lift the cartridge insert/release handle:
+10. When *tapeimgr* has finished, wait until the "tape in use" indicator light stops blinking, and the green "operate handle" light (bottom-right) comes on. Now lift the cartridge insert/release handle:
 
     ![](./img/dlt-unloaded.jpg)
 
 11. Take out the tape cartridge. All done!
+
+Make sure to lower the insert/release handle again at the end of your tape reading session (i.e. before switching off the tape reader). 
