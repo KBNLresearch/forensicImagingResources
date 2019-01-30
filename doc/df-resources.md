@@ -64,7 +64,7 @@
 - [Project "The Digital City Revives" A Case Study of Web Archaeology](https://hart.amsterdam/image/2016/11/28/20160730_redds_tjardadehaan.pdf)
 - [Server-side Preservation of Dynamic Websites](http://publications.beeldengeluid.nl/pub/633/)
 
-## Digital forensics, general
+## Data rescue and digital forensics (general)
 
 - [Getting to Know FRED: Introducing Workflows for Born-Digital Content](https://practicaltechnologyforarchives.org/issue4_prael_wickner/)
 - [Digital Forensics and Preservation (DPC Report)](http://dx.doi.org/10.7207/twr12-03)
