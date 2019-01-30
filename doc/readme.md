@@ -8,8 +8,11 @@
 - [DLT-IV tape](./tape-dlt.md)
 - [USB Flash drive](./usb-flash.md)
 
+## Resources
+
+- [Digital forensics and web archaeology resources](./df-resources.md)
+
 ## Miscellaneous
 
 - [BitCurator setup notes](./bitcurator-setup.md)
-- [Rough,unedited tape notes](./tape-notes.md)
-- [Rough, unedited notes om hardware](./hardwareChecklist.md)
+- [Various rough,unedited notes](./rough-notes/)
