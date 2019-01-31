@@ -26,6 +26,7 @@
 - [SCSI articles on Paralan (AKA the SCSI Bible)](http://www.paralan.com/aboutscsi.html)
 - [SCSI Connector Guide](https://www.cablestogo.com/learning/connector-guides/scsi)
 - [Adaptec SCSI controller specifications](https://storage.microsemi.com/en-us/support/scsi/)
+- [SCSI Termination](https://support.hpe.com/hpsc/doc/public/display?docId=tis14318)
 
 ## Tape archive formats (and how to read / extract them)
 
