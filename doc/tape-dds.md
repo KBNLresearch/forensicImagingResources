@@ -35,6 +35,10 @@ Note that by default the controller has a standard height (120 mm) bracket that 
 
 Always make sure that both the tape reader and the computer are switched off before connecting or disconnecting. Not doing so may cause damage to the computer, the tape reader or both.
 
+## Cleaning cartridges
+
+The drive needs to be cleaned periodically with a cleaning cartridge.
+
 ## Software
 
 [tapeimgr](https://github.com/KBNLresearch/tapeimgr), running in [BitCurator](https://bitcurator.net/).
