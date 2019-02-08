@@ -18,6 +18,7 @@
 - [mhVTL Virtual Tape Library](https://www.mhvtl.com/); source code [here](https://github.com/markh794/mhvtl)
 - [The Source of All Tape Knowledge](http://www.subspacefield.org/~vax/unix_tape.html)
 - [Tapeimgr](https://github.com/KBNLresearch/tapeimgr) - simple format-agnostic tape imaging / extraction software (GUI application, wraps around dd/mt)
+- [Experiences of an LTO/LTFS beginner](https://digitensions.home.blog/2019/01/15/technologic/)
 
 ## SCSI
 
