@@ -16,6 +16,7 @@
 - [What does dd conv=sync,noerror do?](https://superuser.com/questions/622541/what-does-dd-conv-sync-noerror-do) - confirms that using these flags is generally a bad idea
 - [Write protect in DLT IV Data cartridge](https://web.archive.org/web/20181031154114/https://community.hpe.com/t5/StoreEver-Tape-Storage/Write-protect-in-DLT-IV-Data-cartridge/td-p/129718https://community.hpe.com/t5/StoreEver-Tape-Storage/Write-protect-in-DLT-IV-Data-cartridge/td-p/129718)
 - [mhVTL Virtual Tape Library](https://www.mhvtl.com/); source code [here](https://github.com/markh794/mhvtl)
+- [mhVTL install script for Ubuntu](https://gist.github.com/hrchu/3eb1c0aa9994df0328037fff04cd889d)
 - [The Source of All Tape Knowledge](http://www.subspacefield.org/~vax/unix_tape.html)
 - [Tapeimgr](https://github.com/KBNLresearch/tapeimgr) - simple format-agnostic tape imaging / extraction software (GUI application, wraps around dd/mt)
 - [Experiences of an LTO/LTFS beginner](https://digitensions.home.blog/2019/01/15/technologic/)
