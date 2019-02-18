@@ -79,3 +79,4 @@
 - [Disk Image Formats](https://wiki.harvard.edu/confluence/display/digitalpreservation/Disk+Image+Formats)
 - [Automated Processing of Disk Images and Directories in BitCurator (Tim Walsh)](https://www.bitarchivist.net/blog/2017-05-01-buf2017/)
 - [Challenges of Dumping/Imaging old IDE Disks](https://openpreservation.org/blog/2013/03/20/challenges-dumpingimaging-old-ide-disks/)
+- [BitCurator Workflows](https://bitcuratorconsortium.org/workflows)

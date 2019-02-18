@@ -1,0 +1,136 @@
+= Notes on xxLINK tape contents =
+
+== DLT-IV tapes ==
+
+File type (Unix File):
+
+<pre>/media/bcadmin/Elements/Echt/tapes-DLT/29-dec-1998/file000001.dd: new-fs dump file (big endian), Previous dump Sun Apr 11 18:00:56 1999, This dump Thu Jan  1 00:00:00 1970, Volume 1, Level zero, type: tape header, Label none, Filesystem /, Device hourly.0, Host netapp0, Flags 1</pre>
+Created with Linux ''dump'' command:
+
+https://linux.die.net/man/8/dump
+
+Use ''restore'' command to restore the contents of a dump file:
+
+https://linux.die.net/man/8/restore
+
+First install ''restore'' using:
+
+<pre>sudo apt install dump</pre>
+Go to empty directory, then start interactive session:
+
+<pre>restore -if /media/bcadmin/Elements/Echt/tapes-DLT/29-dec-1998/file000001.dd</pre>
+List file system:
+
+<pre>restore &gt; ls</pre>
+Result:
+
+<pre>.:
+apache.intel/  home/          msql/          perl.intel/    www/
+backup/        logs/          mysql/         perlnew.intel/ xxlink/
+bin/           mail/          nedstat/       tmp/
+etc/           messages/      perl/          tripwire/</pre>
+=== Block size ===
+
+Block size of first and second tapes: 64512 bytes. The ''dump(8)'' documentation says:
+
+<blockquote>-b blocksize The number of kilobytes per dump record. The default blocksize is 10, unless the -d option has been used to specify a tape &gt;density of 6250BPI or more, in which case the default blocksize is 32. Th maximal value is 1024. Note however that, since the IO &gt;system slices all requests into chunks of MAXBSIZE (which can be as low as 64kB), you can experience problems with dump(8) and &gt;restore(8) when using a higher value, depending on your kernel and/or libC versions.
+</blockquote>
+So in this case a value of 63 was apparently used.
+
+== DDS tapes ==
+
+Imaging the DDS tapes shows there are the following data layouts.
+
+=== Extraction results in 3 files ===
+
+Example: tape 1 (&quot;www 20 dec '95&quot;):
+
+<pre>-rwxrwxrwx 1 johan johan   12058624 Jan 22 12:40 file000001.dd
+-rwxrwxrwx 1 johan johan  208535552 Jan 22 12:44 file000002.dd
+-rwxrwxrwx 1 johan johan 1169752064 Jan 22 13:03 file000003.dd</pre>
+So what are these files?
+
+<pre>file file000001.dd</pre>
+Result:
+
+<pre>file000001.dd: new-fs dump file (big endian),  Previous dump Wed Dec 20 13:07:49 1995, This dump Thu Jan  1 00:00:00 1970, Volume 1, Level zero, type: tape header, Label none, Filesystem /, Device /dev/sd0a, Host www.xxlink.nl, Flags 1</pre>
+And:
+
+<pre>file file000002.dd</pre>
+Result:
+
+<pre>file000002.dd: new-fs dump file (big endian),  Previous dump Wed Dec 20 13:08:19 1995, This dump Thu Jan  1 00:00:00 1970, Volume 1, Level zero, type: tape header, Label none, Filesystem /usr, Device /dev/sd0g, Host www.xxlink.nl, Flags 1</pre>
+And:
+
+<pre>file file000003.dd</pre>
+Result:
+
+<pre>file000003.dd: new-fs dump file (big endian),  Previous dump Wed Dec 20 13:14:01 1995, This dump Thu Jan  1 00:00:00 1970, Volume 1, Level zero, type: tape header, Label none, Filesystem /home, Device /dev/sd0h, Host www.xxlink.nl, Flags 1</pre>
+So it seems these are dumps from 3 different partitions <code>/dev/sd0a</code>, <code>/dev/sd0g</code> and <code>/dev/sd0a</code>, which were mounted under <code>/</code>, <code>/usr</code> and <code>/home</code>, respectively.
+
+=== Extraction results in 1 file ===
+
+Example: tape 2 (&quot;xxx 23 dec '95&quot;):
+
+<pre>-rwxrwxrwx 1 johan johan 1463429120 Jan 22 13:32 file000001.dd</pre>
+What is this file?
+
+<pre>file file000001.dd</pre>
+Result:
+
+<pre>file000001.dd: tar archive</pre>
+So this is a simple TAR archive.
+
+Example: tape 8 (&quot;Metal 11 nov '95 (TAR file hele machine)&quot;):
+
+<pre>-rwxrwxrwx 1 johan johan 755200000 Jan 22 16:48 file000001.dd</pre>
+What is this file?
+
+<pre>file file000001.dd</pre>
+Result:
+
+<pre>file000001.dd: POSIX tar archive (GNU)</pre>
+Also a TAR archive.
+
+=== Restoring a dump file to empty directory ===
+
+<ol>
+<li><p>Create an empty directory, and go to that directory in the command terminal:</p>
+<pre> mkdir extracted
+
+ cd extracted</pre></li>
+<li><p>Run <code>restore</code> in interactive mode on the dump file you want to extract<ref><p>If you don't run <code>restore</code> as sudo, extraction results in a flood of <code>chown: Operation not permitted</code> messages (the files ''are'' extracted though).</p></ref>:</p>
+<pre> sudo restore -if ../../tapes-DDS/1/file000002.dd</pre></li>
+<li><p>Inspect the contents of the dump file:</p>
+<pre> restore &gt; ls</pre>
+<p>Result:</p>
+<pre> 5bin/        diag/        kvm/         mdec         share/       ucbinclude 
+ 5include/    dict/        lddrv/       net          spool        ucblib 
+ 5lib/        etc/         lib/         nserve       src          xpg2bin/
+ adm          export/      local        old/         stand        xpg2include/
+ bin/         games/       local-/      openwin/     sys          xpg2lib/
+ boot         hosts/       lost+found/  pub          tmp 
+ demo/        include/     man          sccs/        ucb/</pre></li>
+<li><p>Use the <code>add</code>command to add directories that are to be extracted to the directory list. To extract everything:</p>
+<pre> restore &gt; add .</pre></li>
+<li><p>Run the <code>extract</code> command:</p>
+<pre> restore &gt; extract</pre>
+<p>This results in the following prompt:</p>
+<pre> You have not read any volumes yet.
+ Unless you know which volume your file(s) are on you should start
+ with the last volume and work towards the first.
+ Specify next volume # (none if no more volumes):</pre></li>
+<li><p>Now enter <code>1</code>. Response:</p>
+<pre>set owner/mode for '.'? [yn]</pre></li>
+<li><p>Enter <code>n</code> <ref><p>This needs further investigation, as the implications of this setting are not 100% clear to me.</p></ref></p></li>
+<li><p>When the extraction is finished, exit the interactive restore session:</p>
+<pre> restore &gt; q</pre></li></ol>
+
+== Resources ==
+
+* [https://linux.die.net/man/8/dump dump(8)]
+* [https://linux.die.net/man/8/restore restore(8)]
+* [https://www.hscripts.com/tutorials/linux-commands/restore.html restore Linux Commands]
+* [https://docs.oracle.com/cd/E19253-01/817-5093/bkuprestoretasks-63510/index.html How to Restore UFS Files Interactively] (best description I've seen so far)
+
+<references />
