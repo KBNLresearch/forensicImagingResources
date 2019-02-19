@@ -213,3 +213,14 @@ Write with 8192 byte record size:
 - [HP Cleaning Cartridge DDS for use with SureStore and all other DDS drives](https://www.bol.com/nl/p/hp-cleaning-cartridge-dds-for-use-with-surestore-and-all-other-dds-drives/9200000008139219/)
 
 - [Fujifilm DDS Cleaning Tape](https://www.fujifilm.eu/nl/producten/opnamemedia/data-storage-media/p/dds-cleaning-tape)
+
+## DDS-3 drive
+
+Model: IBM STD224000N (internal drive). Cannot find any tech specs on it.
+
+When it is connected to the machine, on bootup it shows:
+
+    Time-out failure during SCSI inquiry command
+
+Then after a few more tries the screen goes blank and the machine hangs.
+
