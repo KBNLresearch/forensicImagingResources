@@ -224,3 +224,10 @@ When it is connected to the machine, on bootup it shows:
 
 Then after a few more tries the screen goes blank and the machine hangs.
 
+
+From [SCSI controller docs](http://download.adaptec.com/pdfs/installation_guides/scsi_installation_and_user_guide_02_07.pdf):
+
+>- Internal Ultra320, Ultra160, and Ultra2 SCSI LVD devices come from the factory with termination disabled and cannot be changed. Proper termination for these internal devices is provided by the built-in terminator at the end of the 68-pin internal LVD SCSI cable.
+>- Termination on SE internal SCSI devices is usually controlled by manually setting a jumper or a switch on the device, or by physically removing or installing one or more resistor modules on the device.
+
+So could be a termination issue ...
