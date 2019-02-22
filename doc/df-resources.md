@@ -2,7 +2,7 @@
 
 ## Tapes
 
-- [Tape Driver Semantics](https://wiki.zmanda.com/index.php/Tape_Driver_Semantics) - Excellent summary of of the behavior of tapes on UNIX systems.
+- [Tape Driver Semantics](https://wiki.zmanda.com/index.php/Tape_Driver_Semantics) - Excellent summary of the behavior of tapes on UNIX systems.
 - [How to use the DAT-tape with Linux](http://www.cs.inf.ethz.ch/stricker/lab/linux_tape.html)
 - [HP Surestore and StorageWorks DAT - HP DAT Accessories and Part Numbers](https://web.archive.org/web/20181101135618/https://support.hpe.com/hpsc/doc/public/display?docId=emr_na-lpg50205)
 -[HP StorageWorks DDS/DAT Media - DDS/DAT Media Compatibility Matrix](https://support.hpe.com/hpsc/doc/public/display?docId=emr_na-lpg50457)
