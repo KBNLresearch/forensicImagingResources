@@ -21,6 +21,7 @@
 - [The Source of All Tape Knowledge](http://www.subspacefield.org/~vax/unix_tape.html)
 - [Tapeimgr](https://github.com/KBNLresearch/tapeimgr) - simple format-agnostic tape imaging / extraction software (GUI application, wraps around dd/mt)
 - [Experiences of an LTO/LTFS beginner](https://digitensions.home.blog/2019/01/15/technologic/)
+- [Tape Driver Semantics](https://wiki.zmanda.com/index.php/Tape_Driver_Semantics)
 
 ## SCSI
 
