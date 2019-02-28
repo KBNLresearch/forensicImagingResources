@@ -14,7 +14,7 @@
 - [Copying Files and File Systems to Tape (Oracle documentation)](https://docs.oracle.com/cd/E19455-01/805-7228/6j6q7uf24/index.html) - explains pax, tar and cpio
 - [How to copy data from DDS tape to UNIX station](https://community.hpe.com/t5/System-Administration/How-to-copy-data-from-DDS-tape-to-UNIX-station/td-p/4780851#.W9MEpxCxU3E)
 - [Purpose of ibs/obs/bs in dd](https://stackoverflow.com/questions/1354938/purpose-of-ibs-obs-bs-in-dd) - one of the answers explains particular importance of block size in case of tapes
-- [Duplicating a tape drive using dd ](https://www.linuxquestions.org/questions/linux-newbie-8/duplicating-a-tape-drive-using-dd-4175592839/) - more info on block size.
+- [Duplicating a tape drive using dd](https://www.linuxquestions.org/questions/linux-newbie-8/duplicating-a-tape-drive-using-dd-4175592839/) - more info on block size.
 - [What does dd conv=sync,noerror do?](https://superuser.com/questions/622541/what-does-dd-conv-sync-noerror-do) - confirms that using these flags is generally a bad idea
 - [Write protect in DLT IV Data cartridge](https://web.archive.org/web/20181031154114/https://community.hpe.com/t5/StoreEver-Tape-Storage/Write-protect-in-DLT-IV-Data-cartridge/td-p/129718https://community.hpe.com/t5/StoreEver-Tape-Storage/Write-protect-in-DLT-IV-Data-cartridge/td-p/129718)
 - [mhVTL Virtual Tape Library](https://www.mhvtl.com/); source code [here](https://github.com/markh794/mhvtl)
@@ -83,3 +83,4 @@
 - [Challenges of Dumping/Imaging old IDE Disks](https://openpreservation.org/blog/2013/03/20/challenges-dumpingimaging-old-ide-disks/)
 - [BitCurator Workflows](https://bitcuratorconsortium.org/workflows)
 - [Museum of Obsolete Media](https://obsoletemedia.org/)
+- [Born Digital Workflows, UNC at Chapel Hill Libraries, Wilson Special Collections Library](http://wilsonborndigital.web.unc.edu/)
