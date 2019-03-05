@@ -231,3 +231,5 @@ From [SCSI controller docs](http://download.adaptec.com/pdfs/installation_guides
 >- Termination on SE internal SCSI devices is usually controlled by manually setting a jumper or a switch on the device, or by physically removing or installing one or more resistor modules on the device.
 
 So could be a termination issue ...
+
+UPDATE: it seems this [IBM 7206-110](http://www.dich.com.tw/Product/Storage/Tape/IBM/7206%20Model%20110%2012%20GB%20External%204mm%20DDS-3%20Tape%20Drive.pdf) external drive is basically the external variant of this drive. See also [here](ftp://ftp.software.ibm.com/software/server/firmware/12GB4mm.htm).

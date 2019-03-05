@@ -31,6 +31,17 @@
 - [SCSI Connector Guide](https://www.cablestogo.com/learning/connector-guides/scsi)
 - [Adaptec SCSI controller specifications](https://storage.microsemi.com/en-us/support/scsi/)
 - [SCSI Termination](https://support.hpe.com/hpsc/doc/public/display?docId=tis14318)
+- Here's a good series of articles on pctechguide.com:
+    - [SCSI Adapters](https://www.pctechguide.com/how-to-install-a-scsi-device/scsi-adapters)
+    - [SCSI Internal Intro](https://www.pctechguide.com/how-to-install-a-scsi-device/scsi-internal-intro)
+    - [SCSI Internal Configuration](https://www.pctechguide.com/how-to-install-a-scsi-device/scsi-internal-configuration)
+    - [SCSI Internal Mounting](https://www.pctechguide.com/how-to-install-a-scsi-device/scsi-internal-mounting)
+    - [SCSI Internal Connections](https://www.pctechguide.com/how-to-install-a-scsi-device/scsi-internal-connections)
+    - [SCSI Internal Software](https://www.pctechguide.com/how-to-install-a-scsi-device/scsi-internal-software)
+    - [SCSI External](https://www.pctechguide.com/how-to-install-a-scsi-device/scsi-external)
+    - [Installing a SCSI device – making the connections](https://www.pctechguide.com/how-to-install-a-scsi-device/installing-a-scsi-device-making-the-connections)
+    - [SCSI External Config](https://www.pctechguide.com/how-to-install-a-scsi-device/scsi-external-config)
+    - [SCSI External Software](https://www.pctechguide.com/how-to-install-a-scsi-device/scsi-external-software)
 
 ## Tape archive formats (and how to read / extract them)
 
