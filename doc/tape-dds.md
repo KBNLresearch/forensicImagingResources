@@ -6,7 +6,7 @@
 
 ## Hardware
 
-### Tape reader
+### Tape readers
 
 |**Model**|[HP SureStore DAT8](https://web.archive.org/web/20180606153928/http://www.hp.com/ecomcat/hpcatalog/specs/S4112B.htm)|
 |:--|:--|
@@ -16,6 +16,15 @@
 |**Cable**|Attached to the device is a [Single Ended HD68 TO LD50 SCSI Cable](https://web.archive.org/web/20180606100950/http://www.itinstock.com/hp-c5665-61001-single-ended-hd68-to-ld50-scsi-cable-1-meter-40938-p.asp). The connector other end is a 68-pin DB68 (MD68) male connector (also known as High-Density or HD 68 and Half-Pitch or HP68)|
 |**Workstation connection**|With this [HD68 to VHDCI adapter](https://web.archive.org/web/20181002103944/https://www.ramelectronics.net/sm-044-r.aspx) the reader can be hooked up to the workstation's SCSI controller (which has a female VHDCI connector)|
 |**Documentation**|<ul><li>[HP Surestore and StorageWorks DAT - HP DAT Accessories and Part Numbers](https://web.archive.org/web/20181101135618/https://support.hpe.com/hpsc/doc/public/display?docId=emr_na-lpg50205)</li><li>[HP SureStore DAT - Sun Workstation Configuration](https://web.archive.org/web/20181101140041/https://support.hpe.com/hpsc/doc/public/display?docId=emr_na-lpg51069)</li><li>[HP StorageWorks DAT - Troubleshooting for HP StorageWorks DAT8, DAT24, DAT40, DAT72, and DAT160  SCSI and USB Devices](https://web.archive.org/web/20190128155319/https://support.hpe.com/hpsc/doc/public/display?docId=emr_na-c00057819)</li></ul>|
+
+|**Model**|[HP StorageWorks DAT 72 (Q1523A)](https://web.archive.org/web/20190311120448/https://support.hpe.com/hpsc/doc/public/display?docId=emr_na-c00624867)|
+|:--|:--|
+|**Media**|DAT 72, DDS-4, DDS-3|
+|**Interface**|Wide Ultra SCSI-3 (LVD/SE)|
+|**Connector**|68-pin wide LVDS, thumbscrew|
+|**Cable**||
+|**Workstation connection**||
+|**Documentation**|<ul><li>[HP StorageWorks DAT tape drive, getting started guide, DAT 40e, DAT 72e](https://web.archive.org/web/20190311115921/http://h10032.www1.hp.com/ctg/Manual/c00070850.pdf)</li><li>[HP StorageWorks DAT - Troubleshooting for HP StorageWorks DAT8, DAT24, DAT40, DAT72, and DAT160  SCSI and USB Devices](https://web.archive.org/web/20190128155319/https://support.hpe.com/hpsc/doc/public/display?docId=emr_na-c00057819)</li></ul>|
 
 [^1]: This is somewhat strange, since the specs explicitly state the drive has a SCSI-2 interface
 
