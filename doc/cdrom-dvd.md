@@ -42,7 +42,7 @@ Can be an internal or external drive, or both. Having multiple drives can be use
 
     If the extraction finished without any errors, the output directory now contains the following files:
 
-    ![](./img/tapeimgr-files.png)
+    ![](./img/omimgr-files.png)
 
     Here, **disc.iso** is the ISO image; **checksums.sha512** contains the SHA512 checksum of the image file, **metadata.json** contains some basic metadata and **omimgr.log** is the log file.
 
