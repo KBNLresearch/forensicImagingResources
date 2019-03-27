@@ -16,39 +16,36 @@ Can be an internal or external drive, or both. Having multiple drives can be use
 
 ## Procedure for reading a disc
 
-1. Start *omimgr* from the OS's main menu (in Ubuntu 18.04 the *tapeimgr* item is located under *System Tools*).
+1. Start *omimgr* from the OS's main menu (in Ubuntu 18.04 the *omimgr* item is located under *System Tools*).
 
     ![](./img/omimgr-1.png)
 
+2. Use the *Select Output Directory* button to navigate to an empty directory where the disc image and its associated metadata will be stored (or create a new directory from the dialog).
 
-1. Check the write-protect tab on the bottom of the cartridge, and slide it to the leftmost position. The orange indicator must be visible:
+3. If you are using an external CD or DVD drive, you may need to change the *Optical device* value accordingly (a typical value for an external device would be `/dev/sr1`).
 
-    ![](./img/dlt-protect.jpg)
+4. Leave *Read method*, *Retries*, *Direct disc mode* and *Auto-retry* at their default values.
 
+5. Click on the *UUID* button to generate a unique identifier.
 
-6. Create an empty directory for storing the extracted tape contents.
+6. Use the *Description* field to enter a description of the disc (e.g. the title that is written on its label or inlay card). Optionally, use the *Notes* field to record anything else worth mentioning about the disc (e.g. if the *Description* is ambiguous because the writing on the disc is illegible, make a note of it here).
 
+7. Insert the disc into the drive, close it, and wait for the disc to mount (a file manager window pops up when the disc is mounted ).
 
-8. Use the *Select Output Directory* button to navigate to the empty directory created under step 6. Click on the *UUID* button to generate a unique identifier. Use the *Description* field to enter a description of the tape (e.g. the title that is written on its label or inlay card). Optionally, use the *Notes* field to record anything else worth mentioning about the tape (e.g. if the *Description* is ambiguous because the writing on the tape's label is illegible, make a note of it here).
+9. Press the *Start* button to start imaging, and then wait for *omimgr* to finish. You can monitor the progress of the imaging procedure in the progress window:
 
-9. Press the *Start* button to start the extraction, and then wait for *tapeimgr* to finish (depending on the amount of data on the tape this may take several hours). You can monitor the progress of the extraction procedure in the progress window:
-
-    ![](./img/tapeimgr-2.png)
+    ![](./img/omimgr-2.png)
 
     Note that the screen output is also written to a log file in the output directory. A prompt appears when the extraction has finished:
 
-    ![](./img/tapeimgr-success.png)
+    ![](./img/omimgr-success.png)
 
     If the extraction finished without any errors, the output directory now contains the following files:
 
     ![](./img/tapeimgr-files.png)
 
-    Here, **file000001.dd** through **file000003.dd** are the extracted files; **checksums.sha512** contains the SHA512 checksums of the extracted files, **metadata.json** contains some basic metadata and **tapeimgr.log** is the log file.
+    Here, **disc.iso** is the ISO image; **checksums.sha512** contains the SHA512 checksum of the image file, **metadata.json** contains some basic metadata and **omimgr.log** is the log file.
 
-10. When *tapeimgr* has finished, wait until the "tape in use" indicator light stops blinking, and the green "operate handle" light (bottom-right) comes on. Now lift the cartridge insert/release handle:
 
-    ![](./img/dlt-unloaded.jpg)
+11. Take out the disc. All done!
 
-11. Take out the tape cartridge. All done!
-
-Make sure to lower the insert/release handle again at the end of your tape reading session (i.e. before switching off the tape reader). 
