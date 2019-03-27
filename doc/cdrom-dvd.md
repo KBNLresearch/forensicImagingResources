@@ -16,6 +16,11 @@ Can be an internal or external drive, or both. Having multiple drives can be use
 
 ## Procedure for reading a disc
 
+1. Start *omimgr* from the OS's main menu (in Ubuntu 18.04 the *tapeimgr* item is located under *System Tools*).
+
+    ![](./img/omimgr-1.png)
+
+
 1. Check the write-protect tab on the bottom of the cartridge, and slide it to the leftmost position. The orange indicator must be visible:
 
     ![](./img/dlt-protect.jpg)
@@ -23,9 +28,6 @@ Can be an internal or external drive, or both. Having multiple drives can be use
 
 6. Create an empty directory for storing the extracted tape contents.
 
-7. Start *omimgr* from the OS's main menu (in Ubuntu 18.04 the *tapeimgr* item is located under *System Tools*).
-
-    ![](./img/omimgr-1.png)
 
 8. Use the *Select Output Directory* button to navigate to the empty directory created under step 6. Click on the *UUID* button to generate a unique identifier. Use the *Description* field to enter a description of the tape (e.g. the title that is written on its label or inlay card). Optionally, use the *Notes* field to record anything else worth mentioning about the tape (e.g. if the *Description* is ambiguous because the writing on the tape's label is illegible, make a note of it here).
 
