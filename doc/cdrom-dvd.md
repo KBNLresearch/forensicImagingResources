@@ -36,15 +36,30 @@ Can be an internal or external drive, or both. Having multiple drives can be use
 
     ![](./img/omimgr-2.png)
 
-    Note that the screen output is also written to a log file in the output directory. A prompt appears when the extraction has finished:
+    Note that the screen output is also written to a log file in the output directory. If the extraction finished without any errors, the following prompt appears:
 
     ![](./img/omimgr-success.png)
 
-    If the extraction finished without any errors, the output directory now contains the following files:
+    The output directory now contains the following files:
 
     ![](./img/omimgr-files.png)
 
     Here, **disc.iso** is the ISO image; **checksums.sha512** contains the SHA512 checksum of the image file, **metadata.json** contains some basic metadata and **omimgr.log** is the log file.
+
+10. If the reading of the disc resulted in errors, the following prompt will appear:
+
+    ![](./img/omimgr-errors.png)
+
+    In this case, have a careful look at the text you see in the progress window. In particular, look at the error message that is reported by *readom*, and the value of *imageTruncated*. 
+    
+    ![](./img/omimgr-errors2.png)
+
+    In this case we see that only 1 sector could not be read (`The following 1 sector(s) could not be read correctly`). This is a common problem with recordable CDs, which often result in problems with the final 1 or 2 sectors. In most cases these sectors do not contain any meaningful data. This is confirmed by the value of *imageTruncated* (`imageTruncated: False`), which means the imaging result is most likely OK, in which case we can click on *No*.
+
+    If *readom* reports more extensive problems, and the value of *imageTruncated* is *True*, 
+    click *Yes*. *Omimgr* will now delete the current image file, and retry imaging the disc with the *ddrescue* tool (which is often better at recovering data from defective media). 
+
+    <!--TODo explain multiple ddrescue passes-->
 
 
 11. Take out the disc. All done!
