@@ -2,7 +2,7 @@
 
 ## Introduction
 
-[CD-ROMs](https://www.wikidata.org/wiki/Q7982) (including [CD-Rs](https://www.wikidata.org/wiki/Q420778)) and [DVDs](https://www.wikidata.org/wiki/Q5294) (including [DVD-Rs](https://www.wikidata.org/wiki/Q1071697)) are optical media carriers that contain digital data.
+[CD-ROMs](https://www.wikidata.org/wiki/Q7982) (including [CD-Rs](https://www.wikidata.org/wiki/Q420778)) and [DVDs](https://www.wikidata.org/wiki/Q5294) (including [DVD-Rs](https://www.wikidata.org/wiki/Q1071697)) are optical media carriers that contain digital data. The workflow described here is only suitable for single-session CD-ROMs and DVDs. It cannot be used for audio CDS, or multisession discs (the tools used only recognise the first session on a disc, and will igniore any remaining sessions).
 
 ## Hardware
 
