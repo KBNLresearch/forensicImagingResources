@@ -26,14 +26,22 @@
 
 2. Connect the write blocker' s power supply to the DC In (at top) and make sure the power cord is plugged into to a power socket.
 
+## Software
+
+## Software
+
+[diskimgr](https://github.com/KBNLresearch/diskimgr), running in [BitCurator](https://bitcurator.net/).
+
 ## Procedure for creating a disk image
 
-### Guymager
 
-1. Connect the floppy disk to the right-hand USB connector on the write blocker.
+1. Connect the floppy disk drive to the right-hand USB connector on the write blocker.
 
 2. Make sure the floppy's square write-protection tab is enabled (the hole in the corner of the disk must be uncovered).
 
+1. Start *diskimgr* from the OS's main menu (in Ubuntu 18.04 the *diskimgr* item is located under *System Tools*).
+
+    ![](./img/omimgr-1.png)
 3. Insert the floppy into the floppy disk drive.
 
 4. Start Guymager. Result:

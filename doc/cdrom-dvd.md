@@ -16,7 +16,7 @@ Can be an internal or external drive, or both. Having multiple drives can be use
 
 ## Procedure for reading a disc
 
-1. Start *omimgr* from the OS's main menu (in Ubuntu 18.04 the *tapeimgr* item is located under *System Tools*).
+1. Start *omimgr* from the OS's main menu (in Ubuntu 18.04 the *omimgr* item is located under *System Tools*).
 
     ![](./img/omimgr-1.png)
 
