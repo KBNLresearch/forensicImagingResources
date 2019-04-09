@@ -41,7 +41,7 @@
 
 3. Start *diskimgr* from the OS's main menu (in Ubuntu 18.04 the *diskimgr* item is located under *System Tools*).
 
-    ![](./img/diskmgr-1.png)
+    ![](./img/diskimgr-1.png)
 
 4. Use the *Select Output Directory* button to navigate to an empty directory where the disk image and its associated metadata will be stored (or create a new directory from the dialog).
 
@@ -80,11 +80,11 @@ If this happens, follow these steps:
 
 1. Click *Yes*. *Diskimgr* will now move the current image file to a subdirectory *dd-failed*, and retry imaging the disc with the *ddrescue* tool (which is often better at recovering data from defective media).
 
-3. If *diskimgr* still reports errors after the first pass with *ddrescue*, you can run additional passes to improve the result. Try re-running it in *Direct disc* mode (which can be selected from *diskimgr*'s interface). Another useful technique is to run additional *ddrescue* passes with a different floppy drive.
+2. If *diskimgr* still reports errors after the first pass with *ddrescue*, you can run additional passes to improve the result. Try re-running it in *Direct disc* mode (which can be selected from *diskimgr*'s interface). Another useful technique is to run additional *ddrescue* passes with a different floppy drive.
 
 <!--TODO elaborate a bit on this, add screenshots-->
 
-4. Take the floppy out of the drive after the last *ddrescue* pass. All done!
+3. Take the floppy out of the drive after the last *ddrescue* pass. All done!
 
 ## Interrupting ddrescue
 
