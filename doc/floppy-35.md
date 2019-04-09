@@ -39,43 +39,71 @@
 
 2. Make sure the floppy's square write-protection tab is enabled (the hole in the corner of the disk must be uncovered).
 
-1. Start *diskimgr* from the OS's main menu (in Ubuntu 18.04 the *diskimgr* item is located under *System Tools*).
+3. Start *diskimgr* from the OS's main menu (in Ubuntu 18.04 the *diskimgr* item is located under *System Tools*).
 
-    ![](./img/omimgr-1.png)
-3. Insert the floppy into the floppy disk drive.
+    ![](./img/diskmgr-1.png)
 
-4. Start Guymager. Result:
+4. Use the *Select Output Directory* button to navigate to an empty directory where the disk image and its associated metadata will be stored (or create a new directory from the dialog).
 
-    ![](./img/floppy-35-guymager1.png)
+5. Click on the *UUID* button to generate a unique identifier.
 
-5. Select the floppy device from the list (in particular , look at the *Size* field), right-click on it and select *Acquire image*
+6. Change the *Prefix* value to the name you want to give to the image file, and use the *Description* field to enter a description of the floppy (e.g. the title or description that is written on its label). Optionally, use the *Notes* field to record anything else worth mentioning about the floppy (e.g. if the *Description* is ambiguous because the writing on label is illegible, make a note of it here).
 
-7. In the *Acquire image* dialog, make the following settings:
+7. Insert the floppy into the drive, and press *diskimgr*'s *Refresh* button.
 
-    - Set *File format* to *Linux dd raw*.
-    - Uncheck the *Split image files* checkbox.
-    - Select the destination directory for the disk image, and enter a file name (without extension).
-    - Check *Calculate SHA-256* (and uncheck the *MD5* and *SHA-1* options).
-    - Check *Verify image after acquisition*.
+8. Now select the floppy from the *Block device* drop-down menu (you can usually identify it by its size, which is 1.4 MiB for a High-Density disc, and 720 KiB for a Double-Density disc).
 
-    ![](./img/floppy-35-guymager2.png)
+9. Press the *Start* button to start imaging, and then wait for *diskimgr* to finish. You can monitor the progress of the imaging procedure in the progress window:
 
-8. Press the *Start* button and watch the progress indicator.
+    ![](./img/diskimgr-2.png)
 
-9. If all went well, the *State* field will read *Finished - Verified & ok*.
+    Note that the screen output is also written to a log file in the output directory. If the imaging finished without any errors, the following prompt appears:
 
-    ![](./img/floppy-35-guymager3.png)
+    ![](./img/diskimgr-success.png)
 
-9. Remove the floppy from the floppy disk drive.
+    The output directory now contains the following files:
 
-The above steps result in two files:
+    ![](./img/diskimgr-files.png)
 
-- A file with extension *.dd*, which is the actual disk image.
-- A file with extension *.info*, which contains information about the imaging process.
+    Here, **ks.img** is the ISO image; **checksums.sha512** contains the SHA512 checksum of the image file, **metadata.json** contains some basic metadata and **diskimgr.log** is the log file.
 
+10. If the imaging procedure *did* result in any errors, follow the *Additional steps in case of errors* section below. Otherwise, take out the floppy.
+
+
+## Additional steps in case of errors
+
+If the reading of the floppy with *dd* resulted in errors, the following prompt will appear:
+
+![](./img/error-dd.png)
+
+If this happens, follow these steps:
+
+1. Click *Yes*. *Diskimgr* will now move the current image file to a subdirectory *dd-failed*, and retry imaging the disc with the *ddrescue* tool (which is often better at recovering data from defective media).
+
+3. If *diskimgr* still reports errors after the first pass with *ddrescue*, you can run additional passes to improve the result. Try re-running it in *Direct disc* mode (which can be selected from *diskimgr*'s interface). Another useful technique is to run additional *ddrescue* passes with a different floppy drive.
+
+<!--TODO elaborate a bit on this, add screenshots-->
+
+4. Take the floppy out of the drive after the last *ddrescue* pass. All done!
+
+## Interrupting ddrescue
+
+Running imaging processes can be stopped by pressing the *Interrupt* button. This is particularly useful for *ddrescue* runs, which may require a long time for floppies that are badly damaged. Note that interrupting *ddrescue* will not result in any data loss, and interrupted runs can be resumed at a later time (see below). Interrupting *dd* is not advised.
+
+## Resuming an interrupted ddrescue run
+
+Follow these steps to resume a *ddrescue* run that was previously interrupted:
+
+1. After launching *diskimgr*, set the output directory to the directory of the interrupted run.
+
+2. Set **Read method** to *ddrescue*.
+
+3. Click on the **Load existing metadata** button; this loads the previously entered *Prefix*, *Extension*, *Identifier*, *Description* and *Notes* values.
+
+4. Hit the **Start** button. Now *ddrescue* will simply pick up on where the interrupted run stopped.
 
 ## Remarks
 
-1. If we first eject the floppy device from the file manager, any newly inserted floppies are not mounted (switching the write blocker off and on fixes this)
+<!-- 1. If we first eject the floppy device from the file manager, any newly inserted floppies are not mounted (switching the write blocker off and on fixes this) -->
 
 2. Using a write blocker may be overkill if we also use the write protection tabs on the floppies? (Then again, better safe than sorry.)
