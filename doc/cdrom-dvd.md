@@ -2,7 +2,7 @@
 
 ## Introduction
 
-[CD-ROMs](https://www.wikidata.org/wiki/Q7982) (including [CD-Rs](https://www.wikidata.org/wiki/Q420778)) and [DVDs](https://www.wikidata.org/wiki/Q5294) (including [DVD-Rs](https://www.wikidata.org/wiki/Q1071697)) are optical media carriers that contain digital data.
+[CD-ROMs](https://www.wikidata.org/wiki/Q7982) (including [CD-Rs](https://www.wikidata.org/wiki/Q420778)) and [DVDs](https://www.wikidata.org/wiki/Q5294) (including [DVD-Rs](https://www.wikidata.org/wiki/Q1071697)) are optical media carriers that contain digital data. The workflow described here is only suitable for single-session CD-ROMs and DVDs. It cannot be used for audio CDS, or multisession discs (the tools used only recognise the first session on a disc, and will igniore any remaining sessions).
 
 ## Hardware
 
@@ -20,35 +20,69 @@ Can be an internal or external drive, or both. Having multiple drives can be use
 
     ![](./img/omimgr-1.png)
 
+2. Use the *Select Output Directory* button to navigate to an empty directory where the disc image and its associated metadata will be stored (or create a new directory from the dialog).
 
-1. Check the write-protect tab on the bottom of the cartridge, and slide it to the leftmost position. The orange indicator must be visible:
+3. If you are using an external CD or DVD drive, you may need to change the *Optical device* value accordingly (a typical value for an external device would be `/dev/sr1`).
 
-    ![](./img/dlt-protect.jpg)
+4. Leave *Read method*, *Retries*, *Direct disc mode* and *Auto-retry* at their default values.
+
+5. Click on the *UUID* button to generate a unique identifier.
+
+6. Use the *Description* field to enter a description of the disc (e.g. the title that is written on its label or inlay card). Optionally, use the *Notes* field to record anything else worth mentioning about the disc (e.g. if the *Description* is ambiguous because the writing on the disc is illegible, make a note of it here).
+
+7. Insert the disc into the drive, close it, and wait for the disc to mount (a file manager window pops up when the disc is mounted ).
+
+9. Press the *Start* button to start imaging, and then wait for *omimgr* to finish. You can monitor the progress of the imaging procedure in the progress window:
+
+    ![](./img/omimgr-2.png)
+
+    Note that the screen output is also written to a log file in the output directory. If the imaging finished without any errors, the following prompt appears:
+
+    ![](./img/omimgr-success.png)
+
+    The output directory now contains the following files:
+
+    ![](./img/omimgr-files.png)
+
+    Here, **disc.iso** is the ISO image; **checksums.sha512** contains the SHA512 checksum of the image file, **metadata.json** contains some basic metadata and **omimgr.log** is the log file.
+
+10. If the imaging procedure *did* result in any errors, follow the *Additional steps in case of errors* section below. Otherwise, take out the disc.
 
 
-6. Create an empty directory for storing the extracted tape contents.
+## Additional steps in case of errors
 
+If the reading of the disc with *readom* resulted in errors, the following prompt will appear:
 
-8. Use the *Select Output Directory* button to navigate to the empty directory created under step 6. Click on the *UUID* button to generate a unique identifier. Use the *Description* field to enter a description of the tape (e.g. the title that is written on its label or inlay card). Optionally, use the *Notes* field to record anything else worth mentioning about the tape (e.g. if the *Description* is ambiguous because the writing on the tape's label is illegible, make a note of it here).
+![](./img/omimgr-errors.png)
 
-9. Press the *Start* button to start the extraction, and then wait for *tapeimgr* to finish (depending on the amount of data on the tape this may take several hours). You can monitor the progress of the extraction procedure in the progress window:
+If this happens, follow the steps below.
 
-    ![](./img/tapeimgr-2.png)
+1. Have a careful look at the text you see in the progress window. In particular, look at the error message that is reported by *readom*, and the value of *imageTruncated*.
 
-    Note that the screen output is also written to a log file in the output directory. A prompt appears when the extraction has finished:
+    ![](./img/omimgr-errors2.png)
 
-    ![](./img/tapeimgr-success.png)
+    In this case we see that only 1 sector could not be read (`The following 1 sector(s) could not be read correctly`). This is a common problem with recordable CDs, which often result in problems with the final 1 or 2 sectors. In most cases these sectors do not contain any meaningful data. This is confirmed by the value of *imageTruncated* (`imageTruncated: False`), which means the imaging result is most likely OK, in which case it's safe to click on *No*, and take out the disc.
 
-    If the extraction finished without any errors, the output directory now contains the following files:
+2. If *readom* reports more extensive problems, and the value of *imageTruncated* is *True*, click *Yes*. *Omimgr* will now delete the current image file, and retry imaging the disc with the *ddrescue* tool (which is often better at recovering data from defective media). Note that, depending on the condition of the disc, *ddrescue* may need up to several hours to read it!
 
-    ![](./img/tapeimgr-files.png)
+3. If *omimgr* still reports errors after the first pass with *ddrescue*, you can run additional passes to improve the result. Try re-running it in *Direct disc* mode (which can be selected from *omimgr*'s interface). Another useful technique is to run additional *ddrescue* passes with different optical devices (e.g. one or more external USB drives).
 
-    Here, **file000001.dd** through **file000003.dd** are the extracted files; **checksums.sha512** contains the SHA512 checksums of the extracted files, **metadata.json** contains some basic metadata and **tapeimgr.log** is the log file.
+<!--TODO elaborate a bit on this, add screenshots-->
 
-10. When *tapeimgr* has finished, wait until the "tape in use" indicator light stops blinking, and the green "operate handle" light (bottom-right) comes on. Now lift the cartridge insert/release handle:
+4. Take out the disc. All done!
 
-    ![](./img/dlt-unloaded.jpg)
+## Interrupting readom or ddrescue
 
-11. Take out the tape cartridge. All done!
+Running imaging processes can be stopped by pressing the *Interrupt* button. This is particularly useful for *ddrescue* runs, which may require many hours for discs that are badly damaged. Note that interrupting *ddrescue* will not result in any data loss, and interrupted runs can be resumed at a later time (see below). Interrupting *readom* will generally result in an unreadable ISO image, and is not advised.
 
-Make sure to lower the insert/release handle again at the end of your tape reading session (i.e. before switching off the tape reader). 
+## Resuming an interrupted ddrescue run
+
+Follow these steps to resume a *ddrescue* run that was previously interrupted:
+
+1. After launching *omimgr*, set the output directory to the directory of the interrupted run.
+
+2. Set **Read method** to *ddrescue*.
+
+3. Click on the **Load existing metadata** button; this loads the previously entered *Prefix*, *Extension*, *Identifier*, *Description* and *Notes* values.
+
+4. Hit the **Start** button. Now *ddrescue* will simply pick up on where the interrupted run stopped.

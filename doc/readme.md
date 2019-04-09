@@ -7,6 +7,7 @@
 - [DDS-1 tape](./tape-dds.md)
 - [DLT-IV tape](./tape-dlt.md)
 - [USB Flash drive](./usb-flash.md)
+- [CD-ROM / DVD](./cdrom-dvd.md)
 
 ## Resources
 
