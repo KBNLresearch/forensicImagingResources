@@ -95,3 +95,4 @@
 - [BitCurator Workflows](https://bitcuratorconsortium.org/workflows)
 - [Museum of Obsolete Media](https://obsoletemedia.org/)
 - [Born Digital Workflows, UNC at Chapel Hill Libraries, Wilson Special Collections Library](http://wilsonborndigital.web.unc.edu/)
+- [CCA Digital Archives Processing Manual](https://github.com/CCA-Public/digital-archives-manual) - includes LOTS of detailed workflow descriptions
