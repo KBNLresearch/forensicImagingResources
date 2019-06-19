@@ -10,31 +10,6 @@ Created with Linux *dump* command:
 
 <https://linux.die.net/man/8/dump>
 
-Use *restore* command to restore the contents of a dump file:
-
-<https://linux.die.net/man/8/restore>
-
-
-First install *restore* using:
-
-    sudo apt install dump
-
-Go to empty directory, then start interactive session:
-
-    restore -if /media/bcadmin/Elements/Echt/tapes-DLT/29-dec-1998/file000001.dd
-
-List file system:
-
-    restore > ls
-
-Result:
-
-    .:
-    apache.intel/  home/          msql/          perl.intel/    www/
-    backup/        logs/          mysql/         perlnew.intel/ xxlink/
-    bin/           mail/          nedstat/       tmp/
-    etc/           messages/      perl/          tripwire/
-
 ### Block size
 
 Block size of first and second tapes: 64512 bytes. The *dump(8)* documentation says:
@@ -112,7 +87,21 @@ Result:
 
 Also a TAR archive.
 
+### Restoring a tar file to empty directory
+
+    tar -xvf /path/to/file0001.dd > /dev/null
+
+Extracts contents to working directory. Verbose output, stdout to /dev/null to suppress messages for individual files (only errors are shown).
+
 ### Restoring a dump file to empty directory
+
+Use *restore* command to restore the contents of a dump file:
+
+<https://linux.die.net/man/8/restore>
+
+First install *restore* using:
+
+    sudo apt install dump
 
 1. Create empty directory and go to that directory in the command terminal. Then run `restore` in interactive mode on the dump file you want to extract[^1]:
 
@@ -156,6 +145,106 @@ Also a TAR archive.
 7. When the extraction is finished, exit the interactive restore session:
 
         restore > q
+
+## Notes on extraction of individual archive files
+
+While extracting dump file `images/tapes-DDS/6/file000003.dd`, restore reported the following messages;
+
+    restore: ./Answerbook/SS2INSTALL/Conformit�_aux__Normes_de_S�curit�: cannot create file: Invalid or incomplete multibyte or wide character
+    restore: ./Answerbook/IPCINSTALL/Conformit�_aux_Normes_de_S�curit�: cannot create file: Invalid or incomplete multibyte or wide character
+    restore: ./Answerbook/IPCINSTALL/Sicherheitsbeh�rdliche_Vorschriften: cannot create file: Invalid or incomplete multibyte or wide character
+
+Affected directories contain software documentation, and no data that are of interest to the web archaeology project, so no problem. Same problem with `images/tapes-DDS/13/file000003.dd`, `images/tapes-DDS/15/file000003.dd`.
+
+While extracting `./images/tapes-DDS/8/file000001.dd`: 
+
+    tar: Exiting with failure status due to previous errors
+
+Extracted 727 MB of data; size of TAR file is 755,2 MB (755200000 bytes)
+
+More info on this error: <http://ask.xmodulo.com/tar-exiting-with-failure-status-due-to-previous-errors.html>
+
+Re-running with stdout redirected to dev/null reveals numerous message such as:
+
+    tar: dev/ttypu: Cannot mknod: Operation not permitted
+    tar: dev/ptypu: Cannot mknod: Operation not permitted
+    tar: dev/ttypv: Cannot mknod: Operation not permitted
+    tar: dev/ptypv: Cannot mknod: Operation not permitted
+
+Explained here: <https://stackoverflow.com/questions/7418303/untar-a-unix-based-operating-system>
+
+These file are of no interest to us, so just left it like that (running tar as root might get rid of these errors).
+
+While extracting `images/tapes-DDS/17/file000002.dd` (TAR archive): extraction results in numerous errors like:
+
+    tar: ./xxlink/xxlinfo/Universiteit/Enqu\210teICTbedrijvigheid.doc: Cannot open: Invalid or incomplete multibyte or wide character
+    tar: ./xxlink/xxlinfo/Lam\202: Cannot mkdir: Invalid or incomplete multibyte or wide character
+    tar: ./xxlink/xxlinfo/Lam\202/offertelame.doc: Cannot open: Invalid or incomplete multibyte or wide character
+
+Most likely cause: external drive to which data are extracted has some Microsoft (probably NTFS) file system. See also:
+
+<https://www.linuxquestions.org/questions/linux-general-1/tar-fails-to-extract-archive-containing-special-characters-884672/>
+
+Perhaps try again on ext3 or ext4 formatted disk (BUT these cannot be read on Windows).
+
+Also interesting:
+
+    tar: ./xxlink/vormgeving/Fonts/Oktober/GROENING.TTF: time stamp 2032-02-10 17:55:18 is 399096030.712148596 s in the future
+    tar: ./xxlink/vormgeving/Fonts/Wabbit/GROENING.TTF: time stamp 2032-02-10 17:55:18 is 399096030.470655055 s in the future
+
+While extracting `images/tapes-DDS/18/file000002.dd` (TAR archive): again `Cannot open: Invalid or incomplete multibyte or wide character` errors.
+
+While extracting `images/tapes-DLT/1/file000001.dd` (dump archive) this happens:
+
+    restore > add .
+    restore: ./www/samsom/root/adverteren/logo�s: Invalid or incomplete multibyte or wide character
+    restore: ./www/samsom/root/logo�s: Invalid or incomplete multibyte or wide character
+    restore: ./www/samsom/root/_old_sams/adverteren/logo�s: Invalid or incomplete multibyte or wide character
+    restore > extract
+    You have not read any volumes yet.
+    Unless you know which volume your file(s) are on you should start
+    with the last volume and work towards the first.
+    Specify next volume # (none if no more volumes): 1
+    restore: ./www/wwwendy/dev/tcp: lsetflags called on a special file: Invalid argument
+    restore: ./www/wwwendy/dev/zero: lsetflags called on a special file: Operation not supported
+    restore: ./www/gitc/dev/tcp: lsetflags called on a special file: Invalid argument
+    restore: ./www/gitc/dev/zero: lsetflags called on a special file: Operation not supported
+    restore: ./www/fortis/nl/virtualvsb/dev/tcp: lsetflags called on a special file: Invalid argument
+    restore: ./www/fortis/nl/virtualvsb/dev/zero: lsetflags called on a special file: Operation not supported
+    restore: ./www/oltronix/dev/tcp: lsetflags called on a special file: Invalid argument
+
+So again there are characters that cannot be restored (at least not on the used NTFS-formatted disk). The `lsetflags called on a special file` is repeated for numerous `/dev/tcp` and `/dev/zero` files. Meaning not clear (google search returns exactly 1 hit which is not very helpful). More info on these devices here:
+
+<https://www.tldp.org/LDP/abs/html/devref1.html>
+
+And also:
+
+<https://unix.stackexchange.com/questions/494389/which-unix-like-system-really-provides-the-dev-tcp-special-file>
+
+
+Also, for same archive (again!):
+
+    restore: ./www/samsom/root/_old_sams/adverteren/logo�s/Veiligheid.jpg: cannot create file: Invalid or incomplete multibyte or wide character
+    restore: ./www/samsom/root/_old_sams/adverteren/logo�s/Vervoerswetenschap.jpg: cannot create file: Invalid or incomplete multibyte or wide character
+    restore: ./www/samsom/root/_old_sams/adverteren/logo�s/Assurantie magazine.gif: cannot create file: Invalid or incomplete multibyte or wide character
+    restore: ./www/samsom/root/_old_sams/adverteren/logo�s/arbo-&-milieu.gif: cannot create file: Invalid or incomplete multibyte or wide character
+    restore: ./www/samsom/root/_old_sams/adverteren/logo�s/Bedrijfsopleidingen.gif: cannot create file: Invalid or incomplete multibyte or wide character
+    restore: ./www/samsom/root/_old_sams/adverteren/logo�s/Facto.gif: cannot create file: Invalid or incomplete multibyte or wide character
+    restore: ./www/samsom/root/_old_sams/adverteren/logo�s/Management Support.gif: cannot create file: Invalid or incomplete multibyte or wide character
+
+This *does* affect data that are part of a website (although from the name it is old/outdated).
+
+Similar for ``images/tapes-DLT/2/file000001.dd` (dump archive):
+
+    restore > add .
+    restore: ./www/samsom/root/sams/adverteren/logo�s: Invalid or incomplete multibyte or wide character
+    restore: ./www/hemmel/root/priv�: Invalid or incomplete multibyte or wide character
+
+Which also results in thing like this:
+
+    restore: ./www/hospitorg/root/b/�noindex: cannot create file: Invalid or incomplete multibyte or wide character
+
+So might be better to extract everything to ext4-formatted disk instead.
 
 [^1]: If you don't run `restore` as sudo, extraction results in a flood of `chown: Operation not permitted` messages (the files *are* extracted though).
 
