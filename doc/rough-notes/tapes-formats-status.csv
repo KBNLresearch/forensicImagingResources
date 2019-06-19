@@ -1,0 +1,56 @@
+directory,fileName,format,extracted,encoding_errors
+tapes-DDS/1,file000001.dd,new-fs dump file (big endian),x,no
+tapes-DDS/1,file000002.dd,new-fs dump file (big endian),x,no
+tapes-DDS/1,file000003.dd,new-fs dump file (big endian),x,no
+tapes-DDS/2,file000001.dd,tar archive,x,no
+tapes-DDS/3,file000001.dd,new-fs dump file (big endian),x,no
+tapes-DDS/3,file000002.dd,new-fs dump file (big endian),x,no
+tapes-DDS/3,file000003.dd,new-fs dump file (big endian),x,no
+tapes-DDS/4,file000001.dd,tar archive,x,no
+tapes-DDS/5,file000001.dd,tar archive,x,no
+tapes-DDS/6,file000001.dd,new-fs dump file (big endian),x,no
+tapes-DDS/6,file000002.dd,new-fs dump file (big endian),x,no
+tapes-DDS/6,file000003.dd,new-fs dump file (big endian),x,yes
+tapes-DDS/7,file000001.dd,data,n/a,no
+tapes-DDS/8,file000001.dd,POSIX tar archive (GNU),x,no
+tapes-DDS/9,file000001.dd,new-fs dump file (little endian),x,no
+tapes-DDS/9,file000002.dd,new-fs dump file (little endian),x,no
+tapes-DDS/9,file000003.dd,new-fs dump file (little endian),x,no
+tapes-DDS/9,file000004.dd,new-fs dump file (little endian),x,no
+tapes-DDS/10,file000001.dd,new-fs dump file (little endian),x,no
+tapes-DDS/10,file000002.dd,new-fs dump file (little endian),x,no
+tapes-DDS/10,file000003.dd,new-fs dump file (little endian),x,no
+tapes-DDS/10,file000004.dd,new-fs dump file (little endian),x,no
+tapes-DDS/11,file000001.dd,POSIX tar archive,x,no
+tapes-DDS/12,file000001.dd,new-fs dump file (big endian),x,no
+tapes-DDS/12,file000002.dd,new-fs dump file (big endian),x,no
+tapes-DDS/12,file000003.dd,new-fs dump file (big endian),x,no
+tapes-DDS/13,file000001.dd,new-fs dump file (big endian),x,no
+tapes-DDS/13,file000002.dd,new-fs dump file (big endian),x,no
+tapes-DDS/13,file000003.dd,new-fs dump file (big endian),x,yes
+tapes-DDS/14,file000001.dd,tar archive,x,no
+tapes-DDS/15,file000001.dd,new-fs dump file (big endian),x,no
+tapes-DDS/15,file000002.dd,new-fs dump file (big endian),x,no
+tapes-DDS/15,file000003.dd,new-fs dump file (big endian),x,no
+tapes-DDS/16,file000001.dd,new-fs dump file (big endian),x,no
+tapes-DDS/16,file000002.dd,new-fs dump file (big endian),x,no
+tapes-DDS/16,file000003.dd,new-fs dump file (big endian),x,no
+tapes-DDS/17,file000001.dd,POSIX tar archive (GNU),x,no
+tapes-DDS/17,file000002.dd,POSIX tar archive (GNU),x,yes
+tapes-DDS/18,file000001.dd,POSIX tar archive (GNU),x,no
+tapes-DDS/18,file000002.dd,POSIX tar archive (GNU),x,yes
+tapes-DDS/19,file000001.dd,POSIX tar archive,x,no
+tapes-DLT/1,file000001.dd,new-fs dump file (big endian),x,yes
+tapes-DLT/2,file000001.dd,new-fs dump file (big endian),x,yes
+tapes-DLT/3,file000001.dd,empty,,
+tapes-DLT/4,file000001.dd,new-fs dump file (big endian),,
+tapes-DLT/5,file000001.dd,empty,,
+tapes-DLT/6,file000001.dd,new-fs dump file (big endian),,
+tapes-DLT/7,file000001.dd,new-fs dump file (big endian),,
+tapes-DLT/8,file000001.dd,empty,,
+tapes-DLT/9,file000001.dd,empty,,
+tapes-DLT/10,file000001.dd,empty,,
+tapes-DLT/11,file000001.dd,empty,,
+tapes-DLT/12,file000001.dd,new-fs dump file (big endian),,
+tapes-DLT/13,file000001.dd,empty,,
+tapes-DLT/14,file000001.dd,new-fs dump file (big endian),,
