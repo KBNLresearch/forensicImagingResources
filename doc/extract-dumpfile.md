@@ -2,7 +2,7 @@
 
 ## Introduction
 
-[Unix dump)](http://fileformats.archiveteam.org/wiki/Unix_dump) was a backup utility that was widely used in the '90s. This document describes how to extract the contents of a *dump* file to an empty directory.
+[Unix dump](http://fileformats.archiveteam.org/wiki/Unix_dump) was a backup utility that was widely used in the '90s. This document describes how to extract the contents of a *dump* file to an empty directory.
 
 ## Software
 
