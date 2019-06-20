@@ -8,6 +8,7 @@
 - [DLT-IV tape](./tape-dlt.md)
 - [USB Flash drive](./usb-flash.md)
 - [CD-ROM / DVD](./cdrom-dvd.md)
+- [Extract contents of Unix dump file](./extract-dumpfile.md)
 
 ## Resources
 
