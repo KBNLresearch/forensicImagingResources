@@ -16,7 +16,9 @@ It is strongly recommended to extract *dump* files to an [*Ext4*](\https://en.wi
 
 ## Procedure for extracting a dump file
 
-**CAUTION**: by default *restore* extracts the contents of a *dump* file to the system's root directory, i.e. it tries to recover a full backup. In nearly all modern-day cases this behaviour is unwanted, and it could even wreak havoc on your machine's file system.  Extraction to a user-defined directory is only possible by running *restore* "interactive" mode, which is described below (on a side node, this severely limits the possibilities for automating the recovery procedure).
+<hr>
+**CAUTION**: by default *restore* extracts the contents of a *dump* file to the system's root directory, i.e. it tries to recover a full backup. In nearly all modern-day cases this behaviour is unwanted, and it could even wreak havoc on your machine's file system.  Extraction to a user-defined directory is only possible by running *restore* in "interactive" mode, which is described below (on a side node, this severely limits the possibilities for automating the recovery procedure).
+<hr>
 
 1. Create an empty directory and go to that directory in the command terminal. Then run `restore` as sudo in interactive mode on the dump file you want to extract[^1]:
 
