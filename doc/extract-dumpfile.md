@@ -24,7 +24,7 @@ It is strongly recommended to extract *dump* files to an [*Ext4*](\https://en.wi
 
 1. Create an empty directory and go to that directory in the command terminal. Then run `restore` as sudo in interactive mode on the dump file you want to extract[^1]:
 
-        sudo restore -if ../../tapes-DDS/1/file000002.dd
+    sudo restore -if ../../tapes-DDS/1/file000002.dd
 
 2. Inspect the contents of the dump file:
 
