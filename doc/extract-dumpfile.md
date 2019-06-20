@@ -74,3 +74,7 @@ This typically happens when extracting to *NTFS*-formatted disks. Extracting to 
 ## Resources
 
 - How to Restore UFS Files Interactively (Oracle): <https://docs.oracle.com/cd/E19253-01/817-5093/bkuprestoretasks-63510/index.html>
+
+[^1]: If you don't run `restore` as sudo, extraction results in a flood of `chown: Operation not permitted` messages (the files *are* extracted though).
+
+[^2]: Needs further investigation, implications of this setting and what it does are not 100% clear to me.
