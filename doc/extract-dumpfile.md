@@ -65,7 +65,11 @@ It is strongly recommended to extract *dump* files to an [*Ext4*](\https://en.wi
 
         restore > q
 
-If the extraction results in errors like:
+Done!
+
+## Troubleshooting
+
+In some cases you may get errors like this during extraction:
 
     restore: ./Answerbook/SS2INSTALL/Conformit�_aux__Normes_de_S�curit�: cannot create file: Invalid or incomplete multibyte or wide character
 
