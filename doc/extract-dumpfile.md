@@ -22,11 +22,17 @@ It is strongly recommended to extract *dump* files to an [*Ext4*](\https://en.wi
 
 <hr>
 
-1. Create an empty directory and go to that directory in the command terminal. Then run `restore` as sudo in interactive mode on the dump file you want to extract[^1]:
+1. Create an empty directory and then go to that directory in the command terminal, e.g.:
+
+        mkdir file000002
+
+        cd file000002
+
+2. Run `restore` as sudo in interactive mode on the dump file you want to extract[^1]:
 
         sudo restore -if ../../tapes-DDS/1/file000002.dd
 
-2. Inspect the contents of the dump file:
+3. Inspect the contents of the dump file (optional):
 
         restore > ls
     
@@ -40,11 +46,11 @@ It is strongly recommended to extract *dump* files to an [*Ext4*](\https://en.wi
         boot         hosts/       lost+found/  pub          tmp 
         demo/        include/     man          sccs/        ucb/
 
-3. Use the `add`command to add directories that are to be extracted to the directory list. To extract everything: 
+4. Use the `add`command to add directories that are to be extracted to the directory list. To extract everything: 
 
         restore > add .
 
-4. Run the `extract` command:
+5. Run the `extract` command:
 
         restore > extract
     
@@ -55,15 +61,25 @@ It is strongly recommended to extract *dump* files to an [*Ext4*](\https://en.wi
         with the last volume and work towards the first.
         Specify next volume # (none if no more volumes):
     
-5.  Now enter `1`. Response:
+6.  Now enter `1`. Response:
 
         set owner/mode for '.'? [yn]
 
-6. Enter `n` [^2]
+7. Enter `n` [^2]
 
-7. When the extraction is finished, exit the interactive restore session:
+8. When the extraction is finished, exit the interactive restore session:
 
         restore > q
+
+9. Move one directory level up:
+
+        cd ..
+
+10. Finally set the permissions on the extracted files and directories using the following two commands (replacing `file000002` with the name of your extraction directory):
+
+        sudo find ./file000002 -type f -exec chmod 644 {} \;
+
+        sudo find ./file000002 -type d -exec chmod 755 {} \;
 
 Done!
 
