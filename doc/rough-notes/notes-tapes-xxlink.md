@@ -89,7 +89,7 @@ Also a TAR archive.
 
 ### Restoring a tar file to empty directory
 
-    tar -xvf /path/to/file0001.dd > /dev/null
+    sudo tar -xvf /path/to/file0001.dd > /dev/null
 
 Extracts contents to working directory. Verbose output, stdout to /dev/null to suppress messages for individual files (only errors are shown).
 
@@ -156,6 +156,8 @@ While extracting dump file `images/tapes-DDS/6/file000003.dd`, restore reported 
 
 Affected directories contain software documentation, and no data that are of interest to the web archaeology project, so no problem. Same problem with `images/tapes-DDS/13/file000003.dd`, `images/tapes-DDS/15/file000003.dd`.
 
+**UPDATE**: extracting again to an Ext4-formatted disk fixes this issue. However in this case it is necessary to update the file permissions on the extractions files/directories.  
+
 While extracting `./images/tapes-DDS/8/file000001.dd`: 
 
     tar: Exiting with failure status due to previous errors
@@ -175,6 +177,8 @@ Explained here: <https://stackoverflow.com/questions/7418303/untar-a-unix-based-
 
 These file are of no interest to us, so just left it like that (running tar as root might get rid of these errors).
 
+**UPDATE**: extracting again as root to an Ext4-formatted disk + updating permissions afterwards fixes this issue.
+
 While extracting `images/tapes-DDS/17/file000002.dd` (TAR archive): extraction results in numerous errors like:
 
     tar: ./xxlink/xxlinfo/Universiteit/Enqu\210teICTbedrijvigheid.doc: Cannot open: Invalid or incomplete multibyte or wide character
@@ -187,12 +191,16 @@ Most likely cause: external drive to which data are extracted has some Microsoft
 
 Perhaps try again on ext3 or ext4 formatted disk (BUT these cannot be read on Windows).
 
+**UPDATE**: extracting again as root to an Ext4-formatted disk + updating permissions afterwards fixes this issue.
+
 Also interesting:
 
     tar: ./xxlink/vormgeving/Fonts/Oktober/GROENING.TTF: time stamp 2032-02-10 17:55:18 is 399096030.712148596 s in the future
     tar: ./xxlink/vormgeving/Fonts/Wabbit/GROENING.TTF: time stamp 2032-02-10 17:55:18 is 399096030.470655055 s in the future
 
 While extracting `images/tapes-DDS/18/file000002.dd` (TAR archive): again `Cannot open: Invalid or incomplete multibyte or wide character` errors.
+
+**UPDATE**: extracting again as root to an Ext4-formatted disk + updating permissions afterwards fixes this issue.
 
 While extracting `images/tapes-DLT/1/file000001.dd` (dump archive) this happens:
 
@@ -245,6 +253,39 @@ Which also results in thing like this:
     restore: ./www/hospitorg/root/b/�noindex: cannot create file: Invalid or incomplete multibyte or wide character
 
 So might be better to extract everything to ext4-formatted disk instead.
+
+**UPDATE**: extracting again as root to an Ext4-formatted disk + updating permissions afterwards fixes the encoding issues (but not the `lsetflags` issue!).
+
+
+While extracting `images/tapes-DLT/4/file000001.dd`: after finishing extracting 1st volume, restore asks `Specify next volume`. Tried 2, doesn't work, so entered none. After this it displays a huge list of errors like this one:
+
+    ./www/nrc/www/root/W2/Lab/Profiel/Anno-00/dood.html: (inode 2196155) not found on tape
+    ./www/nrc/www/root/W2/Lab/Profiel/Anno-00/geloof.html: (inode 2196156) not found on tape
+    ./www/nrc/www/root/W2/Lab/Profiel/Anno-00/gemengdhuwelijk190.gif: (inode 2196157) not found on tape
+    ./www/nrc/www/root/W2/Lab/Profiel/Anno-00/gezinsleven.html: (inode 2196158) not found on tape
+    ./www/nrc/www/root/W2/Lab/Profiel/Anno-00/inhoud.html: (inode 2196159) not found on tape
+    ./www/nrc/www/root/W2/Lab/Profiel/Elfsteden/elfsteden.gif: (inode 2196160) not found on tape
+    ./www/nrc/www/root/W2/Lab/Profiel/Elfsteden/inhoud.html: (inode 2196161) not found on tape
+    ./www/nrc/www/root/W2/Nieuws/1998/12/30/Vp/kort.html: (inode 2196162) not found on tape
+    ./www/nrc/www/root/W2/Nieuws/1998/12/30/Vp/01.html: (inode 2196163) not found on tape
+    ./www/nrc/www/shadow/W2/Nieuws/1998/07/10/Spo/01.html: (inode 2196164) not found on tape
+    ./www/nrc/www/shadow/W2/Nieuws/1997/01/13/Med/01.html: (inode 2196192) not found on tape
+    ./www/nrc/www/shadow/W2/Nieuws/1997/01/13/Med/02.html: (inode 2196193) not found on tape
+    ./www/nrc/www/shadow/W2/Nieuws/1997/01/13/Med/03.html: (inode 2196194) not found on tape
+    ./www/nrc/www/shadow/W2/Nieuws/1999/05/03/Rtv/01.html: (inode 2196195) not found on tape
+
+The corresponding directories do exist in the extract folder, but the listed files are indeed missing.
+
+This looks like the same issue:
+
+<https://www.linuxquestions.org/questions/linux-general-1/file-not-found-on-tape-during-interactive-restore-on-fedora-core-9-a-4175465723/>
+
+But looking at this:
+
+<https://www.linuxquestions.org/questions/linux-newbie-8/dump-restore-not-found-on-tape-539280/>
+
+This suggests that the dump is spread across 2 tapes (=files)! NOTE: this also happened with one of the DDS tapes (1st round), but which one?!
+
 
 [^1]: If you don't run `restore` as sudo, extraction results in a flood of `chown: Operation not permitted` messages (the files *are* extracted though).
 
