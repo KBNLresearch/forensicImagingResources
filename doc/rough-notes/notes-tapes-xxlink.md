@@ -353,7 +353,7 @@ Apparently no web site data.
         Caching		Off
         Gc		O
 
-According the [info here](https://askubuntu.com/questions/652095/cant-find-httpd-conf) `httpd.conf` Apache under Ubuntu does not use this file by default, but it can be imported by adding an include to the global config file, as explained there.
+According the [info here](https://askubuntu.com/questions/652095/cant-find-httpd-conf) `httpd.conf` Apache under Ubuntu does not use this file by default, but it can be imported by adding an include to the global config file, as explained there. [This article](https://opensource.com/article/18/3/configuring-multiple-web-sites-apache) explains how to configure multiple web sites with Apache.
 
 
 #### Tape 3
@@ -394,6 +394,57 @@ According the [info here](https://askubuntu.com/questions/652095/cant-find-httpd
 
 ### DLT tapes
 
+
+## Notes on reconstruction of sites
+
+For convenience we combine all Apache site config entries into one file (`etc/apache2/sites-enabled/xxlink.conf`).
+
+1. Copy directory with site contents to `/var/www`, and adjust the permissions using:
+
+        sudo find schiphol -type d -exec chmod 755 {} \;
+        sudo find schiphol -type f -exec chmod 666 {} \;
+
+2. Add new *VirtualHost* entry to Apache config file:
+
+        <VirtualHost *:80>
+            ServerName schiphol.nl:80
+
+            ServerAdmin webmaster@localhost
+            ServerName schiphol.nl
+            ServerAlias www.schiphol.nl
+            DocumentRoot /var/www/schiphol/root
+
+            # Below line redirects DocumentRoot to home.htm
+            RedirectMatch ^/$ "/home.htm"
+
+            ErrorLog ${APACHE_LOG_DIR}/error.log
+            CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        </VirtualHost>
+
+    We get the values for *ServerName* and *ServerAlias* from the [httpd configuration file](https://httpd.apache.org/docs/2.4/configuring.html) `httpd.conf`. The *RedirectMatch* redirects the *DocumentRoot* to the landing page (here: home.htm)
+
+3. Activate the configuration file. First disable the current configuration (in this case 8000-default.conf*):
+
+        sudo a2dissite 000-default.conf
+
+    Now enable the new one:
+
+        sudo a2ensite xxlink.conf
+
+4. Add original domain to hosts file. Open (with sudo priviliges) file `/etc/hosts` in a text editor, and add a line that associates the IP address at which the site is locally available to its original URL. For example:
+
+        127.0.0.1	www.schiphol.nl
+
+    Then save the file.
+
+5. Restart the server:
+
+        sudo systemctl restart apache2
+
+All done! The newly installed site is now available at the original URL in your web browser.
+
+For some reason, copying the site data to an external disk and then referencing that location in the config file doesn't work.
 
 ## Resources
 
