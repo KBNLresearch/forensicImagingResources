@@ -291,6 +291,110 @@ This suggests that the dump is spread across 2 tapes (=files)! NOTE: this also h
 
 [^2]: Needs further investigation, implications of this setting and what it does are not 100% clear to me.
 
+
+## Notes on contents of extracted archive files
+
+### DDS tapes
+
+#### Tape 1
+
+- file000001: 10 MB, nothing interesting.
+- file000002: 200 MB, application files
+- file000003: 1.1 GB, user dirs
+
+Apparently no web site data.
+
+#### Tape 2
+
+- file000001: 1.5 GB
+- dir `/home/www.xxlink.nl` contains logs (1994/95)
+- dir `/home/local/www` contains 26 folders that each hold a web site!
+- dir `/home/local/etc` contains [httpd configuration file](https://httpd.apache.org/docs/2.4/configuring.html) `httpd.conf` which defines the configuration for all sites. Example:
+
+        #-----------------------------------------------------------------------
+        # NV Luchthaven Schiphol (193.79.208.32)
+        #
+        MultiHost	www.schiphol.nl
+
+        Map		/*.map		/htbin/htimage/home/local/www/schiphol/root/*.map
+        Exec		/htbin/*	/home/local/www/cgi-bin/*
+
+        Exec		/cgi-bin/*	/home/local/www/schiphol/cgi-bin/*
+
+        #
+        # URL translation rules
+        #
+
+        Welcome		home.htm
+        DirAccess	selective
+        NoLog		193.79.208.*
+        NoLog		193.79.209.*
+        NoLog		193.78.242.34
+
+        Redirect	/schiphol*		*
+
+        Redirect	*/home.htm/		*/home.htm
+        Redirect	*/home.html		*/home.htm
+        Redirect	*/Welcome.html		*/home.htm
+
+        Map		*://*			/noproxy.htm
+
+        Pass		/*			/home/local/www/schiphol/root/*
+
+        Pass		http:*
+        Pass		gopher:*
+        Pass		wais:*
+        Pass		ftp:*
+
+        #
+        # 	Caching parameters.
+        #
+
+        Caching		Off
+        Gc		O
+
+According the [info here](https://askubuntu.com/questions/652095/cant-find-httpd-conf) `httpd.conf` Apache under Ubuntu does not use this file by default, but it can be imported by adding an include to the global config file, as explained there.
+
+
+#### Tape 3
+
+#### Tape 4
+
+#### Tape 5
+
+#### Tape 6
+
+#### Tape 7
+
+#### Tape 8
+
+#### Tape 9
+
+#### Tape 10
+
+#### Tape 11
+
+#### Tape 12
+
+#### Tape 13
+
+#### Tape 14
+
+#### Tape 15
+
+#### Tape 16
+
+#### Tape 17
+
+#### Tape 18
+
+#### Tape 19
+
+
+
+### DLT tapes
+
+
 ## Resources
 
 - [dump(8)](https://linux.die.net/man/8/dump)
