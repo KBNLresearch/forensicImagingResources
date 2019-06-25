@@ -453,7 +453,7 @@ Needs improvement. Current steps are:
 
 1. Make copy of httpd configuration file and remove all test entries
 
-2. Run [this script](./scripts/restoresites.sh), taking httpd configuration file as input. Then manually edit away  `/htbin/htimage` prefixes and `/*.map` /suffixes (using search/replace). Resultt:
+2. Run [this script](./scripts/readsiteinfo.sh), taking httpd configuration file as input. Then manually edit away  `/htbin/htimage` prefixes and `/*.map` /suffixes (using search/replace). Result:
 
         domain,rootDir
         www.obragas.nl,/home/local/www/obragas/root
