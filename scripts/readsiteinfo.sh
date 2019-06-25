@@ -8,6 +8,8 @@ foundurl=false
 founddirectory=false
 prefix="/htbin/htimage"
 
+echo "domain","rootDir"
+
 while IFS= read -r line
     do
 

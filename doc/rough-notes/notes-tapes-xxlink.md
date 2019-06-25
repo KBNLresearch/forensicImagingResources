@@ -446,6 +446,22 @@ All done! The newly installed site is now available at the original URL in your 
 
 For some reason, copying the site data to an external disk and then referencing that location in the config file doesn't work.
 
+
+## Automation
+
+Needs improvement. Current steps are:
+
+1. Make copy of httpd configuration file and remove all test entries
+
+2. Run [this script](./scripts/restoresites.sh), taking httpd configuration file as input. Then manually edit away  `/htbin/htimage` prefixes and `/*.map` /suffixes (using search/replace). Resultt:
+
+        domain,rootDir
+        www.obragas.nl,/home/local/www/obragas/root
+        www.iksx.nl,/home/local/www/iksx/root
+        www.dataman.nl,/home/local/www/dataman/root
+
+3. 
+
 ## Resources
 
 - [dump(8)](https://linux.die.net/man/8/dump)
