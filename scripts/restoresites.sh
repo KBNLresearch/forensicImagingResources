@@ -50,13 +50,14 @@ while IFS= read -r line
         echo -e 127.0.0.1	"\t"$url >> $hostsFile
 
         # Copy site data to publish dir TODO: verify if this works!!!
-        cp -r $SiteDir $publishDir
+        #cp -r $SiteDir $publishDir
 
         # Update permissions
         # TODO: siteDirName = $siteDir name (so strip path!), test if this works!
         siteDirName=$(rev <<<"$siteDir" | cut -d'/' -f1 |rev)
-        find $publishDir/$siteDirName -type d -exec chmod 755 {} \;
-        find $publishDir/$siteDirName -type f -exec chmod 666 {} \;
+        echo $siteDirName
+        #find $publishDir/$siteDirName -type d -exec chmod 755 {} \;
+        #find $publishDir/$siteDirName -type f -exec chmod 666 {} \;
 
     fi
 
