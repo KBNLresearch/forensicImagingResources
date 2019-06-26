@@ -53,7 +53,8 @@ while IFS= read -r line
         cp -r $SiteDir $publishDir
 
         # Update permissions
-        # TODO: siteDirName = $siteDir name (so strip path!)  
+        # TODO: siteDirName = $siteDir name (so strip path!), test if this works!
+        siteDirName=$(rev <<<"$siteDir" | cut -d'/' -f1 |rev)
         find $publishDir/$siteDirName -type d -exec chmod 755 {} \;
         find $publishDir/$siteDirName -type f -exec chmod 666 {} \;
 
