@@ -7,6 +7,7 @@ inFile="/home/johan/ownCloud/xxLINK/sites-test.csv"
 configFile="/home/johan/ownCloud/xxLINK/test.conf"
 hostsFile="/home/johan/ownCloud/xxLINK/hosts"
 prefix="www."
+publishDir="/var/www"
 
 while IFS= read -r line
     do
@@ -47,6 +48,15 @@ while IFS= read -r line
 
         # Add entry to hosts file
         echo -e 127.0.0.1	"\t"$url >> $hostsFile
+
+        # Copy site data to publish dir TODO: verify if this works!!!
+        cp -r $SiteDir $publishDir
+
+        # Update permissions
+        # TODO: siteDirName = $siteDir name (so strip path!)  
+        find $publishDir/$siteDirName -type d -exec chmod 755 {} \;
+        find $publishDir/$siteDirName -type f -exec chmod 666 {} \;
+
     fi
 
 done < "$inFile"
