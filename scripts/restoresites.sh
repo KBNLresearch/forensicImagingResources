@@ -7,7 +7,9 @@ inFile="/home/johan/ownCloud/xxLINK/sites-test.csv"
 configFile="/home/johan/ownCloud/xxLINK/test.conf"
 hostsFile="/home/johan/ownCloud/xxLINK/hosts"
 prefix="www."
+containerDir="/media/johan/WEBARCH/webarcheologie/xxLINK/extracted/tapes-DDS/2/file000001"
 publishDir="/var/www"
+#publishDir="/home/johan/ownCloud/xxLINK/www"
 
 while IFS= read -r line
     do
@@ -19,7 +21,8 @@ while IFS= read -r line
         rootDir="$(cut -d',' -f2 <<<"$line")"
         # SiteDir is 1 level above root (this is what needs to be copied over)
         siteDir=${rootDir%"root"}
-        echo $siteDir
+        # Name (without path) of siteDir
+        siteDirName=$(rev <<<"$siteDir" | cut -d'/' -f2 | rev)
         if [[ $url == "www."* ]]; then
             # Remove www. prefix
             serverName=${url#$prefix}
@@ -38,11 +41,11 @@ while IFS= read -r line
         echo -e "\t"ServerAdmin webmaster@localhost >> $configFile
         echo -e "\t"ServerName $serverName  >> $configFile
         echo -e "\t"ServerAlias $url  >> $configFile
-        echo -e "\t"DocumentRoot $rootDir  >> $configFile
+        echo -e "\t"DocumentRoot $publishDir/$siteDirName/root >> $configFile
         echo -e "\t""# Below line redirects DocumentRoot to home.htm" >> $configFile
         echo -e "\t"RedirectMatch ^/$ '"/home.htm"'  >> $configFile
-        echo -e "\t"ErrorLog ${APACHE_LOG_DIR}/error.log  >> $configFile
-        echo -e "\t"CustomLog ${APACHE_LOG_DIR}/access.log combined  >> $configFile
+        echo -e "\t"ErrorLog \${APACHE_LOG_DIR}/error.log  >> $configFile
+        echo -e "\t"CustomLog \${APACHE_LOG_DIR}/access.log combined  >> $configFile
         echo "</VirtualHost>" >> $configFile
         echo >> $configFile
 
@@ -50,14 +53,14 @@ while IFS= read -r line
         echo -e 127.0.0.1	"\t"$url >> $hostsFile
 
         # Copy site data to publish dir TODO: verify if this works!!!
-        #cp -r $SiteDir $publishDir
+        echo $containerDir$siteDir
+        cp -r $containerDir/$siteDir $publishDir/
 
         # Update permissions
         # TODO: siteDirName = $siteDir name (so strip path!), test if this works!
-        siteDirName=$(rev <<<"$siteDir" | cut -d'/' -f1 |rev)
-        echo $siteDirName
-        #find $publishDir/$siteDirName -type d -exec chmod 755 {} \;
-        #find $publishDir/$siteDirName -type f -exec chmod 666 {} \;
+        echo $publishDir/$siteDirName
+        find $publishDir/$siteDirName -type d -exec chmod 755 {} \;
+        find $publishDir/$siteDirName -type f -exec chmod 666 {} \;
 
     fi
 
