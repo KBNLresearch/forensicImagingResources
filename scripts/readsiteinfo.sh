@@ -30,16 +30,12 @@ while IFS= read -r line
         if [[ $mapPath != "/noproxy.htm" ]]; then
             directory=$mapPath
             founddirectory=true
+            echo $url,$directory
+            foundurl=false
+            founddirectory=false
             #echo $directory
         fi
     fi
-
-    if [[ $foundurl == "true" && $founddirectory == "true" ]]; then
-        echo $url,$directory
-        foundurl=false
-        founddirectory=false
-    fi
-
 
 done < "$confFile"
 

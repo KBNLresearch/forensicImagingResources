@@ -2,7 +2,7 @@
 #
 # Restore sites from CSV file of domains and root dirs
 #
-inFile="/home/johan/ownCloud/xxLINK/sites-test.csv"
+inFile="/home/johan/ownCloud/xxLINK/sites.csv"
 #configFile="/home/johan/ownCloud/xxLINK/xxlink.conf"
 configFile="/home/johan/ownCloud/xxLINK/test.conf"
 hostsFile="/home/johan/ownCloud/xxLINK/hosts"
