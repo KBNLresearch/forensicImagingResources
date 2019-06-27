@@ -7,6 +7,7 @@ confFile="/home/johan/ownCloud/xxLINK/httpd-cleaned.conf"
 foundurl=false
 founddirectory=false
 prefix="/htbin/htimage"
+suffix="\/*.map"
 
 echo "domain","rootDir"
 
@@ -29,6 +30,9 @@ while IFS= read -r line
         mapPath="$(awk -F '[[:blank:]]+' '{print $3}' <<< $line )"
         if [[ $mapPath != "/noproxy.htm" ]]; then
             directory=$mapPath
+            # Remove prefix, suffix
+            directory=${mapPath#$prefix}
+            directory=${directory%$suffix}
             founddirectory=true
             echo $url,$directory
             foundurl=false
