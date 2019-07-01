@@ -106,4 +106,4 @@ Follow these steps to resume a *ddrescue* run that was previously interrupted:
 
 <!-- 1. If we first eject the floppy device from the file manager, any newly inserted floppies are not mounted (switching the write blocker off and on fixes this) -->
 
-2. Using a write blocker may be overkill if we also use the write protection tabs on the floppies? (Then again, better safe than sorry.)
+Using a write blocker may be overkill if we also use the write protection tabs on the floppies? (Then again, better safe than sorry.)
