@@ -80,9 +80,12 @@
 - [DIY Handboek voor Webarcheologie](https://hart.amsterdam/image/2017/11/17/20171116_freeze_diy_handboek.pdf)
 - [Project "The Digital City Revives" A Case Study of Web Archaeology](https://hart.amsterdam/image/2016/11/28/20160730_redds_tjardadehaan.pdf)
 - [Server-side Preservation of Dynamic Websites](http://publications.beeldengeluid.nl/pub/633/)
+-[Archaeology of the Amsterdam digital city; why digital data are dynamic and should be treated accordingly](https://www.tandfonline.com/doi/full/10.1080/24701475.2017.1309852)
 
 ## Data rescue and digital forensics (general)
 
+-[Digital Forensics and Preservation](http://dx.doi.org/10.7207/twr12-03)
+- [Digital Archaeology: Rescuing Neglected and Damaged Data Resources](http://www.ukoln.ac.uk/services/elib/papers/supporting/pdf/p2.pdf)
 - [Getting to Know FRED: Introducing Workflows for Born-Digital Content](https://practicaltechnologyforarchives.org/issue4_prael_wickner/)
 - [Digital Forensics and Preservation (DPC Report)](http://dx.doi.org/10.7207/twr12-03)
 - [Digital Archives Workstation Update: KryoFlux, FRED, and BitCurator Walk into a Bar…](https://blogs.princeton.edu/techsvs/2017/10/03/digital-archives-workstation-update-kryoflux-fred-and-bitcurator-walk-into-a-bar/)
