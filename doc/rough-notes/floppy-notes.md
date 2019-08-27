@@ -36,3 +36,6 @@ Looks like this one is the floppy drive 9disappears after unplugging the drive's
 
     Bus 003 Device 006: ID 16c0:06d6 Van Ooijen Technische Informatica
 
+## More fc5025 resources
+
+<https://josephcarrano.files.wordpress.com/2018/06/fred_guide1.pdf>
