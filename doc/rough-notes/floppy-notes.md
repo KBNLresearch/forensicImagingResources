@@ -73,6 +73,9 @@ BUT this gives the following result:
 
 Same for other format values. Under Windows the device is properly recognized, so there appears to be a problem with the compiled binaries. The most likely cause is that the docs state that the tools need version 0.1.12 of libusb, which is ancient (and AFAIK it cannot be installed on a modern Linux system without conflicts).
 
+**UPDATE**:
+
+<https://groups.google.com/forum/#!topic/bitcurator-users/K1BPIbdKoOY/discussion>
 
 ## More fc5025 resources
 
