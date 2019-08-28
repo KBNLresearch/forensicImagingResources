@@ -75,7 +75,14 @@ Same for other format values. Under Windows the device is properly recognized, s
 
 **UPDATE**:
 
+See also:
+
 <https://groups.google.com/forum/#!topic/bitcurator-users/K1BPIbdKoOY/discussion>
+
+Detailed instructions on how to compile the software here;
+
+<https://dallibraries.atlassian.net/wiki/spaces/DFL/pages/568918043/Install+FC5025+Disk+Image+and+Browse+software+in+BitCurator+environment>
+
 
 ## More fc5025 resources
 
