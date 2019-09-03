@@ -22,6 +22,7 @@
 - [The Source of All Tape Knowledge](http://www.subspacefield.org/~vax/unix_tape.html)
 - [Tapeimgr](https://github.com/KBNLresearch/tapeimgr) - simple format-agnostic tape imaging / extraction software (GUI application, wraps around dd/mt)
 - [Experiences of an LTO/LTFS beginner](https://digitensions.home.blog/2019/01/15/technologic/)
+- [Data by the Foot](https://campuspress.yale.edu/borndigital/2019/08/30/data-by-the-foot/) - blog about tape data recovery at Yale University Library
 
 ## SCSI
 
