@@ -66,6 +66,10 @@ if [[ $fileType == "tar" ]]; then
   # Go back to user directory
   cd $dirUser
 
+  # Transfer ownership of dirOut to default user
+  # (only affects top-level directory)
+  chown $USER $dirOut
+
   #echo "Fixing permissions on extracted files and directories ..."
   #find $dirOut -type f -exec chmod 644 {} \;
   #find $dirOut -type d -exec chmod 755 {} \;
