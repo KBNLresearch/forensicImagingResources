@@ -49,6 +49,7 @@ if [[ $fileType == "dump" ]]; then
   echo "Extracting dump file ..."
   # Source: https://docs.oracle.com/cd/E19253-01/817-5093/bkuprestoretasks-72504/index.html
   restore -xvf $fileIn .
+  extractStatus=$?
   # Go back to user directory
   cd $dirUser
 
@@ -62,13 +63,14 @@ if [[ $fileType == "tar" ]]; then
   echo "Extracting TAR archive ..."
   # Run tar
   tar -xf $fileIn
-
+  extractStatus=$?
   # Go back to user directory
   cd $dirUser
 
   # Transfer ownership of dirOut to default user
   # (only affects top-level directory)
-  chown $USER $dirOut
+  echo "Set owner of top-level directory ..."
+  chown johan $dirOut
 
   #echo "Fixing permissions on extracted files and directories ..."
   #find $dirOut -type f -exec chmod 644 {} \;
@@ -76,4 +78,4 @@ if [[ $fileType == "tar" ]]; then
 fi
 
 # Notify user
-echo "Done!"
+echo "Done, exit status of extract command was "$extractStatus
