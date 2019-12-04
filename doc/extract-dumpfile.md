@@ -18,64 +18,42 @@ It is strongly recommended to extract *dump* files to an [*Ext4*](\https://en.wi
 
 <hr>
 
-**CAUTION**: by default *restore* extracts the contents of a *dump* file to the system's root directory, i.e. it tries to recover a full backup. In nearly all modern-day cases this behaviour is unwanted, and it could even wreak havoc on your machine's file system.  Extraction to a user-defined directory is only possible by running *restore* in "interactive" mode, which is described below (on a side node, this severely limits the possibilities for automating the recovery procedure).
+**CAUTION**: by default *restore* extracts the contents of a *dump* file to the system's root directory, i.e. it tries to recover a full backup. In nearly all modern-day cases this behaviour is unwanted, and it could even wreak havoc on your machine's file system.  Extraction to a user-defined directory is possible, but it does require some user interaction (which limits the possibilities for automating the recovery procedure).
 
 <hr>
 
-1. Create an empty directory and then go to that directory in the command terminal, e.g.:
+1. Create an empty directory, and then go to that directory in the command terminal, e.g.:
 
         mkdir file000002
 
         cd file000002
 
-2. Run `restore` as sudo in interactive mode on the dump file you want to extract[^1]:
+2. Run `restore` as sudo with the following command-line arguments[^1]:
 
-        sudo restore -if ../../tapes-DDS/1/file000002.dd
+        sudo restore -xvf ../../tapes-DDS/1/file000002.dd .
 
-3. Inspect the contents of the dump file (optional):
+    Here, `../../tapes-DDS/1/file000002.dd` points to the dump file. Note that the final `.` argument defines the files *inside* the dump file that are to be extracted (here: all of them), it does *not* define an output path!
 
-        restore > ls
-    
-    Result:
-
-        5bin/        diag/        kvm/         mdec         share/       ucbinclude 
-        5include/    dict/        lddrv/       net          spool        ucblib 
-        5lib/        etc/         lib/         nserve       src          xpg2bin/
-        adm          export/      local        old/         stand        xpg2include/
-        bin/         games/       local-/      openwin/     sys          xpg2lib/
-        boot         hosts/       lost+found/  pub          tmp 
-        demo/        include/     man          sccs/        ucb/
-
-4. Use the `add`command to add directories that are to be extracted to the directory list. To extract everything: 
-
-        restore > add .
-
-5. Run the `extract` command:
-
-        restore > extract
-    
-    This results in the following prompt:
+3. After a while the following prompt appears:
 
         You have not read any volumes yet.
         Unless you know which volume your file(s) are on you should start
         with the last volume and work towards the first.
         Specify next volume # (none if no more volumes):
-    
-6.  Now enter `1`. Response:
+
+    Now enter `1`. This will start the extraction process.
+
+4.  After a while another prompt appears:
 
         set owner/mode for '.'? [yn]
 
-7. Enter `n` [^2]
+    Now enter `n` [^2]
 
-8. When the extraction is finished, exit the interactive restore session:
-
-        restore > q
-
-9. Move one directory level up:
+5. Move one directory level up:
 
         cd ..
 
-10. Finally set the permissions on the extracted files and directories using the following two commands (replacing `file000002` with the name of your extraction directory):
+6. Finally set the permissions on the extracted files and directories using the following two commands (replacing `file000002` with the name of your extraction directory):
 
         sudo find ./file000002 -type f -exec chmod 644 {} \;
 
@@ -93,7 +71,10 @@ This typically happens when extracting to *NTFS*-formatted disks. Extracting to 
 
 ## Resources
 
+- How to Restore Specific UFS Files Noninteractively (Oracle): <https://docs.oracle.com/cd/E19253-01/817-5093/bkuprestoretasks-72504/index.html>
+
 - How to Restore UFS Files Interactively (Oracle): <https://docs.oracle.com/cd/E19253-01/817-5093/bkuprestoretasks-63510/index.html>
+
 
 [^1]: If you don't run `restore` as sudo, extraction results in a flood of `chown: Operation not permitted` messages (the files *are* extracted though).
 
