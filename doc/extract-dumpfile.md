@@ -47,7 +47,7 @@ It is strongly recommended to extract *dump* files to an [*Ext4*](\https://en.wi
 
         set owner/mode for '.'? [yn]
 
-    Now enter `n` [^2]
+    Now enter `n` [^2] and wait for `restore` to finish.
 
 5. Move one directory level up:
 
