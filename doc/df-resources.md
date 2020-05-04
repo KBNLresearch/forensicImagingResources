@@ -100,3 +100,5 @@
 - [Museum of Obsolete Media](https://obsoletemedia.org/)
 - [Born Digital Workflows, UNC at Chapel Hill Libraries, Wilson Special Collections Library](http://wilsonborndigital.web.unc.edu/)
 - [CCA Digital Archives Processing Manual](https://github.com/CCA-Public/digital-archives-manual) - includes LOTS of detailed workflow descriptions
+- [Guide to identifying obsolete digital media](https://www.projectcest.be/wiki/Publicatie:Handleiding_Verouderde_Dragers_Herkennen) (in Dutch)
+- [Digital Repair Cafe](https://automatic-ingest-digital-archives.github.io/Digital-Repair-Cafe/) - links to various capture workflows.
