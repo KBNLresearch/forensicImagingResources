@@ -102,3 +102,4 @@
 - [CCA Digital Archives Processing Manual](https://github.com/CCA-Public/digital-archives-manual) - includes LOTS of detailed workflow descriptions
 - [Guide to identifying obsolete digital media](https://www.projectcest.be/wiki/Publicatie:Handleiding_Verouderde_Dragers_Herkennen) (in Dutch)
 - [Digital Repair Cafe](https://automatic-ingest-digital-archives.github.io/Digital-Repair-Cafe/) - links to various capture workflows.
+- [How to Read a Floppy Disk on a Modern PC or Mac](https://www.howtogeek.com/669331/how-to-read-a-floppy-disk-on-a-modern-pc-or-mac/)
