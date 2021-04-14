@@ -66,6 +66,17 @@
 - [Bodging a case for a 5.25″ floppy drive](https://radd.dsalo.info/2017/01/bodging-a-case-for-a-5-25-floppy-drive/)
 - [Digital Archaeology and/or Forensics: Working with Floppy Disks from the 1980s](https://journal.code4lib.org/articles/11986)
 
+## Optical media
+
+- [An Introduction to Optical Media Preservation (Alexander Duryee)](https://journal.code4lib.org/articles/9581)
+- [Preserving Write-Once DVDs (Blood Report for LoC)](http://www.digitizationguidelines.gov/audio-visual/documents/Preserve_DVDs_BloodReport_20140901.pdf)
+- [Andy McFadden's CD-Recordable FAQ](https://www.cdrfaq.org/)
+- [Preserving optical media from the command-line](https://www.bitsgalore.org/2015/11/13/preserving-optical-media-from-the-command-line)
+- [A simple workflow tool for imaging optical media using readom and ddrescue](https://www.bitsgalore.org/2019/03/22/a-simple-workflow-tool-for-imaging-optical-media-using-readom-and-ddrescue)
+- [Imaging CD-Extra / Blue Book discs](https://www.bitsgalore.org/2017/04/25/imaging-cd-extra-blue-book-discs)
+- [Image and Rip Optical Media Like A Boss!](https://www.bitsgalore.org/2017/06/19/image-and-rip-optical-media-like-a-boss)
+- [Isolyzer](https://github.com/KBNLresearch/isolyzer) - tool that verifies if the file size of a CD / DVD image ("ISO image") is consistent with the information in its filesystem-level headers.
+
 ## Cables
 
 - [The Cable Bible](https://amiaopensource.github.io/cable-bible/)
@@ -85,7 +96,7 @@
 
 ## Data rescue and digital forensics (general)
 
--[Digital Forensics and Preservation](http://dx.doi.org/10.7207/twr12-03)
+- [Digital Forensics and Preservation](http://dx.doi.org/10.7207/twr12-03)
 - [Digital Archaeology: Rescuing Neglected and Damaged Data Resources](http://www.ukoln.ac.uk/services/elib/papers/supporting/pdf/p2.pdf)
 - [Getting to Know FRED: Introducing Workflows for Born-Digital Content](https://practicaltechnologyforarchives.org/issue4_prael_wickner/)
 - [Digital Forensics and Preservation (DPC Report)](http://dx.doi.org/10.7207/twr12-03)
