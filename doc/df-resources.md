@@ -70,6 +70,7 @@
 
 - [An Introduction to Optical Media Preservation (Alexander Duryee)](https://journal.code4lib.org/articles/9581)
 - [Preserving Write-Once DVDs (Blood Report for LoC)](http://www.digitizationguidelines.gov/audio-visual/documents/Preserve_DVDs_BloodReport_20140901.pdf)
+- [CD Formats and Their Longevity - FAQ (Canadian Conservation Institute)](https://web.archive.org/web/20170825093105if_/http://canada.pch.gc.ca/eng/1456339921100)
 - [Andy McFadden's CD-Recordable FAQ](https://www.cdrfaq.org/)
 - [Preserving optical media from the command-line](https://www.bitsgalore.org/2015/11/13/preserving-optical-media-from-the-command-line)
 - [A simple workflow tool for imaging optical media using readom and ddrescue](https://www.bitsgalore.org/2019/03/22/a-simple-workflow-tool-for-imaging-optical-media-using-readom-and-ddrescue)
