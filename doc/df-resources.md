@@ -2,6 +2,7 @@
 
 ## Tapes
 
+- [Recovering '90s Data Tapes - Experiences From the KB Web Archaeology project (iPres 2019 paper)](https://www.bitsgalore.org/2019/09/09/recovering-90s-data-tapes-experiences-kb-web-archaeology)
 - [Tape Driver Semantics](https://wiki.zmanda.com/index.php/Tape_Driver_Semantics) - Excellent summary of the behavior of tapes on UNIX systems.
 - [How to use the DAT-tape with Linux](http://www.cs.inf.ethz.ch/stricker/lab/linux_tape.html)
 - [HP Surestore and StorageWorks DAT - HP DAT Accessories and Part Numbers](https://web.archive.org/web/20181101135618/https://support.hpe.com/hpsc/doc/public/display?docId=emr_na-lpg50205)
