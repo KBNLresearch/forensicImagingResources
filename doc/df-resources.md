@@ -70,7 +70,9 @@
 ## Optical media
 
 - [An Introduction to Optical Media Preservation (Alexander Duryee)](https://journal.code4lib.org/articles/9581)
+- [Developing a Robust Migration Workflow for Preserving and Curating Hand-held Media](https://arxiv.org/abs/1309.4932)
 - [Preserving Write-Once DVDs (Blood Report for LoC)](http://www.digitizationguidelines.gov/audio-visual/documents/Preserve_DVDs_BloodReport_20140901.pdf)
+- [Assessing High-volume Transfers from Optical Media at NYPL](https://journal.code4lib.org/articles/15908)
 - [CD Formats and Their Longevity - FAQ (Canadian Conservation Institute)](https://web.archive.org/web/20170825093105if_/http://canada.pch.gc.ca/eng/1456339921100)
 - [Andy McFadden's CD-Recordable FAQ](https://www.cdrfaq.org/)
 - [Preserving optical media from the command-line](https://www.bitsgalore.org/2015/11/13/preserving-optical-media-from-the-command-line)
