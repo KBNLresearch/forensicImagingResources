@@ -66,6 +66,7 @@
 - [Use Guide for the FC5025 Floppy Disk Controller](https://web.archive.org/web/20180507194729/https://mith.umd.edu/vintage-computers/fc5025-operation-instructions)
 - [Bodging a case for a 5.25″ floppy drive](https://radd.dsalo.info/2017/01/bodging-a-case-for-a-5-25-floppy-drive/)
 - [Digital Archaeology and/or Forensics: Working with Floppy Disks from the 1980s](https://journal.code4lib.org/articles/11986)
+- [Adafruit Floppy](https://github.com/adafruit/Adafruit_Floppy) - a helper library to abstract away interfacing with floppy disk drives in a cross-platform and open source library.
 
 ## Optical media
 
