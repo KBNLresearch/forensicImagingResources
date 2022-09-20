@@ -67,6 +67,8 @@
 - [Bodging a case for a 5.25″ floppy drive](https://radd.dsalo.info/2017/01/bodging-a-case-for-a-5-25-floppy-drive/)
 - [Digital Archaeology and/or Forensics: Working with Floppy Disks from the 1980s](https://journal.code4lib.org/articles/11986)
 - [Adafruit Floppy](https://github.com/adafruit/Adafruit_Floppy) - a helper library to abstract away interfacing with floppy disk drives in a cross-platform and open source library.
+- [A Dogged Pursuit: Capturing Forensic Images of 3.5” Floppy Disks](https://practicaltechnologyforarchives.org/issue2_waugh/)
+
 
 ## Optical media
 
@@ -121,4 +123,4 @@
 - [Digital Repair Cafe](https://automatic-ingest-digital-archives.github.io/Digital-Repair-Cafe/) - links to various capture workflows.
 - [How to Read a Floppy Disk on a Modern PC or Mac](https://www.howtogeek.com/669331/how-to-read-a-floppy-disk-on-a-modern-pc-or-mac/)
 - [Disk Imaging Decision Factors](https://dannng.github.io/disk-imaging-decision-factors.html)
-
+- [Imaging Digital Media for Preservation with LAMMP](https://resources.culturalheritage.org/emg-review/volume-three-2013-2014/mckinley/)
