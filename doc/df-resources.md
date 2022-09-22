@@ -124,3 +124,4 @@
 - [How to Read a Floppy Disk on a Modern PC or Mac](https://www.howtogeek.com/669331/how-to-read-a-floppy-disk-on-a-modern-pc-or-mac/)
 - [Disk Imaging Decision Factors](https://dannng.github.io/disk-imaging-decision-factors.html)
 - [Imaging Digital Media for Preservation with LAMMP](https://resources.culturalheritage.org/emg-review/volume-three-2013-2014/mckinley/)
+- [Towards Best Practices In Disk Imaging: A Cross-Institutional Approach](https://resources.culturalheritage.org/emg-review/volume-6-2019-2020/colloton/)
