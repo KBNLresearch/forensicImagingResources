@@ -125,3 +125,5 @@
 - [Disk Imaging Decision Factors](https://dannng.github.io/disk-imaging-decision-factors.html)
 - [Imaging Digital Media for Preservation with LAMMP](https://resources.culturalheritage.org/emg-review/volume-three-2013-2014/mckinley/)
 - [Towards Best Practices In Disk Imaging: A Cross-Institutional Approach](https://resources.culturalheritage.org/emg-review/volume-6-2019-2020/colloton/)
+- [NMAAHC Disk Imaging Workshop](http://eddycolloton.com/blog/2022/4/6/nmaahc-disk-imaging-workshop)
+- [National Institute of Standards and Technology (NIST) Computer Forensic Tool Testing (CFTT) Reports](https://www.dhs.gov/science-and-technology/nist-cftt-reports)
