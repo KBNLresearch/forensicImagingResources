@@ -44,6 +44,7 @@
     - [Installing a SCSI device – making the connections](https://www.pctechguide.com/how-to-install-a-scsi-device/installing-a-scsi-device-making-the-connections)
     - [SCSI External Config](https://www.pctechguide.com/how-to-install-a-scsi-device/scsi-external-config)
     - [SCSI External Software](https://www.pctechguide.com/how-to-install-a-scsi-device/scsi-external-software)
+- [Squishy: a platform for working with old SCSI devices with modern systems in a flexible manner](https://github.com/lethalbit/squishy)
 
 ## Tape archive formats (and how to read / extract them)
 
