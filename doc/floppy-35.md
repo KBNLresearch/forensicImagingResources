@@ -26,7 +26,6 @@
 
 2. Connect the write blocker' s power supply to the DC In (at top) and make sure the power cord is plugged into to a power socket.
 
-## Software
 
 ## Software
 
@@ -37,7 +36,9 @@
 
 1. Connect the floppy disk drive to the right-hand USB connector on the write blocker.
 
-2. Make sure the floppy's square write-protection tab is enabled (the hole in the corner of the disk must be uncovered).
+2. Make sure the floppy's square write-protection tab is enabled (the hole in the corner of the disk must be uncovered):
+
+    ![](./img/write-protection.png)
 
 3. Start *diskimgr* from the OS's main menu (in Ubuntu 18.04 the *diskimgr* item is located under *System Tools*).
 
