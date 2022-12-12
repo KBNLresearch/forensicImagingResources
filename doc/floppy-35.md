@@ -34,7 +34,7 @@ An earlier version of this document recommended the use of a forensic write bloc
 
 Because of this we discourage the use of write blockers for 3.5" floppies, and suggest to always use the following write-protectionb measures instead:
 
-1. Disable automatic mounting of removable media at the Operating System level. This is already the default in BitCurator. For other common Ubuntu-derived Linux distros, [follow the instructions here]](./disable-automount.md)
+1. Disable automatic mounting of removable media at the Operating System level. This is already the default in BitCurator. For other common Ubuntu-derived Linux distros, [follow the instructions here](./disable-automount.md)
 
 2. Always set the floppy's square write-protection tab to the "protected" position.
 
