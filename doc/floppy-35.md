@@ -11,8 +11,9 @@
 |**Model**|[BaseTech USB Floppy Disk Drive refurbished](https://web.archive.org/web/20181008141513/http://www.produktinfo.conrad.com/datenblaetter/1100000-1199999/001170561-an-01-ml-BASETECH_FLOPPY_LAUFWERK_USB_de_en_fr_nl.pdf)|
 |:--|:--|
 |**Connection**|USB 2.0/1.1|
-|**Type of floppy disk**|High Density (2HD) 1.44 MByte,Normal Density (2DD), 720 kByte|
+|**Type of floppy disk**|High Density (HD) 1.44 MByte, Double Density (DD), 720 kByte|
 
+<!--
 ### Write blocker
 
 |**Model**|[Tableau Forensic USB 3.0 Bridge](https://www.guidancesoftware.com/tableau/hardware/t8u)|
@@ -25,7 +26,17 @@
 1. Hook up the write blocker to the workstation using the blue USB cable (use the left-hand port on the write blocker).
 
 2. Connect the write blocker' s power supply to the DC In (at top) and make sure the power cord is plugged into to a power socket.
+-->
 
+## Note on write protection
+
+An earlier version of this document recommended the use of a forensic write blocker (Tableau Forensic USB 3.0 Bridge). More recent experience has shown that this particular write blocker (and possibly other models as well) does not work well with USB floppy drives, and may result in faulty or incomplete captures. We have received confirmation of this from the manufacturer. For example, when the write blocker is first used to image a  Double Density (720 kB) floppy, followed by a High Density (1.44 MB) one, the High Density image only contains the first 720 kB of the data on the floppy!
+
+Because of this we discourage the use of write blockers for 3.5" floppies, and suggest to always use the following write-protectionb measures instead:
+
+1. Disable automatic mounting of removable media at the Operating System level. This is already the default in BitCurator. For other common Ubuntu-derived Linux distros, [follow the instructions here]](./disable-automount.md)
+
+2. Always set the floppy's square write-protection tab to the "protected" position.
 
 ## Software
 
@@ -33,10 +44,9 @@
 
 ## Procedure for creating a disk image
 
-
 1. Connect the floppy disk drive to the right-hand USB connector on the write blocker.
 
-2. Make sure the floppy's square write-protection tab is set to "protected" (the hole in the corner of the disk must be uncovered):
+2. Make sure the floppy's write-protection tab is set to the "protected" position (the hole in the corner of the disk must be uncovered):
 
     ![](./img/write-protection.png)
 
