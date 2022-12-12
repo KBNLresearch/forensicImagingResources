@@ -32,7 +32,7 @@
 
 An earlier version of this document recommended the use of a forensic write blocker (Tableau Forensic USB 3.0 Bridge). More recent experience has shown that this particular write blocker (and possibly other models as well) does not work well with USB floppy drives, and may result in faulty or incomplete captures. We have received confirmation of this from the manufacturer. For example, when the write blocker is first used to image a  Double Density (720 kB) floppy, followed by a High Density (1.44 MB) one, the High Density image only contains the first 720 kB of the data on the floppy!
 
-Because of this we discourage the use of write blockers for 3.5" floppies, and suggest to always use the following write-protectionb measures instead:
+Because of this we discourage the use of write blockers for 3.5" floppies, and suggest to always use the following write-protection measures instead:
 
 1. Disable automatic mounting of removable media at the Operating System level. This is already the default in BitCurator. For other common Ubuntu-derived Linux distros, [follow the instructions here](./disable-automount.md).
 
