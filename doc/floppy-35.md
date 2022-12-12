@@ -36,7 +36,7 @@
 
 1. Connect the floppy disk drive to the right-hand USB connector on the write blocker.
 
-2. Make sure the floppy's square write-protection tab is enabled (the hole in the corner of the disk must be uncovered):
+2. Make sure the floppy's square write-protection tab is set to "protected" (the hole in the corner of the disk must be uncovered):
 
     ![](./img/write-protection.png)
 
