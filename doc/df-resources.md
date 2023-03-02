@@ -128,3 +128,4 @@
 - [Towards Best Practices In Disk Imaging: A Cross-Institutional Approach](https://resources.culturalheritage.org/emg-review/volume-6-2019-2020/colloton/)
 - [NMAAHC Disk Imaging Workshop](http://eddycolloton.com/blog/2022/4/6/nmaahc-disk-imaging-workshop)
 - [National Institute of Standards and Technology (NIST) Computer Forensic Tool Testing (CFTT) Reports](https://www.dhs.gov/science-and-technology/nist-cftt-reports)
+- [Cambridge University Library Transfer Service](https://digitalpreservation-blog.lib.cam.ac.uk/the-transfer-service-40bddeff0d32)
