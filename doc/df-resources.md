@@ -85,6 +85,7 @@
 - [Image and Rip Optical Media Like A Boss!](https://www.bitsgalore.org/2017/06/19/image-and-rip-optical-media-like-a-boss)
 - [Isolyzer](https://github.com/KBNLresearch/isolyzer) - tool that verifies if the file size of a CD / DVD image ("ISO image") is consistent with the information in its filesystem-level headers.
 - [Acronova Nimbie Drive Replacement Instruction](https://web.archive.org/web/20210915163606/http://www.usarcades.com/wp-content/uploads/Drive-Replacement-Instruction-v1.2.pdf)
+- [To Everything There Is a Session: A Time to Listen, a Time to Read Multi-session CDs (Dietrich, Nelson)](https://journal.code4lib.org/articles/17208)
 
 ## Cables
 
