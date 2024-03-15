@@ -7,7 +7,7 @@
 - [How to use the DAT-tape with Linux](http://www.cs.inf.ethz.ch/stricker/lab/linux_tape.html)
 - [HP Surestore and StorageWorks DAT - HP DAT Accessories and Part Numbers](https://web.archive.org/web/20181101135618/https://support.hpe.com/hpsc/doc/public/display?docId=emr_na-lpg50205)
 - [HP StorageWorks DDS/DAT Media - DDS/DAT Media Compatibility Matrix](https://support.hpe.com/hpsc/doc/public/display?docId=emr_na-lpg50457) (note: not accessible anymore, and no usable snapshots in web archives!)
-- [HP DAT Compatability Chart](https://web.archive.org/web/20240315125731/https://www.artisantg.com/info/HP_DAT_Compatability_Chart.pdf)
+- [HP DAT Compatibility Chart](https://web.archive.org/web/20240315125731/https://www.artisantg.com/info/HP_DAT_Compatability_Chart.pdf)
 - [15 Useful Linux and Unix Tape Managements Commands For Sysadmins](https://www.cyberciti.biz/hardware/unix-linux-basic-tape-management-commands/)
 - [Linux Set the Block Size for a SCSI Tape Device](https://www.cyberciti.biz/faq/rhel-centos-debian-set-tape-blocksize/)
 - [Reading VMS tapes from Linux](https://www.tldp.org/HOWTO/VMS-to-Linux-HOWTO/x838.html)
