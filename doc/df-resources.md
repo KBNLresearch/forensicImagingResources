@@ -70,7 +70,7 @@
 - [Digital Archaeology and/or Forensics: Working with Floppy Disks from the 1980s](https://journal.code4lib.org/articles/11986)
 - [Adafruit Floppy](https://github.com/adafruit/Adafruit_Floppy) - a helper library to abstract away interfacing with floppy disk drives in a cross-platform and open source library.
 - [A Dogged Pursuit: Capturing Forensic Images of 3.5” Floppy Disks](https://practicaltechnologyforarchives.org/issue2_waugh/)
-
+- [Emulating the early Macintosh floppy drive](https://thomasw.dev/post/mac-floppy-emu/) - in-depth post about low-level aspects of vintage Macintosh floppies.
 
 ## Optical media
 
