@@ -88,6 +88,7 @@
 - [Acronova Nimbie Drive Replacement Instruction](https://web.archive.org/web/20210915163606/http://www.usarcades.com/wp-content/uploads/Drive-Replacement-Instruction-v1.2.pdf)
 - [To Everything There Is a Session: A Time to Listen, a Time to Read Multi-session CDs (Dietrich, Nelson)](https://journal.code4lib.org/articles/17208)
 - [The Forgotten Disc: Synthesis and Recommendations for Viable VCD Preservation (Weaver, Blewer)](https://journal.code4lib.org/articles/17406)
+- [The Working Archivist's Guide to Enthusiast CD-ROM Archiving Tools (De Meo)](https://www.mistys-internet.website/blog/blog/2024/09/13/the-working-archivists-guide-to-enthusiast-cd-rom-archiving-tools/)
 
 ## Cables
 
