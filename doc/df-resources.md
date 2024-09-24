@@ -71,6 +71,7 @@
 - [Adafruit Floppy](https://github.com/adafruit/Adafruit_Floppy) - a helper library to abstract away interfacing with floppy disk drives in a cross-platform and open source library.
 - [A Dogged Pursuit: Capturing Forensic Images of 3.5” Floppy Disks](https://practicaltechnologyforarchives.org/issue2_waugh/)
 - [Emulating the early Macintosh floppy drive](https://thomasw.dev/post/mac-floppy-emu/) - in-depth post about low-level aspects of vintage Macintosh floppies.
+- [A Guide to Imaging Obscure Floppy Disk Formats](https://zenodo.org/doi/10.5281/zenodo.13766982)
 
 ## Optical media
 
