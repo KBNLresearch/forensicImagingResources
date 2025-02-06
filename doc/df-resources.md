@@ -111,10 +111,9 @@
 
 ## Data rescue and digital forensics (general)
 
-- [Digital Forensics and Preservation](http://dx.doi.org/10.7207/twr12-03)
+- [Digital Forensics and Preservation (DPC Report)](http://dx.doi.org/10.7207/twr12-03)
 - [Digital Archaeology: Rescuing Neglected and Damaged Data Resources](http://www.ukoln.ac.uk/services/elib/papers/supporting/pdf/p2.pdf)
 - [Getting to Know FRED: Introducing Workflows for Born-Digital Content](https://practicaltechnologyforarchives.org/issue4_prael_wickner/)
-- [Digital Forensics and Preservation (DPC Report)](http://dx.doi.org/10.7207/twr12-03)
 - [Digital Archives Workstation Update: KryoFlux, FRED, and BitCurator Walk into a Bar…](https://blogs.princeton.edu/techsvs/2017/10/03/digital-archives-workstation-update-kryoflux-fred-and-bitcurator-walk-into-a-bar/)
 - [NYPL’s New Digital Archives Lab](https://www.nypl.org/blog/2017/01/11/nypls-new-digital-archives-lab)
 - [Michigan University Digital Preservation Lab 2.0](https://www.lib.umich.edu/blogs/bits-and-pieces/digital-preservation-lab-20)
