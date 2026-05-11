@@ -134,3 +134,4 @@
 - [NMAAHC Disk Imaging Workshop](http://eddycolloton.com/blog/2022/4/6/nmaahc-disk-imaging-workshop)
 - [National Institute of Standards and Technology (NIST) Computer Forensic Tool Testing (CFTT) Reports](https://www.dhs.gov/science-and-technology/nist-cftt-reports)
 - [Cambridge University Library Transfer Service](https://digitalpreservation-blog.lib.cam.ac.uk/the-transfer-service-40bddeff0d32)
+- [Forensic workstation](https://simonpwilson.com/services/forensic-workstation/) - series of blogs posts by Simon P Wilson.
