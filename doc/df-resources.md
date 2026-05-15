@@ -72,6 +72,7 @@
 - [A Dogged Pursuit: Capturing Forensic Images of 3.5” Floppy Disks](https://practicaltechnologyforarchives.org/issue2_waugh/)
 - [Emulating the early Macintosh floppy drive](https://thomasw.dev/post/mac-floppy-emu/) - in-depth post about low-level aspects of vintage Macintosh floppies.
 - [A Guide to Imaging Obscure Floppy Disk Formats](https://zenodo.org/doi/10.5281/zenodo.13766982)
+- [Digital Accessioning Wins, Fails and Dragon Tales: Part 1](https://preservation.library.harvard.edu/news/2026/05/digital-accessioning-wins-fails-and-dragon-tales-part-1) and [Part 2](https://preservation.library.harvard.edu/news/2026/05/digital-accessioning-wins-fails-and-dragon-tales-part-2) - discusses processing 3.5" floppies that are affected by mold.
 
 ## Optical media
 
